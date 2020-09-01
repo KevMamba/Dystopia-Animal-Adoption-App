@@ -1,6 +1,6 @@
-# dystopia_flutter_app
+# Dystopia - Animal Adoption app
 
-Dystopia - Animal Adoption app
+A Flutter application to help connect people looking to adopt pets with those who'd like to give their pets up for adoption
 
 ## Getting Started
 
