@@ -1,3 +1,4 @@
+import 'package:dystopia_flutter_app/screens/log_in.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(DystopiaApp());
@@ -11,11 +12,12 @@ class _DystopiaAppState extends State<DystopiaApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      debugShowCheckedModeBanner: false,
+      home: LoginScreen(), // Landing Page will be passed here.
     );
   }
 }
-
+/*
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -27,3 +29,4 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+*/
