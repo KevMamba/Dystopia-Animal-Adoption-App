@@ -19,7 +19,10 @@ class _DystopiaAppState extends State<DystopiaApp> {
         home: LoginScreen(),
         duration: 2500,
         type: AnimatedSplashType.StaticDuration,
-      ), // Landing Page will be passed here.
+      ),
+      // Landing Page will be passed here.
+      // https://pub.dev/packages/animated_splash
+      // will be handy later.
     );
   }
 }
