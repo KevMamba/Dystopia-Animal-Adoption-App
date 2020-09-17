@@ -1,3 +1,4 @@
+import 'package:animated_splash/animated_splash.dart';
 import 'package:dystopia_flutter_app/screens/log_in.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,15 @@ class _DystopiaAppState extends State<DystopiaApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(), // Landing Page will be passed here.
+      home: AnimatedSplash(
+        imagePath: 'assets/images/Dystopia_logo_png.png',
+        home: LoginScreen(),
+        duration: 2500,
+        type: AnimatedSplashType.StaticDuration,
+      ),
+      // Landing Page will be passed here.
+      // https://pub.dev/packages/animated_splash
+      // will be handy later.
     );
   }
 }

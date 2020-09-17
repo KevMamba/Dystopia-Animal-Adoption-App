@@ -1,6 +1,4 @@
-import 'package:dystopia_flutter_app/screens/sign_up_form.dart';
 import 'package:dystopia_flutter_app/widgets/layout.dart';
-import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:dystopia_flutter_app/widgets/signup_or_login.dart';
 import 'package:dystopia_flutter_app/widgets/social_signin.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +6,7 @@ import 'package:flutter/services.dart';
 
 import '../theme.dart';
 
-class LoginScreen extends StatelessWidget {
+class SignUpForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +48,7 @@ class LoginScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'Sign In',
+                      'Sign Up',
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'OpenSans',
@@ -61,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(
                       height: 30.0,
                     ),
-                    SigninFields(),
+                    SignUpFields(), //.create() later,
                   ],
                 ),
               ),
@@ -73,16 +71,13 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class SigninFields extends StatefulWidget {
-  SigninFields({Key key}) : super(key: key);
-
+class SignUpFields extends StatefulWidget {
   @override
-  _SigninFieldsState createState() => _SigninFieldsState();
+  _SignUpFieldsState createState() => _SignUpFieldsState();
 }
 
-class _SigninFieldsState extends State<SigninFields> {
-  /*
-  final TextEditingController _emailController = TextEditingController();
+class _SignUpFieldsState extends State<SignUpFields> {
+  /* final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
@@ -95,124 +90,9 @@ class _SigninFieldsState extends State<SigninFields> {
     _passwordController.dispose();
     super.dispose();
   }
-
-  Commented lines will be implemented later with the help of validators.
-*/
-  bool _rememberMe = false;
-
-  _displaySignUpForm() {
-    PlatformPageRoute.pageRoute(
-      widget: SignUpForm(),
-      fullScreen: false,
-      fromRoot: true,
-      context: context,
-    );
-  }
-
-  Container _buildLoginButton() {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: 25.0,
-      ),
-      width: double.infinity,
-      child: RaisedButton(
-        onPressed: () => debugPrint("LOG IN BUTTON PRESSED"),
-        padding: EdgeInsets.all(15.0),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-        color: Colors.white,
-        child: Text(
-          'LOGIN',
-          style: TextStyle(
-            color: Color(0xFF565165),
-            fontFamily: 'OpenSans',
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Container _buildRememberMe() {
-    return Container(
-        height: 20.0,
-        child: Row(
-          children: <Widget>[
-            Theme(
-              data: ThemeData(
-                unselectedWidgetColor: Colors.white,
-              ),
-              child: Checkbox(
-                value: _rememberMe,
-                onChanged: (value) {
-                  setState(() {
-                    _rememberMe = value;
-                  });
-                },
-                checkColor: Colors.green,
-                activeColor: Colors.white,
-              ),
-            ),
-            Text(
-              'Remember Me',
-              style: kLabelStyle,
-            )
-          ],
-        ));
-  }
-
-  Container _buildForgotPassButton() {
-    return Container(
-      alignment: Alignment.centerRight,
-      child: FlatButton(
-        child: Text(
-          "Forgot Password?",
-          style: kLabelStyle,
-        ),
-        onPressed: () => debugPrint("FORGOT PASSWORD BUTTON PRESSED!"),
-      ),
-    );
-  }
-
-  Column _buildPassword() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          'Password',
-          style: kLabelStyle,
-        ),
-        SizedBox(height: 10),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: kBoxDecorationStyle,
-          height: 60.0,
-          child: TextField(
-            obscureText: true,
-            // focusNode: _passwordFocusNode,
-            // controller: _passwordController,
-            autocorrect: false,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(
-                Icons.lock,
-                color: Colors.white,
-              ),
-              hintText: 'Enter your password',
-              hintStyle: kHintTextStyle,
-            ),
-          ),
-        )
-      ],
-    );
-  }
+  
+  // implemented later with the help of validators.
+  */
 
   Column _buildEmail() {
     return Column(
@@ -229,10 +109,6 @@ class _SigninFieldsState extends State<SigninFields> {
           height: 60.0,
           child: TextField(
             keyboardType: TextInputType.emailAddress,
-            //focusNode: _emailFocusNode,
-            //controller: _emailController,
-            //textInputAction: TextInputAction.next,
-            autocorrect: false,
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -253,6 +129,68 @@ class _SigninFieldsState extends State<SigninFields> {
     );
   }
 
+  Column _buildPassword() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Password',
+          style: kLabelStyle,
+        ),
+        SizedBox(height: 10),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: kBoxDecorationStyle,
+          height: 60.0,
+          child: TextField(
+            obscureText: true,
+            keyboardType: TextInputType.emailAddress,
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14),
+              prefixIcon: Icon(
+                Icons.lock,
+                color: Colors.white,
+              ),
+              hintText: 'Enter your password',
+              hintStyle: kHintTextStyle,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Container _buildRegister() {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        vertical: 25.0,
+      ),
+      width: double.infinity,
+      child: RaisedButton(
+        onPressed: () => debugPrint("REGISTER BUTTON PRESSED"),
+        padding: EdgeInsets.all(15.0),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+        color: Colors.white,
+        child: Text(
+          'REGISTER',
+          style: TextStyle(
+            color: Color(0xFF565165),
+            fontFamily: 'OpenSans',
+            letterSpacing: 1.5,
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> _buildChildren() {
@@ -262,9 +200,10 @@ class _SigninFieldsState extends State<SigninFields> {
           height: 30.0,
         ),
         _buildPassword(),
-        _buildForgotPassButton(),
-        _buildRememberMe(),
-        _buildLoginButton(),
+        SizedBox(
+          height: 20.0,
+        ),
+        _buildRegister(),
         Layout(),
         SizedBox(
           height: 10.0,
@@ -275,16 +214,14 @@ class _SigninFieldsState extends State<SigninFields> {
         ),
         Divider(
           color: Colors.grey,
-          height: 10,
+          height: 10.0,
           thickness: 2,
         ),
-        SizedBox(
-          height: 10.0,
-        ),
+        SizedBox(height: 15),
         SignUpOrIn(
-          description: 'Don\'t have an Account?',
-          highlighted: 'Sign Up!',
-          action: () => _displaySignUpForm(),
+          description: 'Already have an Account?',
+          highlighted: 'Login!',
+          action: () => Navigator.of(context).pop(false),
         )
       ];
     }
