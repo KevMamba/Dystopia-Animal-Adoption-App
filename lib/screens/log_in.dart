@@ -1,12 +1,15 @@
 import 'package:dystopia_flutter_app/screens/sign_up_form.dart';
-import 'package:dystopia_flutter_app/widgets/layout.dart';
+
 import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
-import 'package:dystopia_flutter_app/widgets/signup_or_login.dart';
-import 'package:dystopia_flutter_app/widgets/social_signin.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../theme.dart';
+import '../widgets/sign_in_helpers/layout.dart';
+import '../widgets/sign_in_helpers/signup_or_login.dart';
+import '../widgets/sign_in_helpers/social_signin.dart';
+import 'bottom_navigation.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -23,12 +26,7 @@ class LoginScreen extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0xFFe3e5dd),
-                    Color(0xFFd5d8cc),
-                    Color(0xFFc7cbbb),
-                    Color(0xFFbabfab),
-                  ],
+                  colors: kSignUpColors,
                   stops: [
                     0.1,
                     0.4,
@@ -49,6 +47,15 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    /*  Image.asset(
+                      'assets/images/Dystopia_logo_png.png',
+                      filterQuality: FilterQuality.high,
+                      height: 100,
+                      width: 121,
+                    ),*/
+                    SizedBox(
+                      height: 10,
+                    ),
                     Text(
                       'Sign In',
                       style: TextStyle(
@@ -109,6 +116,15 @@ class _SigninFieldsState extends State<SigninFields> {
     );
   }
 
+  _gotoHomePage() {
+    PlatformPageRoute.pageRoute(
+      widget: BottomNavigation(),
+      fullScreen: true,
+      fromRoot: true,
+      context: context,
+    );
+  }
+
   Container _buildLoginButton() {
     return Container(
       padding: EdgeInsets.symmetric(
@@ -116,10 +132,11 @@ class _SigninFieldsState extends State<SigninFields> {
       ),
       width: double.infinity,
       child: RaisedButton(
-        onPressed: () => debugPrint("LOG IN BUTTON PRESSED"),
+        onPressed: () => _gotoHomePage(),
         padding: EdgeInsets.all(15.0),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
         color: Colors.white,
         child: Text(
           'LOGIN',
@@ -151,7 +168,7 @@ class _SigninFieldsState extends State<SigninFields> {
                     _rememberMe = value;
                   });
                 },
-                checkColor: Colors.green,
+                checkColor: Color(0xFFb0abbf),
                 activeColor: Colors.white,
               ),
             ),
