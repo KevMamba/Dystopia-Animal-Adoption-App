@@ -1,10 +1,12 @@
-import 'package:dystopia_flutter_app/widgets/layout.dart';
-import 'package:dystopia_flutter_app/widgets/signup_or_login.dart';
-import 'package:dystopia_flutter_app/widgets/social_signin.dart';
+import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../theme.dart';
+import '../widgets/sign_in_helpers/layout.dart';
+import '../widgets/sign_in_helpers/signup_or_login.dart';
+import '../widgets/sign_in_helpers/social_signin.dart';
+import 'bottom_navigation.dart';
 
 class SignUpForm extends StatelessWidget {
   @override
@@ -21,12 +23,7 @@ class SignUpForm extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0xFFe3e5dd),
-                    Color(0xFFd5d8cc),
-                    Color(0xFFc7cbbb),
-                    Color(0xFFbabfab),
-                  ],
+                  colors: kSignUpColors,
                   stops: [
                     0.1,
                     0.4,
@@ -93,6 +90,15 @@ class _SignUpFieldsState extends State<SignUpFields> {
   
   // implemented later with the help of validators.
   */
+
+  _gotoHomePage() {
+    PlatformPageRoute.pageRoute(
+      widget: BottomNavigation(),
+      fullScreen: true,
+      fromRoot: true,
+      context: context,
+    );
+  }
 
   Column _buildEmail() {
     return Column(
@@ -172,7 +178,7 @@ class _SignUpFieldsState extends State<SignUpFields> {
       ),
       width: double.infinity,
       child: RaisedButton(
-        onPressed: () => debugPrint("REGISTER BUTTON PRESSED"),
+        onPressed: () => _gotoHomePage(),
         padding: EdgeInsets.all(15.0),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),

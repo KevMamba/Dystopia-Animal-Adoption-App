@@ -11,6 +11,13 @@ final kLabelStyle = TextStyle(
   fontFamily: 'OpenSans',
 );
 
+final kLabelStyleAppBar = TextStyle(
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+  fontSize: 13.0,
+  fontFamily: 'OpenSans',
+);
+
 final kBoxDecorationStyle = BoxDecoration(
   color: Color(0xFFb0abbf),
   borderRadius: BorderRadius.circular(10.0),
@@ -22,3 +29,10 @@ final kBoxDecorationStyle = BoxDecoration(
     ),
   ],
 );
+
+final kSignUpColors = <Color>[
+  Color(0xFFe3e5dd),
+  Color(0xFFd5d8cc),
+  Color(0xFFc7cbbb),
+  Color(0xFFbabfab),
+];
