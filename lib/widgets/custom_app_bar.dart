@@ -8,7 +8,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
       backgroundColor: Color(0xFFbabfab),
       elevation: 5.0,
-      leadingWidth: 0.0,
+      //leadingWidth: 0.0,
       leading: Opacity(
         opacity: 0.0,
       ),
@@ -24,10 +24,10 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Icon(
+                    /*Icon(
                       Icons.location_pin,
                       size: 15,
-                    ),
+                    ),*/
                     Text(
                       ' User_Location',
                       style: kLabelStyleAppBar,
