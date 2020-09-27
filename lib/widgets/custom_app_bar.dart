@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return SliverAppBar(
       pinned: false,
       //forceElevated: true,
       elevation: 20,
-
       backgroundColor: Colors.transparent,
       floating: true,
       toolbarHeight: 50,
