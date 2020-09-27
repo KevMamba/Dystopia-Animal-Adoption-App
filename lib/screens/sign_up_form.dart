@@ -6,7 +6,7 @@ import '../theme.dart';
 import '../widgets/sign_in_helpers/layout.dart';
 import '../widgets/sign_in_helpers/signup_or_login.dart';
 import '../widgets/sign_in_helpers/social_signin.dart';
-import 'bottom_navigation.dart';
+import '../widgets/bottom_navigation.dart';
 
 class SignUpForm extends StatelessWidget {
   @override
