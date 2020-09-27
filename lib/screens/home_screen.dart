@@ -1,142 +1,101 @@
-/*import 'package:dystopia_flutter_app/widgets/custom_app_bar.dart';
+
+import 'package:dystopia_flutter_app/theme.dart';
+import 'package:dystopia_flutter_app/widgets/custom_app_bar.dart';
+import 'package:dystopia_flutter_app/widgets/pet_category.dart';
+import 'package:dystopia_flutter_app/widgets/custom_app_bar.dart';
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(),
+    return CustomScrollView(
+      physics: BouncingScrollPhysics(),
+      slivers: <Widget>[
+        CustomAppBar(),
+        _buildHeader(),
+        _buildSubHeading(),
+        _buildPetCategory(),
+      ],
     );
   }
-}
-*/
 
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../widgets/petCategoryCard.dart';
-
-
-class HomePage extends StatefulWidget {
-  // creating a stateful widget
-  @override
-  State createState() => new HomePageState(); // creating the state
-}
-
-class HomePageState extends State<HomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    return Scaffold(
-      /*bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Color(0xffbfe0bf),
-        items: <Widget>[
-          Icon(Icons.add, size: 30),
-          Icon(Icons.list, size: 30),
-          Icon(Icons.compare_arrows, size: 30),
-        ],
-        onTap: (index) {
-          //Handle button tap
-        },
-      ),*/
-        body: Stack(
-          children: <Widget>[
-            Container(
-              height: size.height*.45,
-              decoration: BoxDecoration(
-                color: Color(0xFFbabfab),
-                gradient: new LinearGradient(colors: [Color(0xFFbabfab), Color(0xffE2D7C5)]),
-              ),
-            ),
-            SafeArea(
-                child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          child: CircleAvatar(
-                              child: ClipOval(
-                                child: Image.asset(
-                                  'assets/images/userIcon.png',
-                                  height: 40.0,
-                                  width: 40.0,
-                                  fit: BoxFit.cover,
-                                ),
-                              )),
-                        ),
-                        SizedBox(height:30),
-                        Text(
-                          "Welcome Back,\n XYZ", //RichText?
-                          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: 30.0)),
-                        ),
-                        Container(
-                            margin: EdgeInsets.symmetric(vertical: 30),
-                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                            height: 60,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFF5F5F7),
-                              borderRadius: BorderRadius.circular(40),
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(3, 3),
-                                  blurRadius: 10,
-                                  color: Colors.black.withOpacity(0.16),
-                                  spreadRadius: -2,
-                                )
-                              ],
-                            ),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  prefixIcon: Icon(Icons.search, color: Colors.black),
-                                  labelText: "Search for something!",
-                                  labelStyle: TextStyle(
-                                    fontSize: 18.0,
-                                    color: Colors.grey,
-                                  )
-                              ),
-                            )
-                        ),
-                        Expanded(
-                            child: GridView.count(
-                                crossAxisCount: 2,
-                                childAspectRatio: .90,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 10,
-                                children:<Widget>[
-                                  petCategory(
-                                      name: "Dogs",
-                                      emoji: "🐶",
-                                      pressButton: () {}
-                                  ),
-                                  petCategory(
-                                      name: "Cats",
-                                      emoji: "🐱",
-                                      pressButton: () {}
-                                  ),
-                                  petCategory(
-                                      name: "Hamsters",
-                                      emoji: "🐹",
-                                      pressButton: () {}
-                                  ),
-                                  petCategory(
-                                      name: "Others",
-                                      emoji: "🐾",
-                                      pressButton: () {}
-                                  )
-                                ]
-                            )
-
-                        )
-                      ],
+  SliverToBoxAdapter _buildHeader() {
+    return SliverToBoxAdapter(
+      child: Container(
+        margin: EdgeInsets.all(4),
+        padding: EdgeInsets.all(
+          5,
+        ),
+        decoration: BoxDecoration(
+            color: Colors.grey[400], //Color(0xFFbabfab),
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            )),
+        child: Container(
+            margin: EdgeInsets.all(3),
+            height: 115,
+            padding: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                RichText(
+                  text: TextSpan(children: [
+                    TextSpan(text: "Hello", style: kLabelStyle),
+                    TextSpan(
+                        text: ' {User_Name}',
+                        style: TextStyle(color: Colors.black, fontSize: 15)),
+                    TextSpan(
+                      text: '! We found ',
+                      style: kLabelStyle,
+                    ),
+                    TextSpan(
+                        text: "{no_of_pets}",
+                        style: TextStyle(color: Colors.black, fontSize: 15)),
+                    TextSpan(
+                      text: " animals waiting to be adopted in your area.",
+                      style: kLabelStyle,
                     )
-                )
-            )
-          ],
-        )
+                  ]),
+                ),
+              ],
+            )),
+      ),
+    );
+  }
+
+  SliverToBoxAdapter _buildSubHeading() {
+    return SliverToBoxAdapter(
+      child: Container(
+        margin: EdgeInsets.all(10),
+        child: Text("Categories"),
+      ),
+    );
+  }
+
+  SliverGrid _buildPetCategory() {
+    List<PetCategory> gridElements = [
+      PetCategory(name: "Dogs", emoji: "🐶", pressButton: () {}),
+      PetCategory(name: "Cats", emoji: "🐈", pressButton: () {}),
+      PetCategory(name: "Hamsters", emoji: "🐹", pressButton: () {}),
+      PetCategory(name: "Others", emoji: "🐾", pressButton: () {})
+    ];
+    return SliverGrid(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return gridElements[index];
+        },
+        childCount: 4,
+      ),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 2,
+        crossAxisSpacing: 5,
+      ),
     );
   }
 }
+

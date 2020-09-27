@@ -1,10 +1,12 @@
+import 'package:dystopia_flutter_app/screens/account.dart';
 import 'package:dystopia_flutter_app/screens/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/services.dart';
 
-import 'home_screen.dart';
+import '../screens/home_screen.dart';
+import '../theme.dart';
 
 class BottomNavigation extends StatefulWidget {
   @override
@@ -47,43 +49,49 @@ class _BottomNavigationState extends State<BottomNavigation>
   }
 
   List iconList = <IconData>[
-    Icons.home,
-    Icons.search,
-    Icons.favorite,
-    Icons.account_circle,
+    Icons.search, // the pet market
+
+    Icons.favorite, // user's favorites
+
+    Icons.chat_bubble, // connects the user and pet owner
+
+    Icons.account_circle, // user's details
   ];
   final List _screens = [
     HomePage(),
     SearchPage(),
     Scaffold(),
-    Scaffold(),
-    Scaffold(),
+    ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(designSize: Size(414, 896), allowFontScaling: true);
     return Scaffold(
       body: _screens[_bottomNavIndex],
       floatingActionButton: ScaleTransition(
         scale: animation,
-        child: FloatingActionButton(
-          elevation: 5,
-          backgroundColor: Color(0xFFbabfab),
-          child: Image.asset(
-            'assets/images/pet_logo.png',
-            color: Color(0xFF565165),
-          ),
-          onPressed: () {
+        child: GestureDetector(
+          onTap: () {
             _animationController.reset();
 
             // logic to be implemented
 
             _animationController.forward();
           },
+          child: CircleAvatar(
+            backgroundColor: Color(0xFFbabfab),
+            child: Image.asset(
+              'assets/images/pet_logo.png',
+              color: Color(0xFF565165),
+            ),
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
         icons: iconList,
+        height: kSpacingUnit.h * 7,
+        iconSize: kSpacingUnit.w * 2.5,
         activeIndex: _bottomNavIndex,
         activeColor: Color(0xFF565165),
         splashColor: Color(0xFF651c56),
@@ -99,3 +107,24 @@ class _BottomNavigationState extends State<BottomNavigation>
     );
   }
 }
+
+/*
+ onPressed: () {
+              _animationController.reset();
+
+              // logic to be implemented
+
+              _animationController.forward();
+            },
+
+*/
+
+/*
+CircleAvatar(
+          backgroundColor: Color(0xFFbabfab),
+          child: Image.asset(
+            'assets/images/pet_logo.png',
+            color: Color(0xFF565165),
+          ),
+        ),
+*/

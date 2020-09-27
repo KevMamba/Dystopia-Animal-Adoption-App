@@ -1,33 +1,38 @@
 import 'package:dystopia_flutter_app/theme.dart';
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    return AppBar(
-      backgroundColor: Color(0xFFbabfab),
-      elevation: 5.0,
-      //leadingWidth: 0.0,
+
+    return SliverAppBar(
+      pinned: false,
+      //forceElevated: true,
+      elevation: 20,
+      backgroundColor: Colors.transparent,
+      floating: true,
+      toolbarHeight: 50,
+      leadingWidth: 0.0,
       leading: Opacity(
         opacity: 0.0,
       ),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: Column(
+      title: Container(
+        margin: EdgeInsets.all(2),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    /*Icon(
+                    Icon(
                       Icons.location_pin,
                       size: 15,
-                    ),*/
+                      color: Colors.black,
+                    ),
                     Text(
                       ' User_Location',
                       style: kLabelStyleAppBar,
@@ -40,32 +45,27 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                     "Change",
                     style: TextStyle(
                       fontSize: 10,
+                      color: Colors.black,
                       decoration: TextDecoration.underline,
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-          SizedBox(
-            width: width * 0.39,
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 15.0),
-              child: Image.asset(
-                'assets/images/Dystopia_logo_png.png',
-                filterQuality: FilterQuality.high,
-                fit: BoxFit.cover,
-                height: 53.0,
-              ),
+            Image.asset(
+              'assets/images/Dystopia_logo_png.png',
+              filterQuality: FilterQuality.high,
+              fit: BoxFit.contain,
+              height: 60,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+      bottom: PreferredSize(
+          preferredSize: Size.fromHeight(15),
+          child: Divider(
+            thickness: 1,
+          )),
     );
   }
-
-  @override
-  Size get preferredSize => Size.fromHeight(70.00);
 }
