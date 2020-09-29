@@ -1,23 +1,42 @@
 import 'package:dystopia_flutter_app/theme.dart';
 import 'package:dystopia_flutter_app/widgets/custom_app_bar.dart';
 import 'package:dystopia_flutter_app/widgets/pet_category.dart';
-
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      physics: BouncingScrollPhysics(),
-      slivers: <Widget>[
-        CustomAppBar(),
-        _buildHeader(),
-        _buildSubHeading(),
-        _buildPetCategory(),
-      ],
+    return Scaffold(
+      body: NestedScrollView(
+        floatHeaderSlivers: true,
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[_buildHeader(), CustomAppBar()];
+        },
+        body: Builder(builder: (BuildContext builder) {
+          return CustomScrollView(
+            physics: ClampingScrollPhysics(),
+            slivers: [
+              _buildSubHeading(),
+              _buildPetCategory(),
+              _buildPetCategory(),
+            ],
+          );
+        }),
+      ),
     );
   }
 
+/*
+CustomScrollView(
+      physics: BouncingScrollPhysics(),
+      slivers: <Widget>[
+        CustomAppBar(),
+        _buildSubHeading(),
+        _buildPetCategory(),
+        _buildHeader(),
+      ],
+    );
+*/
   SliverToBoxAdapter _buildHeader() {
     return SliverToBoxAdapter(
       child: Container(

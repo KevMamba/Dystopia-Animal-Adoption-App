@@ -5,13 +5,13 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      pinned: false,
+      pinned: true,
       //forceElevated: true,
       elevation: 20,
       backgroundColor: Colors.transparent,
-      floating: true,
-      toolbarHeight: 50,
-      //leadingWidth: 0.0,
+      floating: false,
+      toolbarHeight: 55,
+      leadingWidth: 0.0,
       leading: Opacity(
         opacity: 0.0,
       ),
@@ -60,11 +60,11 @@ class CustomAppBar extends StatelessWidget {
           ],
         ),
       ),
-      bottom: PreferredSize(
-          preferredSize: Size.fromHeight(15),
-          child: Divider(
-            thickness: 1,
-          )),
+      //bottom: PreferredSize(
+      //preferredSize: Size.fromHeight(15),
+      //  child: Divider(
+      //thickness: 1,
+      //)),
     );
   }
 }
