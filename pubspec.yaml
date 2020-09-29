@@ -32,7 +32,6 @@ dependencies:
   animated_bottom_navigation_bar: ^0.1.2+2
   line_awesome_flutter: ^1.0.1
   flutter_screenutil: ^3.0.1
-  google_fonts: ^1.1.0
 
 dev_dependencies:
   flutter_test:

@@ -8,7 +8,8 @@ import '../theme.dart';
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(designSize: Size(414, 896), allowFontScaling: true);
+    ScreenUtil.init(context,
+        designSize: Size(414, 896), allowFontScaling: true);
     var profileInfo = Expanded(
       child: Column(
         children: <Widget>[
@@ -70,47 +71,50 @@ class ProfileScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          SizedBox(height: kSpacingUnit.w * 5),
-          header,
-          Expanded(
-            child: ListView(
-              children: <Widget>[
-                ProfileListItem(
-                  icon: LineAwesomeIcons.user_shield,
-                  text: 'Privacy',
-                ),
-                ProfileListItem(
-                  icon: LineAwesomeIcons.history,
-                  text: 'History',
-                ),
-                ProfileListItem(
-                  icon: LineAwesomeIcons.question_circle,
-                  text: 'Help & Support',
-                ),
-                ProfileListItem(
-                  icon: LineAwesomeIcons.cog,
-                  text: 'Settings',
-                ),
-                ProfileListItem(
-                  icon: LineAwesomeIcons.user_plus,
-                  text: 'Invite a Friend',
-                ),
-                ProfileListItem(
-                  icon: LineAwesomeIcons.alternate_sign_out,
-                  text: 'Logout',
-                  hasNavigation: false,
-                ),
-                ProfileListItem(
-                  icon: LineAwesomeIcons.money_check,
-                  text: 'Donate',
-                  hasNavigation: false,
-                ),
-              ],
-            ),
-          )
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: kSpacingUnit.w * 5),
+            header,
+            Expanded(
+              child: ListView(
+                children: <Widget>[
+                  ProfileListItem(
+                    icon: LineAwesomeIcons.user_shield,
+                    text: 'Privacy',
+                  ),
+                  ProfileListItem(
+                    icon: LineAwesomeIcons.history,
+                    text: 'History',
+                  ),
+                  ProfileListItem(
+                    icon: LineAwesomeIcons.question_circle,
+                    text: 'Help & Support',
+                  ),
+                  ProfileListItem(
+                    icon: LineAwesomeIcons.cog,
+                    text: 'Settings',
+                  ),
+                  ProfileListItem(
+                    icon: LineAwesomeIcons.user_plus,
+                    text: 'Invite a Friend',
+                  ),
+                  ProfileListItem(
+                    icon: LineAwesomeIcons.alternate_sign_out,
+                    text: 'Logout',
+                    hasNavigation: false,
+                  ),
+                  ProfileListItem(
+                    icon: LineAwesomeIcons.money_check,
+                    text: 'Donate',
+                    hasNavigation: false,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

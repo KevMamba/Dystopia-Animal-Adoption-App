@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return SliverAppBar(
       pinned: false,
       //forceElevated: true,
@@ -12,7 +11,7 @@ class CustomAppBar extends StatelessWidget {
       backgroundColor: Colors.transparent,
       floating: true,
       toolbarHeight: 50,
-      leadingWidth: 0.0,
+      //leadingWidth: 0.0,
       leading: Opacity(
         opacity: 0.0,
       ),
@@ -29,7 +28,7 @@ class CustomAppBar extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Icon(
-                      Icons.location_pin,
+                      Icons.location_on,
                       size: 15,
                       color: Colors.black,
                     ),

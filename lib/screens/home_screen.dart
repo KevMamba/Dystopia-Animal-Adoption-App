@@ -1,4 +1,3 @@
-
 import 'package:dystopia_flutter_app/theme.dart';
 import 'package:dystopia_flutter_app/widgets/custom_app_bar.dart';
 import 'package:dystopia_flutter_app/widgets/pet_category.dart';
@@ -28,7 +27,7 @@ class HomePage extends StatelessWidget {
           5,
         ),
         decoration: BoxDecoration(
-            color: Colors.grey[400], //Color(0xFFbabfab),
+            color: Color(0xFF8a8c5d), //Color(0xFFbabfab),
             borderRadius: BorderRadius.all(
               Radius.circular(10),
             )),
@@ -98,4 +97,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-

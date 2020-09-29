@@ -65,7 +65,9 @@ class _BottomNavigationState extends State<BottomNavigation>
   ];
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(designSize: Size(414, 896), allowFontScaling: true);
+    //ScreenUtil.init(designSize: Size(414, 896), allowFontScaling: true);
+    ScreenUtil.init(context,
+        designSize: Size(414, 896), allowFontScaling: true);
     return Scaffold(
       body: _screens[_bottomNavIndex],
       floatingActionButton: ScaleTransition(

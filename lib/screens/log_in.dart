@@ -298,10 +298,12 @@ class _SigninFieldsState extends State<SigninFields> {
         SizedBox(
           height: 10.0,
         ),
-        SignUpOrIn(
-          description: 'Don\'t have an Account?',
-          highlighted: 'Sign Up!',
-          action: () => _displaySignUpForm(),
+        Center(
+          child: SignUpOrIn(
+            description: 'Don\'t have an Account? ',
+            highlighted: 'Sign Up!',
+            action: () => _displaySignUpForm(),
+          ),
         )
       ];
     }

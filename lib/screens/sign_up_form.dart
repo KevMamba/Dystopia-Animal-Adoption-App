@@ -224,10 +224,12 @@ class _SignUpFieldsState extends State<SignUpFields> {
           thickness: 2,
         ),
         SizedBox(height: 15),
-        SignUpOrIn(
-          description: 'Already have an Account?',
-          highlighted: 'Login!',
-          action: () => Navigator.of(context).pop(false),
+        Center(
+          child: SignUpOrIn(
+            description: 'Already have an Account? ',
+            highlighted: 'Login!',
+            action: () => Navigator.of(context).pop(false),
+          ),
         )
       ];
     }
