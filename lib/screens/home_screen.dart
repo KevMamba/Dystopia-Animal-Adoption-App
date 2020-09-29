@@ -1,7 +1,6 @@
 import 'package:dystopia_flutter_app/theme.dart';
 import 'package:dystopia_flutter_app/widgets/custom_app_bar.dart';
 import 'package:dystopia_flutter_app/widgets/pet_category.dart';
-import 'package:dystopia_flutter_app/widgets/custom_app_bar.dart';
 
 import 'package:flutter/material.dart';
 
