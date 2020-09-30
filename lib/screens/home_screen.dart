@@ -60,7 +60,6 @@ class HomePage extends StatelessWidget {
               );
             },
           ),
-          buildFloatingSearchBar(context),
         ],
       ),
     );
@@ -69,7 +68,6 @@ class HomePage extends StatelessWidget {
   Widget buildFloatingSearchBar(BuildContext context) {
     final isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
-
     return Directionality(
       textDirection: TextDirection.rtl,
       child: FloatingSearchBar(
