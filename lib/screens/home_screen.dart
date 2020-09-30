@@ -1,5 +1,4 @@
 import 'package:dystopia_flutter_app/theme.dart';
-
 import 'package:dystopia_flutter_app/widgets/pet_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -22,40 +21,47 @@ class HomePage extends StatelessWidget {
   Widget buildCarousel(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.width,
-      child: Swiper(
-        autoplay: true,
-        autoplayDelay: 30000,
-        duration: 1000,
-        curve: Curves.easeInOut,
-        autoplayDisableOnInteraction: true,
-        layout: SwiperLayout.CUSTOM,
-        customLayoutOption:
-            new CustomLayoutOption(startIndex: -1, stateCount: 3)
-                .addRotate([45.0 / 180, 0.0, -45.0 / 180]).addTranslate([
-          new Offset(-370.0, -40.0),
-          new Offset(0.0, 0.0),
-          new Offset(370.0, -40.0)
-        ]),
-        controller: SwiperController(),
-        itemWidth: MediaQuery.of(context).size.width,
-        itemCount: 3,
-        pagination: new SwiperPagination(),
-        control: new SwiperControl(
-          size: 0.0,
-        ),
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return ClipRRect(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30)),
-            child: Image(
-              image: AssetImage('assets/images/Final-RGB.jpg'),
-              filterQuality: FilterQuality.high,
-              fit: BoxFit.cover,
+      alignment: AlignmentDirectional.bottomCenter,
+      child: Stack(
+        children: <Widget>[
+          Swiper(
+            autoplay: true,
+            autoplayDelay: 3000,
+            duration: 1000,
+            curve: Curves.easeInOut,
+            autoplayDisableOnInteraction: true,
+            layout: SwiperLayout.STACK,
+            // customLayoutOption:
+            //     new CustomLayoutOption(startIndex: -1, stateCount: 3)
+            //         .addRotate([45.0 / 180, 0.0, -45.0 / 180]).addTranslate([
+            //   new Offset(-370.0, -40.0),
+            //   new Offset(0.0, 0.0),
+            //   new Offset(370.0, -40.0)
+            // ]),
+            controller: SwiperController(),
+            itemHeight: MediaQuery.of(context).size.height,
+            itemWidth: MediaQuery.of(context).size.width,
+            itemCount: 3,
+            pagination: new SwiperPagination(),
+            control: new SwiperControl(
+              size: 0.0,
             ),
-          );
-        },
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return ClipRRect(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30)),
+                child: Image(
+                  image: AssetImage('assets/images/Final-RGB.jpg'),
+                  filterQuality: FilterQuality.high,
+                  fit: BoxFit.cover,
+                ),
+              );
+            },
+          ),
+          buildFloatingSearchBar(context),
+        ],
       ),
     );
   }
