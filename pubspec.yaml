@@ -33,6 +33,8 @@ dependencies:
   flutter_screenutil: ^3.0.1
   google_fonts: ^1.1.0
   linked_scroll_controller: ^0.1.2
+  material_floating_search_bar: ^0.1.7
+  flutter_swiper: ^1.1.6
 
 dev_dependencies:
   flutter_test:

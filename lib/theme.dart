@@ -36,6 +36,19 @@ final kBoxDecorationStyle = BoxDecoration(
   ],
 );
 
+final kBoxDecorationStyleCarousel = BoxDecoration(
+  color: Color(0xFFb0abbf),
+  borderRadius: BorderRadius.only(
+      bottomLeft: Radius.circular(30.0), bottomRight: Radius.circular(30.0)),
+  boxShadow: [
+    BoxShadow(
+      color: Colors.black12,
+      blurRadius: 6.0,
+      offset: Offset(0, 2),
+    ),
+  ],
+);
+
 final kSignUpColors = <Color>[
   Color(0xFFe3e5dd),
   Color(0xFFd5d8cc),
