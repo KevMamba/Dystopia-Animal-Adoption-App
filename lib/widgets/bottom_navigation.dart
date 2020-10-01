@@ -1,5 +1,5 @@
 import 'package:dystopia_flutter_app/screens/account.dart';
-import 'package:dystopia_flutter_app/screens/search_page.dart';
+import 'package:dystopia_flutter_app/screens/saved_page.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -59,17 +59,18 @@ class _BottomNavigationState extends State<BottomNavigation>
     Icons.account_circle, // user's details
   ];
   final List _screens = [
-    HomePage(),
+    HomePage2(),
     SavedPage(),
     Scaffold(),
     ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {
-    //ScreenUtil.init(designSize: Size(414, 896), allowFontScaling: true);
     ScreenUtil.init(context,
         designSize: Size(414, 896), allowFontScaling: true);
     return Scaffold(
+      extendBody: true,
+      resizeToAvoidBottomInset: true,
       body: _screens[_bottomNavIndex],
       floatingActionButton: ScaleTransition(
         scale: animation,
@@ -83,6 +84,7 @@ class _BottomNavigationState extends State<BottomNavigation>
           },
           child: CircleAvatar(
             backgroundColor: Color(0xFFbabfab),
+            radius: 20,
             child: Image.asset(
               'assets/images/pet_logo.png',
               color: Color(0xFF565165),
@@ -102,7 +104,7 @@ class _BottomNavigationState extends State<BottomNavigation>
         inactiveColor: Colors.grey,
         notchAndCornersAnimation: animation,
         splashSpeedInMilliseconds: 300,
-        notchSmoothness: NotchSmoothness.smoothEdge,
+        notchSmoothness: NotchSmoothness.defaultEdge,
         gapLocation: GapLocation.center,
         leftCornerRadius: 0,
         rightCornerRadius: 0,
@@ -111,24 +113,3 @@ class _BottomNavigationState extends State<BottomNavigation>
     );
   }
 }
-
-/*
- onPressed: () {
-              _animationController.reset();
-
-              // logic to be implemented
-
-              _animationController.forward();
-            },
-
-*/
-
-/*
-CircleAvatar(
-          backgroundColor: Color(0xFFbabfab),
-          child: Image.asset(
-            'assets/images/pet_logo.png',
-            color: Color(0xFF565165),
-          ),
-        ),
-*/
