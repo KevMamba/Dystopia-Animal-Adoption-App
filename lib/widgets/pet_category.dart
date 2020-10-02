@@ -17,6 +17,7 @@ class PetCategory extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Container(
+        width: 50,
         decoration:
             BoxDecoration(borderRadius: BorderRadius.circular(10), boxShadow: [
           BoxShadow(

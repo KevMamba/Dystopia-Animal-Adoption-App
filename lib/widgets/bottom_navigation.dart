@@ -2,11 +2,11 @@ import 'package:dystopia_flutter_app/screens/account.dart';
 import 'package:dystopia_flutter_app/screens/saved_page.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:flutter/services.dart';
 
 import '../screens/home_screen.dart';
-import '../theme.dart';
+
 import 'floating_action_helper.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -66,8 +66,6 @@ class _BottomNavigationState extends State<BottomNavigation>
   ];
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context,
-        designSize: Size(414, 896), allowFontScaling: true);
     return Scaffold(
       extendBody: true,
       resizeToAvoidBottomInset: true,
@@ -83,11 +81,11 @@ class _BottomNavigationState extends State<BottomNavigation>
             _animationController.forward();
           },
           child: CircleAvatar(
-            backgroundColor: Color(0xFFbabfab),
+            backgroundColor: Color(0xFFb9815d),
             radius: 20,
             child: Image.asset(
               'assets/images/pet_logo.png',
-              color: Color(0xFF565165),
+              color: Colors.black,
             ),
           ),
         ),
@@ -96,11 +94,13 @@ class _BottomNavigationState extends State<BottomNavigation>
           FixedCenterDockedFabLocation(context: context),
       bottomNavigationBar: AnimatedBottomNavigationBar(
         icons: iconList,
-        height: kSpacingUnit.h * 7,
-        iconSize: kSpacingUnit.w * 2.5,
+        height: 50,
+        iconSize: 20,
         activeIndex: _bottomNavIndex,
-        activeColor: Color(0xFF565165),
-        splashColor: Color(0xFF651c56),
+        elevation: 10,
+        backgroundColor: Color(0xFFedf3eb),
+        activeColor: Color(0xFFb9815d),
+        splashColor: Color(0xFF875433),
         inactiveColor: Colors.grey,
         notchAndCornersAnimation: animation,
         splashSpeedInMilliseconds: 300,
