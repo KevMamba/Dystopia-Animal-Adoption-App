@@ -7,6 +7,7 @@ import '../widgets/sign_in_helpers/layout.dart';
 import '../widgets/sign_in_helpers/signup_or_login.dart';
 import '../widgets/sign_in_helpers/social_signin.dart';
 import '../widgets/bottom_navigation.dart';
+import 'package:password_strength/password_strength.dart';
 
 class SignUpForm extends StatelessWidget {
   @override
@@ -14,54 +15,57 @@ class SignUpForm extends StatelessWidget {
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
-        child: Stack(
-          children: <Widget>[
-            Container(
-              height: double.infinity,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: kSignUpColors,
-                  stops: [
-                    0.1,
-                    0.4,
-                    0.7,
-                    0.9,
-                  ],
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Stack(
+            children: <Widget>[
+              Container(
+                height: double.infinity,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: kSignUpColors,
+                    stops: [
+                      0.1,
+                      0.4,
+                      0.7,
+                      0.9,
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Container(
-              height: double.infinity,
-              child: SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 40.0,
-                  vertical: 120.0,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'OpenSans',
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
+              Container(
+                height: double.infinity,
+                child: SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 40.0,
+                    vertical: 120.0,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'OpenSans',
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    SignUpFields(), //.create() later,
-                  ],
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      SignUpFields(), //.create() later,
+                    ],
+                  ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -90,6 +94,37 @@ class _SignUpFieldsState extends State<SignUpFields> {
   
   // implemented later with the help of validators.
   */
+
+  final myController = TextEditingController();
+  Text passwordStrength(String password) {
+    double strength = estimatePasswordStrength(password);
+
+    if (strength < 0.3) {
+      return (Text(
+        'Password Strength: Weak',
+        style: TextStyle(
+          color: Colors.red,
+          fontWeight: FontWeight.bold,
+        ),
+      ));
+    } else if (strength < 0.7) {
+      return (Text(
+        'Password Strength: Medium',
+        style: TextStyle(
+          color: Colors.yellow,
+          fontWeight: FontWeight.bold,
+        ),
+      ));
+    } else {
+      return (Text(
+        'Password Strength: Strong',
+        style: TextStyle(
+          color: Colors.greenAccent[400],
+          fontWeight: FontWeight.bold,
+        ),
+      ));
+    }
+  }
 
   _gotoHomePage() {
     PlatformPageRoute.pageRoute(
@@ -149,6 +184,7 @@ class _SignUpFieldsState extends State<SignUpFields> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
+            controller: myController,
             obscureText: true,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
@@ -167,6 +203,15 @@ class _SignUpFieldsState extends State<SignUpFields> {
             ),
           ),
         )
+      ],
+    );
+  }
+
+  Widget _buildPasswordStrength() {
+    return Column(
+      children: <Widget>[
+        SizedBox(height: 20),
+        passwordStrength(myController.text)
       ],
     );
   }
@@ -206,6 +251,7 @@ class _SignUpFieldsState extends State<SignUpFields> {
           height: 30.0,
         ),
         _buildPassword(),
+        _buildPasswordStrength(),
         SizedBox(
           height: 20.0,
         ),
