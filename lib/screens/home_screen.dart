@@ -24,12 +24,18 @@ class _HomePage2State extends State<HomePage2> {
             Radius.circular(30),
           ),
           child: RaisedButton(
+            color: Colors.white,
             onPressed: () {},
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Icon(Icons.search),
-                Text("Search for a pet..."),
+                Text(
+                  "Search for a pet...",
+                  style: TextStyle(
+                    fontSize: 15,
+                  ),
+                ),
                 Opacity(
                   opacity: 0.0,
                 )
@@ -118,7 +124,7 @@ class _HomePage2State extends State<HomePage2> {
           bottomRight: Radius.circular(30),
         ),
       ),
-      leadingWidth: 0.0,
+      //leadingWidth: 0.0,
       leading: Opacity(
         opacity: 0.0,
       ),
