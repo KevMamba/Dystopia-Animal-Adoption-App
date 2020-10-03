@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class PetCategory extends StatelessWidget {
   final String image;
   final String name;
-  final Function pressButton;
+  final VoidCallback pressButton;
   const PetCategory({
     Key key,
     this.image,
@@ -18,17 +18,9 @@ class PetCategory extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: Container(
         width: 50,
-        decoration:
-            BoxDecoration(borderRadius: BorderRadius.circular(10), boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            offset: Offset(0, 2),
-            blurRadius: 10,
-          )
-        ]),
         child: Material(
           child: InkWell(
-            onTap: pressButton,
+            onTap: () {},
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
