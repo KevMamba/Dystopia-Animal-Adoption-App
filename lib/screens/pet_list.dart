@@ -1,8 +1,8 @@
 import 'package:dystopia_flutter_app/theme.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:dystopia_flutter_app/widgets/pet_results.dart';
-import 'package:dystopia_flutter_app/widgets/custom_app_bar.dart';
+import 'package:dystopia_flutter_app/widgets/pet_list_cards.dart';
+
 //import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 
@@ -29,8 +29,7 @@ class AdoptionResultsState extends State<AdoptionResults> {
         floatHeaderSlivers: true,
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
-            _buildHeader(),
-            CustomAppBar()];
+            _buildHeader()];
         },
         body: Builder(builder: (BuildContext builder) {
           return CustomScrollView(
