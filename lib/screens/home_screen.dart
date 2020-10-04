@@ -24,7 +24,6 @@ class _HomePage2State extends State<HomePage2> {
             Radius.circular(30),
           ),
           child: RaisedButton(
-            color: Colors.white,
             onPressed: () {},
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,24 +91,53 @@ class _HomePage2State extends State<HomePage2> {
     return SliverToBoxAdapter(
       child: Container(
         margin: EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 10,
+          horizontal: 20,
+          vertical: 5,
         ),
         padding: EdgeInsets.symmetric(
-          vertical: 5,
-          horizontal: 15,
+          vertical: 20,
+          horizontal: 20,
         ),
         decoration: BoxDecoration(
-          //  gradient: LinearGradient(
-          //    colors: [
-          //      Color(0xFFedb18b),
-          //      Color(0xFFb9815d),
-          //   ],
-          //    begin: Alignment.centerLeft,
-          // ),
+          gradient: LinearGradient(colors: [
+            Color(0xFFb9725d),
+            Color(0xFFe2c5bd),
+          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
           borderRadius: BorderRadius.circular(30),
         ),
-        child: Placeholder(),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Flexible(
+              child: Text(
+                "Can\'t look after your pet due to unforeseen circumstances? List your pet today and let us help you find their next owner.",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            FlatButton.icon(
+                height: 50,
+                color: Color(0xFF875433),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                onPressed: () {},
+                icon: Icon(
+                  Icons.night_shelter,
+                  color: Colors.white,
+                ),
+                label: Text(
+                  "Start now",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                )),
+          ],
+        ),
       ),
     );
   }
@@ -124,7 +152,7 @@ class _HomePage2State extends State<HomePage2> {
           bottomRight: Radius.circular(30),
         ),
       ),
-      //leadingWidth: 0.0,
+      leadingWidth: 0.0,
       leading: Opacity(
         opacity: 0.0,
       ),
@@ -181,7 +209,9 @@ class _HomePage2State extends State<HomePage2> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 15.0),
+                padding: const EdgeInsets.only(
+                  top: 25.0,
+                ),
                 child: Divider(),
               ),
               Expanded(
@@ -190,7 +220,19 @@ class _HomePage2State extends State<HomePage2> {
                   physics: BouncingScrollPhysics(),
                   slivers: [
                     petCategories(),
+                    SliverPadding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 5,
+                      ),
+                    ),
                     petList(),
+                    // scroll helper
+                    SliverToBoxAdapter(
+                      child: Container(
+                        height: 50,
+                        color: Colors.transparent,
+                      ),
+                    )
                   ],
                 ),
               ),

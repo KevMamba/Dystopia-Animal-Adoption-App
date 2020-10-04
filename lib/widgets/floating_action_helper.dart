@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class FixedCenterDockedFabLocation extends FloatingActionButtonLocation {
-  const FixedCenterDockedFabLocation({
+class FixedDockedFabLocation extends FloatingActionButtonLocation {
+  const FixedDockedFabLocation({
     this.context,
   });
   final context;
@@ -18,7 +18,7 @@ class FixedCenterDockedFabLocation extends FloatingActionButtonLocation {
 
     double fabY = contentBottom + bottomDistance - fabHeight / 2.0;
 
-    // The FAB should sit with a margin between it and the snack bar.
+    // The FAB should sit with a margin between the snack bar and itself.
     if (snackBarHeight > 0.0)
       fabY = min(
           fabY,
@@ -26,6 +26,7 @@ class FixedCenterDockedFabLocation extends FloatingActionButtonLocation {
               snackBarHeight -
               fabHeight -
               kFloatingActionButtonMargin);
+
     // The FAB should sit with its center in front of the top of the bottom sheet.
     if (bottomSheetHeight > 0.0)
       fabY = min(fabY, contentBottom - bottomSheetHeight - fabHeight / 2.0);
@@ -38,7 +39,7 @@ class FixedCenterDockedFabLocation extends FloatingActionButtonLocation {
   Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
     final double fabX = (scaffoldGeometry.scaffoldSize.width -
             scaffoldGeometry.floatingActionButtonSize.width) /
-        2.0;
+        1.05;
     return Offset(fabX, getDockedY(scaffoldGeometry));
   }
 }

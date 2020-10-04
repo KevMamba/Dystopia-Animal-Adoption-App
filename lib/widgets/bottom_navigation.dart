@@ -90,8 +90,7 @@ class _BottomNavigationState extends State<BottomNavigation>
           ),
         ),
       ),
-      floatingActionButtonLocation:
-          FixedCenterDockedFabLocation(context: context),
+      floatingActionButtonLocation: FixedDockedFabLocation(context: context),
       bottomNavigationBar: AnimatedBottomNavigationBar(
         icons: iconList,
         height: 50,
@@ -104,8 +103,8 @@ class _BottomNavigationState extends State<BottomNavigation>
         inactiveColor: Colors.grey,
         notchAndCornersAnimation: animation,
         splashSpeedInMilliseconds: 300,
-        notchSmoothness: NotchSmoothness.defaultEdge,
-        gapLocation: GapLocation.center,
+        notchSmoothness: NotchSmoothness.softEdge,
+        gapLocation: GapLocation.end,
         leftCornerRadius: 0,
         rightCornerRadius: 0,
         onTap: (index) => setState(() => _bottomNavIndex = index),
