@@ -90,6 +90,7 @@ class _HomePage2State extends State<HomePage2> {
   SliverToBoxAdapter petList() {
     return SliverToBoxAdapter(
       child: Container(
+        height: MediaQuery.of(context).size.height / 3,
         margin: EdgeInsets.symmetric(
           horizontal: 20,
           vertical: 5,
@@ -100,28 +101,32 @@ class _HomePage2State extends State<HomePage2> {
         ),
         decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
-            Color(0xFFb9725d),
-            Color(0xFFe2c5bd),
+            Color(0xFFbbc7b9),
+            Color(0xFFe3e5e2),
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
           borderRadius: BorderRadius.circular(30),
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Flexible(
               child: Text(
-                "Can\'t look after your pet due to unforeseen circumstances? List your pet today and let us help you find their next owner.",
+                "Can\'t look after your pet due to unforeseen reasons? List your pet today and let us help you find their next owner.",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 15,
                 ),
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 15,
             ),
-            FlatButton.icon(
-                height: 50,
+            Container(
+              decoration: BoxDecoration(
                 color: Color(0xFF875433),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: FlatButton.icon(
+                height: 30,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -132,10 +137,10 @@ class _HomePage2State extends State<HomePage2> {
                 ),
                 label: Text(
                   "Start now",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                )),
+                  style: TextStyle(fontSize: 15, color: Colors.white),
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -219,17 +224,22 @@ class _HomePage2State extends State<HomePage2> {
                 child: CustomScrollView(
                   physics: BouncingScrollPhysics(),
                   slivers: [
+                    SliverPadding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 30,
+                      ),
+                    ),
                     petCategories(),
                     SliverPadding(
                       padding: EdgeInsets.symmetric(
-                        vertical: 5,
+                        vertical: 25,
                       ),
                     ),
                     petList(),
                     // scroll helper
                     SliverToBoxAdapter(
                       child: Container(
-                        height: 50,
+                        height: 180,
                         color: Colors.transparent,
                       ),
                     )
