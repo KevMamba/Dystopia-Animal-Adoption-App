@@ -71,6 +71,7 @@ class PlatformAlertDialog extends PlatFormWidget {
         assert(defaultActionText != null);
 
   Future<bool> show(BuildContext context) async {
+    print("Is invoking show?");
     return Platform.isIOS
         ? await showCupertinoDialog<bool>(
             context: context,

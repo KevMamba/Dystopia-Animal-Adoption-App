@@ -58,9 +58,7 @@ class SignInPage extends StatelessWidget {
 
 
 
-  void _showSignInError(BuildContext context, PlatformException exception) {
-    PlatFormExceptionAlertDialog(title: 'Sign In Failed', exception: exception);
-  }
+  
 
 */
   @override
@@ -165,10 +163,7 @@ class _SigninFieldsState extends State<SigninFields> {
       model.formType = EmailSignInFormType.SignIn;
       await model.submit();
     } on PlatformException catch (e) {
-      PlatFormExceptionAlertDialog(
-        title: 'Sign In Failed',
-        exception: e,
-      ).show(context);
+      _showSignInError(context, e);
     }
   }
 
@@ -188,6 +183,10 @@ class _SigninFieldsState extends State<SigninFields> {
       fromRoot: true,
       context: context,
     );
+  }
+
+  void _showSignInError(BuildContext context, PlatformException exception) {
+    PlatFormExceptionAlertDialog(title: 'Sign In Failed', exception: exception);
   }
 
   Container _buildLoginButton() {
@@ -347,6 +346,7 @@ class _SigninFieldsState extends State<SigninFields> {
 
   @override
   Widget build(BuildContext context) {
+    final block = Provider.of<SignInLoadingNotifier>(context);
     List<Widget> _buildChildren() {
       return [
         _buildEmail(),
@@ -361,7 +361,9 @@ class _SigninFieldsState extends State<SigninFields> {
         SizedBox(
           height: 10.0,
         ),
-        SocialSignin(),
+        SocialSignin(
+          block: block,
+        ),
         SizedBox(
           height: 10.0,
         ),
