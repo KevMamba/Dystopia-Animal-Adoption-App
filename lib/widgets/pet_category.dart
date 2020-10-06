@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 
 class PetCategory extends StatelessWidget {
   final String image;

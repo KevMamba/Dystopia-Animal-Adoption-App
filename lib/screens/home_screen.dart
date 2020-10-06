@@ -1,6 +1,11 @@
+import 'package:dystopia_flutter_app/screens/pet_list.dart';
 import 'package:dystopia_flutter_app/widgets/pet_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:dystopia_flutter_app/widgets/searchbox.dart';
+import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
+import 'package:dystopia_flutter_app/screens/pet_list.dart';
+
 
 class HomePage2 extends StatefulWidget {
   @override
@@ -8,43 +13,7 @@ class HomePage2 extends StatefulWidget {
 }
 
 class _HomePage2State extends State<HomePage2> {
-  Padding buildSearchBox() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40.0),
-      child: Container(
-        height: 40,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(30),
-          ),
-          color: Colors.white,
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.all(
-            Radius.circular(30),
-          ),
-          child: RaisedButton(
-            onPressed: () {},
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Icon(Icons.search),
-                Text(
-                  "Search for a pet...",
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
-                ),
-                Opacity(
-                  opacity: 0.0,
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+
 
   SliverToBoxAdapter petCategories() {
     List<PetCategory> _tiles = [
@@ -61,6 +30,7 @@ class _HomePage2State extends State<HomePage2> {
         name: "Others",
       ),
     ];
+
     return SliverToBoxAdapter(
       child: Container(
         color: Color(0xFFedf3eb),
@@ -219,34 +189,34 @@ class _HomePage2State extends State<HomePage2> {
                 child: CustomScrollView(
                   physics: BouncingScrollPhysics(),
                   slivers: [
-                    petCategories(),
-                    SliverPadding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 5,
+                      petCategories(),
+                      SliverPadding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 5,
+                        ),
                       ),
-                    ),
-                    petList(),
-                    // scroll helper
-                    SliverToBoxAdapter(
-                      child: Container(
-                        height: 50,
-                        color: Colors.transparent,
-                      ),
-                    )
-                  ],
+                      petList(),
+                      // scroll helper
+                      SliverToBoxAdapter(
+                        child: Container(
+                          height: 50,
+                          color: Colors.transparent,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Positioned(
-            top: (MediaQuery.of(context).size.height + 30) / 2.5,
-            width: MediaQuery.of(context).size.width,
-            child: Align(
-              child: buildSearchBox(),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
+            Positioned(
+              top: (MediaQuery.of(context).size.height + 30) / 2.5,
+              width: MediaQuery.of(context).size.width,
+              child: Align(
+                child: buildSearchBox(),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
-}

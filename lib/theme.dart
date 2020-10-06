@@ -51,9 +51,9 @@ final kBoxDecorationStyleCarousel = BoxDecoration(
 
 final kSignUpColors = <Color>[
   Color(0xFFe3e5dd),
-  Color(0xFFd5d8cc),
-  Color(0xFFc7cbbb),
-  Color(0xFFbabfab),
+  Color(0XFFedf3eb),
+  Color(0xFFbbc0b9),
+  Color(0xFF8b9089),
 ];
 
 const kSpacingUnit = 10;
