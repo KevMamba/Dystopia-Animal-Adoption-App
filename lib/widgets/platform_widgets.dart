@@ -89,9 +89,7 @@ class PlatformAlertDialog extends PlatFormWidget {
     return CupertinoAlertDialog(
       title: Text(title),
       content: Text(content),
-      actions: _buildActions(
-        context,
-      ),
+      actions: _buildActions(context),
     );
   }
 
@@ -119,7 +117,7 @@ class PlatformAlertDialog extends PlatFormWidget {
     if (cancelActionText != null) {
       actions.add(PlatFormAlertDialogAction(
         child: Text(cancelActionText),
-        onPressed: () => Navigator.of(context).pop(false),
+        onPressed: () => Navigator.of(context).pop(true),
       ));
     }
     return actions;

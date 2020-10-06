@@ -28,7 +28,7 @@ abstract class AuthBase {
 }
 
 class Auth implements AuthBase {
-  final _firebaseAuth = auth.FirebaseAuth.instance;
+  final _firebaseAuth = FirebaseAuth.instance;
 
   // type helper
   User _userFromFirebase(auth.User user) => (user != null)

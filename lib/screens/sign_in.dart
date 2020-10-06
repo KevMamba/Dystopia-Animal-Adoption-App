@@ -20,7 +20,7 @@ class SignInPage extends StatelessWidget {
   const SignInPage({Key key, @required this.block, @required this.loadingValue})
       : super(key: key);
   static Widget create(BuildContext context) {
-    final auth = Provider.of<Auth>(context);
+    final auth = Provider.of<AuthBase>(context);
     return ChangeNotifierProvider<ValueNotifier<bool>>(
       create: (_) => ValueNotifier<bool>(false),
       child: Consumer<ValueNotifier<bool>>(
@@ -162,8 +162,8 @@ class _SigninFieldsState extends State<SigninFields> {
 
   Future<void> _submit() async {
     try {
+      model.formType = EmailSignInFormType.SignIn;
       await model.submit();
-      Navigator.of(context).pop();
     } on PlatformException catch (e) {
       PlatFormExceptionAlertDialog(
         title: 'Sign In Failed',
@@ -180,7 +180,6 @@ class _SigninFieldsState extends State<SigninFields> {
   }
 
   _displaySignUpForm() {
-    model.toggleFormType();
     _emailController.clear();
     _passwordController.clear();
     PlatformPageRoute.pageRoute(
@@ -198,7 +197,7 @@ class _SigninFieldsState extends State<SigninFields> {
       ),
       width: double.infinity,
       child: RaisedButton(
-        onPressed: _submit,
+        onPressed: model.canSubmit ? _submit : null,
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -321,14 +320,15 @@ class _SigninFieldsState extends State<SigninFields> {
             focusNode: _emailFocusNode,
             controller: _emailController,
             textInputAction: TextInputAction.next,
+            onEditingComplete: () => _onEmailEditingComplete(),
+            onChanged: model.updateEmail,
+            enabled: model.isLoading == false,
             autocorrect: false,
             maxLines: 1,
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
             ),
-            onEditingComplete: () => _onEmailEditingComplete(),
-            onChanged: model.updateEmail,
             decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),

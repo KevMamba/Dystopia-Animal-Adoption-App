@@ -71,12 +71,15 @@ class EmailSignInChangeModel with FieldValidators, ChangeNotifier {
 
   Future<void> submit() async {
     updateWith(submitted: true, isLoading: true);
+    print(formType);
     try {
       // introduce artificial delays to check if the sign-in form is disabled when an auth request is in progress
       // await Future.delayed(Duration(seconds: 3));
       if (this.formType == EmailSignInFormType.SignIn) {
+        print("Is it here (Sign in with email)?");
         await auth.signInWithEmailAndPassword(this.email, this.password);
       } else {
+        print("Is it here (Create user with email)?");
         await auth.createUserWithEmailIdAndPassword(this.email, this.password);
       }
     } catch (e) {

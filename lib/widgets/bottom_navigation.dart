@@ -16,14 +16,21 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation>
     with SingleTickerProviderStateMixin {
-  var _bottomNavIndex = 0;
+  var _bottomNavIndex;
   AnimationController _animationController;
   Animation<double> animation;
   CurvedAnimation curve;
 
   @override
+  void dispose() {
+    super.dispose();
+    _animationController.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
+    _bottomNavIndex = 0;
     final systemTheme = SystemUiOverlayStyle.light;
     SystemChrome.setSystemUIOverlayStyle(systemTheme);
     _animationController = AnimationController(
@@ -82,7 +89,7 @@ class _BottomNavigationState extends State<BottomNavigation>
           },
           child: CircleAvatar(
             backgroundColor: Color(0xFFb9815d),
-            radius: 20,
+            radius: 15,
             child: Image.asset(
               'assets/images/pet_logo.png',
               color: Colors.black,
