@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dystopia_flutter_app/widgets/favorite_button.dart';
+import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
+import 'package:dystopia_flutter_app/screens/pet_list.dart';
 
 
 class PetResults extends StatelessWidget {
@@ -19,12 +21,13 @@ class PetResults extends StatelessWidget {
     this.pressButton,
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return ClipRRect(
       borderRadius: BorderRadius.circular(30.0),
-      child: Container(
+        child: Container(
           margin: EdgeInsets.all(20.0),
           height: 360,
           child: Column(children: <Widget>[
@@ -79,6 +82,6 @@ class PetResults extends StatelessWidget {
                             ]))))
           ])),
       //
-    );
+      );
   }
 }

@@ -7,10 +7,10 @@ import 'package:dystopia_flutter_app/widgets/pet_list_cards.dart';
 
 
 
-class AdoptionResults extends StatefulWidget {
+class ListScreen extends StatefulWidget {
   // creating a stateful widget
   @override
-  State createState() => new AdoptionResultsState(); // creating the state
+  State createState() => new ListScreenState(); // creating the state
 }
 
 final kLabelStyle = TextStyle(
@@ -20,7 +20,7 @@ final kLabelStyle = TextStyle(
 );
 
 
-class AdoptionResultsState extends State<AdoptionResults> {
+class ListScreenState extends State<ListScreen> {
   @override
 
   Widget build(BuildContext context) {
@@ -105,8 +105,8 @@ class AdoptionResultsState extends State<AdoptionResults> {
 
   SliverList _buildPetResults() {
     List<PetResults> listElements = [
-      PetResults(petPic: 'assets/images/dog-bg.jpg', petName: "Marley", petBreed: "Golden Retriever", petAge: "12 months", pressButton: () {}),
-      PetResults(petPic: 'assets/images/dog-bg.jpg', petName: "Polo", petBreed: "Beagle", petAge: "3 months", pressButton: () {})
+      PetResults(petPic: 'assets/images/dog-bg.jpg', petName: "Marley", petBreed: "Golden Retriever", petAge: "12 months"),
+      PetResults(petPic: 'assets/images/dog-bg.jpg', petName: "Polo", petBreed: "Beagle", petAge: "3 months")
     ];
     return SliverList(
       delegate: SliverChildBuilderDelegate(

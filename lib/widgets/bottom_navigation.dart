@@ -1,6 +1,9 @@
 import 'package:dystopia_flutter_app/screens/account.dart';
 import 'package:dystopia_flutter_app/screens/saved_page.dart';
+import 'package:dystopia_flutter_app/screens/pet_list.dart';
 import 'package:flutter/material.dart';
+import 'package:dystopia_flutter_app/screens/pet_results.dart';
+
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 
 import 'package:flutter/services.dart';
