@@ -19,6 +19,16 @@ class SocialSignin extends StatelessWidget {
     }
   }
 
+  Future<void> _signInWithFacebook(BuildContext context) async {
+    try {
+      await block.signInWithFacebook();
+    } on PlatformException catch (e) {
+      if (e.code != 'ERROR_ABORTED_BY_USER') {
+        _showSignInError(context, e);
+      }
+    }
+  }
+
   void _showSignInError(BuildContext context, PlatformException exception) {
     PlatFormExceptionAlertDialog(title: 'Sign In Failed', exception: exception);
   }
@@ -27,7 +37,7 @@ class SocialSignin extends StatelessWidget {
   Widget build(BuildContext context) {
     GestureDetector _facebookSignIn() {
       return GestureDetector(
-        onTap: () => debugPrint("FACEBOOK!"),
+        onTap: () => _signInWithFacebook(context),
         child: Container(
           height: 60.0,
           width: 60.0,

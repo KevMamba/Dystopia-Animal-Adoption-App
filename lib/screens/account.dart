@@ -23,8 +23,8 @@ class ProfileScreen extends StatelessWidget {
     final didRequestSignOut = await PlatformAlertDialog(
       title: 'Logout',
       content: 'Are you sure that you want to logout?',
-      cancelActionText: 'Cancel',
-      defaultActionText: 'Logout',
+      cancelActionText: 'Logout',
+      defaultActionText: 'Cancel',
     ).show(context);
     if (didRequestSignOut == true) {
       _signOut(context);

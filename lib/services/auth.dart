@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class User {
@@ -22,6 +23,7 @@ abstract class AuthBase {
 
   Future<void> signOut();
   Future<User> signInWithGoogle();
+  Future<User> siginWithFacebook();
 
   Future<User> signInWithEmailAndPassword(String email, String password);
   Future<User> createUserWithEmailIdAndPassword(String email, String password);
@@ -66,6 +68,33 @@ class Auth implements AuthBase {
         throw PlatformException(
           code: 'ERROR_MISSING_GOOGLE_AUTH_TOKEN',
           message: 'Missing google auth token',
+        );
+      }
+    } else {
+      throw PlatformException(
+        code: 'ERROR_ABORTED_BY_USER',
+        message: 'Sign in aborted by user',
+      );
+    }
+  }
+
+  @override
+  Future<User> siginWithFacebook() async {
+    final facebookAuth = FacebookAuth.instance;
+    final facebookAccount = await facebookAuth.login();
+
+    if (facebookAccount != null) {
+      final AccessToken _accessToken = await facebookAuth.isLogged;
+      if (_accessToken != null) {
+        final OAuthCredential credential =
+            FacebookAuthProvider.credential(_accessToken.token);
+        final auth.User user =
+            (await _firebaseAuth.signInWithCredential(credential)).user;
+        return _userFromFirebase(user);
+      } else {
+        throw PlatformException(
+          code: 'ERROR_MISSING_FACEBOOK_ACCESS_TOKEN',
+          message: 'Missing Facebook access token',
         );
       }
     } else {

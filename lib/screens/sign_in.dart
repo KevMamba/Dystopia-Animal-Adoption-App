@@ -45,22 +45,8 @@ class SignInPage extends StatelessWidget {
       _showSignInError(context, e);
     }
   }
-
-  Future<void> _signInWithGoogle(BuildContext context) async {
-    try {
-      await block.signInWithGoogle();
-    } on PlatformException catch (e) {
-      if (e.code != 'ERROR_ABORTED_BY_USER') {
-        _showSignInError(context, e);
-      }
-    }
-  }
-
-
-
-  
-
 */
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,6 +87,7 @@ class SignInPage extends StatelessWidget {
                     ),
                     Text(
                       'Sign In',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'OpenSans',
