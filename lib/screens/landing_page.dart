@@ -28,7 +28,11 @@ class LandingPage extends StatelessWidget {
             }
           } else {
             return Scaffold(
-              body: Center(child: PlatFormProgressIndicator()),
+              body: Center(
+                child: PlatFormProgressIndicator(
+                  r: 40,
+                ),
+              ),
             );
           }
         });

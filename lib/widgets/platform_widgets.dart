@@ -71,7 +71,6 @@ class PlatformAlertDialog extends PlatFormWidget {
         assert(defaultActionText != null);
 
   Future<bool> show(BuildContext context) async {
-    print("Is show invoked?");
     return Platform.isIOS
         ? await showCupertinoDialog<bool>(
             context: context,
@@ -155,9 +154,14 @@ class PlatFormAlertDialogAction extends PlatFormWidget {
 }
 
 class PlatFormProgressIndicator extends PlatFormWidget {
+  final double r;
+
+  PlatFormProgressIndicator({this.r});
   @override
   Widget buildCuptertinoWidgets(BuildContext context) {
-    return CupertinoActivityIndicator();
+    return CupertinoActivityIndicator(
+      radius: r,
+    );
   }
 
   @override

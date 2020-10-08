@@ -111,11 +111,11 @@ class _SignUpFieldsState extends State<SignUpFields> {
   Future<void> _submit() async {
     try {
       model.formType = EmailSignInFormType.Register;
+
       await model.submit();
-      Navigator.pop(context);
     } on PlatformException catch (e) {
       PlatFormExceptionAlertDialog(
-        title: 'Sign In Failed',
+        title: 'Sign Up Failed',
         exception: e,
       ).show(context);
     }
@@ -180,8 +180,10 @@ class _SignUpFieldsState extends State<SignUpFields> {
             ),
             focusNode: _emailFocusNode,
             controller: _emailController,
+            textInputAction: TextInputAction.next,
             onEditingComplete: () => _onEmailEditingComplete(),
             onChanged: model.updateEmail,
+            autocorrect: false,
             decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),

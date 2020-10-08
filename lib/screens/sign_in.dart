@@ -49,61 +49,77 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _buildLoading() {
+      if (loadingValue == true) {
+        return PlatFormProgressIndicator(
+          r: 40,
+        );
+      } else {
+        return Text(
+          'Sign In',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'OpenSans',
+            fontSize: 30.0,
+            fontWeight: FontWeight.bold,
+          ),
+        );
+      }
+    }
+
     return Scaffold(
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
-        child: Stack(
-          children: <Widget>[
-            Container(
-              height: double.infinity,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: kSignUpColors,
-                  stops: [
-                    0.1,
-                    0.4,
-                    0.7,
-                    0.9,
-                  ],
+      body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          FocusScope.of(context).requestFocus(new FocusNode());
+        },
+        child: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.light,
+          child: Stack(
+            children: <Widget>[
+              Container(
+                height: double.infinity,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: kSignUpColors,
+                    stops: [
+                      0.1,
+                      0.4,
+                      0.7,
+                      0.9,
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Container(
-              height: double.infinity,
-              child: SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 40.0,
-                  vertical: 120.0,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Sign In',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'OpenSans',
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
+              Container(
+                height: double.infinity,
+                child: SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 40.0,
+                    vertical: 120.0,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    SigninFields.create(context),
-                  ],
+                      _buildLoading(),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      SigninFields.create(context),
+                    ],
+                  ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -270,7 +286,7 @@ class _SigninFieldsState extends State<SigninFields> {
             ),
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14),
+              contentPadding: EdgeInsets.all(15),
               prefixIcon: Icon(
                 Icons.lock,
                 color: Colors.white,
@@ -308,7 +324,6 @@ class _SigninFieldsState extends State<SigninFields> {
             textInputAction: TextInputAction.next,
             onEditingComplete: () => _onEmailEditingComplete(),
             onChanged: model.updateEmail,
-            enabled: model.isLoading == false,
             autocorrect: false,
             maxLines: 1,
             style: TextStyle(
@@ -324,6 +339,7 @@ class _SigninFieldsState extends State<SigninFields> {
               ),
               hintText: 'Enter your email',
               hintStyle: kHintTextStyle,
+              enabled: model.isLoading == false,
             ),
           ),
         )

@@ -81,22 +81,15 @@ class Auth implements AuthBase {
   @override
   Future<User> siginWithFacebook() async {
     final facebookAuth = FacebookAuth.instance;
-    final facebookAccount = await facebookAuth.login();
+    final facebookAccount =
+        await facebookAuth.login(permissions: ['email', 'public_profile']);
 
-    if (facebookAccount != null) {
-      final AccessToken _accessToken = await facebookAuth.isLogged;
-      if (_accessToken != null) {
-        final OAuthCredential credential =
-            FacebookAuthProvider.credential(_accessToken.token);
-        final auth.User user =
-            (await _firebaseAuth.signInWithCredential(credential)).user;
-        return _userFromFirebase(user);
-      } else {
-        throw PlatformException(
-          code: 'ERROR_MISSING_FACEBOOK_ACCESS_TOKEN',
-          message: 'Missing Facebook access token',
-        );
-      }
+    if (facebookAccount.accessToken != null) {
+      final OAuthCredential credential =
+          FacebookAuthProvider.credential(facebookAccount.accessToken.token);
+      final auth.User user =
+          (await _firebaseAuth.signInWithCredential(credential)).user;
+      return _userFromFirebase(user);
     } else {
       throw PlatformException(
         code: 'ERROR_ABORTED_BY_USER',
@@ -117,6 +110,7 @@ class Auth implements AuthBase {
       String email, String password) async {
     final authResult = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
+
     return _userFromFirebase(authResult.user);
   }
 
