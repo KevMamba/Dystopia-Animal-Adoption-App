@@ -30,7 +30,8 @@ class SocialSignin extends StatelessWidget {
   }
 
   void _showSignInError(BuildContext context, FirebaseAuthException exception) {
-    PlatFormExceptionAlertDialog(title: 'Sign In Failed', exception: exception);
+    PlatFormExceptionAlertDialog(title: 'Sign In Failed', exception: exception)
+        .show(context);
   }
 
   @override

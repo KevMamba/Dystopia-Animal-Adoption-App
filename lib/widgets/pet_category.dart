@@ -1,52 +1,70 @@
+import 'package:dystopia_flutter_app/screens/list_of_pets.dart';
+import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PetCategory extends StatelessWidget {
   final String image;
   final String name;
-  final VoidCallback pressButton;
+
+  final BuildContext context;
   const PetCategory({
     Key key,
+    this.context,
     this.image,
     this.name,
-    this.pressButton,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize: Size(414, 896),
+      allowFontScaling: true,
+    );
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Container(
-        width: 50,
+        width: 70.w,
         child: Material(
           child: InkWell(
-            onTap: () {},
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Color(0xFFb9815d),
-                        image: DecorationImage(
-                          image: AssetImage(image),
-                          fit: BoxFit.cover,
-                        )),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Center(
-                    child: Text(
-                      name,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.nunito(
-                          textStyle: TextStyle(fontSize: 18.0)),
+            onTap: () {
+              print("Is it here?");
+              PlatformPageRoute.pageRoute(
+                  fullScreen: false,
+                  widget: ListScreen(),
+                  fromRoot: false,
+                  context: context);
+            },
+            child: IgnorePointer(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Color(0xFFb9815d),
+                          image: DecorationImage(
+                            image: AssetImage(image),
+                            fit: BoxFit.cover,
+                          )),
                     ),
                   ),
-                )
-              ],
+                  Expanded(
+                    flex: 1,
+                    child: Center(
+                      child: Text(
+                        name,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.nunito(
+                            textStyle: TextStyle(fontSize: 20.w)),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

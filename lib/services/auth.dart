@@ -27,6 +27,8 @@ abstract class AuthBase {
 
   Future<User> signInWithEmailAndPassword(String email, String password);
   Future<User> createUserWithEmailIdAndPassword(String email, String password);
+
+  Future<void> resetPassword(String email);
 }
 
 class Auth implements AuthBase {
@@ -118,9 +120,14 @@ class Auth implements AuthBase {
       await authResult.user.sendEmailVerification();
       return _userFromFirebase(authResult.user);
     } catch (e) {
-      print("An error occured while trying to send email        verification");
+      print("An error occured while trying to send email verification");
       print(e.message);
     }
+  }
+
+  @override
+  Future<void> resetPassword(String email) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
   @override

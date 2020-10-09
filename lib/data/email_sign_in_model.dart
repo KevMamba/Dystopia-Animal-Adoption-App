@@ -85,4 +85,14 @@ class EmailSignInChangeModel with FieldValidators, ChangeNotifier {
       rethrow;
     }
   }
+
+  Future<void> forgotPass() async {
+    updateWith(isLoading: true);
+    try {
+      await auth.resetPassword(this.email);
+    } catch (e) {
+      updateWith(isLoading: false);
+      print(e);
+    }
+  }
 }

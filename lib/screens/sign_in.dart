@@ -146,7 +146,7 @@ class SigninFields extends StatefulWidget {
 }
 
 class _SigninFieldsState extends State<SigninFields> {
-  bool _rememberMe = false;
+  // bool _rememberMe = false;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final FocusNode _emailFocusNode = FocusNode();
@@ -221,7 +221,7 @@ class _SigninFieldsState extends State<SigninFields> {
       ),
     );
   }
-
+/*
   Container _buildRememberMe() {
     return Container(
         height: 20.0,
@@ -234,9 +234,11 @@ class _SigninFieldsState extends State<SigninFields> {
               child: Checkbox(
                 value: _rememberMe,
                 onChanged: (value) {
-                  setState(() {
-                    _rememberMe = value;
-                  });
+                  setState(
+                    () {
+                      _rememberMe = value;
+                    },
+                  );
                 },
                 checkColor: Color(0xFFb0abbf),
                 activeColor: Colors.white,
@@ -249,6 +251,7 @@ class _SigninFieldsState extends State<SigninFields> {
           ],
         ));
   }
+*/
 
   Container _buildForgotPassButton() {
     return Container(
@@ -258,7 +261,8 @@ class _SigninFieldsState extends State<SigninFields> {
           "Forgot Password?",
           style: kLabelStyle,
         ),
-        onPressed: () => debugPrint("FORGOT PASSWORD BUTTON PRESSED!"),
+        // TODO: Implement forgot password through a new screen.
+        onPressed: () => model.forgotPass(),
       ),
     );
   }
@@ -361,7 +365,7 @@ class _SigninFieldsState extends State<SigninFields> {
         ),
         _buildPassword(),
         _buildForgotPassButton(),
-        _buildRememberMe(),
+        // _buildRememberMe(),
         _buildLoginButton(),
         Layout(),
         SizedBox(
