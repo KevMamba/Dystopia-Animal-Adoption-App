@@ -137,7 +137,7 @@ class _HomePage2State extends State<HomePage2> {
                 ),
                 onPressed: () {},
                 icon: Icon(
-                  Icons.night_shelter,
+                  Icons.lock,
                   color: Colors.white,
                 ),
                 label: Text(
@@ -162,7 +162,7 @@ class _HomePage2State extends State<HomePage2> {
           bottomRight: Radius.circular(40.w),
         ),
       ),
-      leadingWidth: 0.0,
+      //leadingWidth: 0.0,
       leading: Opacity(
         opacity: 0.0,
       ),
