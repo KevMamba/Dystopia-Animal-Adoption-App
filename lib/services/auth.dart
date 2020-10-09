@@ -99,19 +99,28 @@ class Auth implements AuthBase {
   }
 
   @override
+  // ignore: missing_return
   Future<User> signInWithEmailAndPassword(String email, String password) async {
     final authResult = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
-    return _userFromFirebase(authResult.user);
+    if (authResult.user.emailVerified == true) {
+      return _userFromFirebase(authResult.user);
+    }
   }
 
   @override
+  // ignore: missing_return
   Future<User> createUserWithEmailIdAndPassword(
       String email, String password) async {
     final authResult = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
-
-    return _userFromFirebase(authResult.user);
+    try {
+      await authResult.user.sendEmailVerification();
+      return _userFromFirebase(authResult.user);
+    } catch (e) {
+      print("An error occured while trying to send email        verification");
+      print(e.message);
+    }
   }
 
   @override

@@ -65,7 +65,7 @@ class PlatformAlertDialog extends PlatFormWidget {
       @required this.content,
       this.cancelActionText,
       this.action,
-      @required this.defaultActionText})
+      this.defaultActionText})
       : assert(title != null),
         assert(content != null),
         assert(defaultActionText != null);

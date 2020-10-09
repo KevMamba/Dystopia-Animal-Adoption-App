@@ -112,6 +112,12 @@ class _SignUpFieldsState extends State<SignUpFields> {
     try {
       model.formType = EmailSignInFormType.Register;
       await model.submit();
+      PlatformAlertDialog(
+        title: "Email Verification",
+        cancelActionText: "Okay",
+        content:
+            "We've sent a link on your email. Once verified, tap on Login! to continue.",
+      ).show(context);
     } catch (e) {
       PlatFormExceptionAlertDialog(
         title: 'Sign Up Failed',
