@@ -1,6 +1,6 @@
 import 'package:dystopia_flutter_app/data/sign_in_loading_notifier.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../platform_widgets.dart';
 
@@ -12,7 +12,7 @@ class SocialSignin extends StatelessWidget {
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
       await block.signInWithGoogle();
-    } on PlatformException catch (e) {
+    } catch (e) {
       if (e.code != 'ERROR_ABORTED_BY_USER') {
         _showSignInError(context, e);
       }
@@ -22,14 +22,14 @@ class SocialSignin extends StatelessWidget {
   Future<void> _signInWithFacebook(BuildContext context) async {
     try {
       await block.signInWithFacebook();
-    } on PlatformException catch (e) {
+    } catch (e) {
       if (e.code != 'ERROR_ABORTED_BY_USER') {
         _showSignInError(context, e);
       }
     }
   }
 
-  void _showSignInError(BuildContext context, PlatformException exception) {
+  void _showSignInError(BuildContext context, FirebaseAuthException exception) {
     PlatFormExceptionAlertDialog(title: 'Sign In Failed', exception: exception);
   }
 

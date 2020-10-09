@@ -111,9 +111,8 @@ class _SignUpFieldsState extends State<SignUpFields> {
   Future<void> _submit() async {
     try {
       model.formType = EmailSignInFormType.Register;
-
       await model.submit();
-    } on PlatformException catch (e) {
+    } catch (e) {
       PlatFormExceptionAlertDialog(
         title: 'Sign Up Failed',
         exception: e,

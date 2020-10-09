@@ -4,6 +4,7 @@ import 'package:dystopia_flutter_app/screens/sign_up_form.dart';
 import 'package:dystopia_flutter_app/services/auth.dart';
 
 import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -165,7 +166,8 @@ class _SigninFieldsState extends State<SigninFields> {
     try {
       model.formType = EmailSignInFormType.SignIn;
       await model.submit();
-    } on PlatformException catch (e) {
+    } catch (e) {
+      print("Is the paltform exception caught?");
       _showSignInError(context, e);
     }
   }
@@ -188,8 +190,9 @@ class _SigninFieldsState extends State<SigninFields> {
     );
   }
 
-  void _showSignInError(BuildContext context, PlatformException exception) {
-    PlatFormExceptionAlertDialog(title: 'Sign In Failed', exception: exception);
+  void _showSignInError(BuildContext context, FirebaseAuthException exception) {
+    PlatFormExceptionAlertDialog(title: 'Sign In Failed', exception: exception)
+        .show(context);
   }
 
   Container _buildLoginButton() {

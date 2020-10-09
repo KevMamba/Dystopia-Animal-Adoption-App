@@ -1,8 +1,8 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class PlatformPageRoute {
   final bool fullScreen;
@@ -172,7 +172,7 @@ class PlatFormProgressIndicator extends PlatFormWidget {
 
 class PlatFormExceptionAlertDialog extends PlatformAlertDialog {
   final String title;
-  final PlatformException exception;
+  final FirebaseAuthException exception;
 
   PlatFormExceptionAlertDialog({
     @required this.title,
@@ -183,8 +183,8 @@ class PlatFormExceptionAlertDialog extends PlatformAlertDialog {
           content: _message(exception),
         );
 
-  static String _message(PlatformException exception) {
-    //print(exception);
+  static String _message(FirebaseAuthException exception) {
+    print("Sign in issue : $exception");
     if (exception.message == 'FIRFirestoreErrorDomain') {
       if (exception.code == 'Error 7') {
         return 'Missing or insufficient permissions';
