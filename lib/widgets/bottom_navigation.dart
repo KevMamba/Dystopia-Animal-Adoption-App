@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../screens/home_screen.dart';
 
@@ -16,14 +17,21 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation>
     with SingleTickerProviderStateMixin {
-  var _bottomNavIndex = 0;
+  var _bottomNavIndex;
   AnimationController _animationController;
   Animation<double> animation;
   CurvedAnimation curve;
 
   @override
+  void dispose() {
+    super.dispose();
+    _animationController.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
+    _bottomNavIndex = 0;
     final systemTheme = SystemUiOverlayStyle.light;
     SystemChrome.setSystemUIOverlayStyle(systemTheme);
     _animationController = AnimationController(
@@ -66,6 +74,11 @@ class _BottomNavigationState extends State<BottomNavigation>
   ];
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize: Size(414, 896),
+      allowFontScaling: true,
+    );
     return Scaffold(
       extendBody: true,
       resizeToAvoidBottomInset: true,
@@ -82,7 +95,7 @@ class _BottomNavigationState extends State<BottomNavigation>
           },
           child: CircleAvatar(
             backgroundColor: Color(0xFFb9815d),
-            radius: 20,
+            radius: 35.h,
             child: Image.asset(
               'assets/images/pet_logo.png',
               color: Colors.black,
@@ -93,11 +106,11 @@ class _BottomNavigationState extends State<BottomNavigation>
       floatingActionButtonLocation: FixedDockedFabLocation(context: context),
       bottomNavigationBar: AnimatedBottomNavigationBar(
         icons: iconList,
-        height: 50,
-        iconSize: 20,
+        height: 80.h,
+        iconSize: 35.h,
         activeIndex: _bottomNavIndex,
         elevation: 10,
-        backgroundColor: Color(0xFFedf3eb),
+        backgroundColor: Colors.white, //Color(0xFFedf3eb),
         activeColor: Color(0xFFb9815d),
         splashColor: Color(0xFF875433),
         inactiveColor: Colors.grey,

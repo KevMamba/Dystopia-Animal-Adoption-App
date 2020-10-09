@@ -1,11 +1,36 @@
+import 'package:dystopia_flutter_app/services/auth.dart';
 import 'package:dystopia_flutter_app/widgets/account_list_item.dart';
+import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 import '../theme.dart';
 
 class ProfileScreen extends StatelessWidget {
+  Future<void> _signOut(BuildContext context) async {
+    try {
+      final auth = Provider.of<AuthBase>(context, listen: false);
+      print("Is it here?");
+      await auth.signOut();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> _confirmSignOut(BuildContext context) async {
+    final didRequestSignOut = await PlatformAlertDialog(
+      title: 'Logout',
+      content: 'Are you sure that you want to logout?',
+      cancelActionText: 'Logout',
+      defaultActionText: 'Cancel',
+    ).show(context);
+    if (didRequestSignOut == true) {
+      _signOut(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context,
@@ -100,10 +125,15 @@ class ProfileScreen extends StatelessWidget {
                     icon: LineAwesomeIcons.user_plus,
                     text: 'Invite a Friend',
                   ),
-                  ProfileListItem(
-                    icon: LineAwesomeIcons.alternate_sign_out,
-                    text: 'Logout',
-                    hasNavigation: false,
+                  GestureDetector(
+                    onTap: () {
+                      _confirmSignOut(context);
+                    },
+                    child: ProfileListItem(
+                      icon: LineAwesomeIcons.alternate_sign_out,
+                      text: 'Logout',
+                      hasNavigation: false,
+                    ),
                   ),
                   ProfileListItem(
                     icon: LineAwesomeIcons.money_check,

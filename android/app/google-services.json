@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1076455883800",
+    "firebase_url": "https://dystopia-animal-adoption-app.firebaseio.com",
+    "project_id": "dystopia-animal-adoption-app",
+    "storage_bucket": "dystopia-animal-adoption-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076455883800:android:7de0f66aac21d3b3fd2f6d",
+        "android_client_info": {
+          "package_name": "com.example.dystopia_flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076455883800-gjeuaandfrdbs3mv9siij9mc0on1t6i6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dystopia_flutter_app",
+            "certificate_hash": "8fcd34dfba5595eb7077910d894be142e2359527"
+          }
+        },
+        {
+          "client_id": "1076455883800-tnc5bm3ne73dhoq0umg1f0570tgfhhfk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQhifGvpDCrh17_TlgnF5M5TJ1UWxDoRY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076455883800-tnc5bm3ne73dhoq0umg1f0570tgfhhfk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,12 +1,14 @@
+import 'package:dystopia_flutter_app/data/email_sign_in_model.dart';
+import 'package:dystopia_flutter_app/services/auth.dart';
 import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import '../theme.dart';
 import '../widgets/sign_in_helpers/layout.dart';
 import '../widgets/sign_in_helpers/signup_or_login.dart';
 import '../widgets/sign_in_helpers/social_signin.dart';
-import '../widgets/bottom_navigation.dart';
 import 'package:password_strength/password_strength.dart';
 
 class SignUpForm extends StatelessWidget {
@@ -59,7 +61,7 @@ class SignUpForm extends StatelessWidget {
                       SizedBox(
                         height: 30.0,
                       ),
-                      SignUpFields(), //.create() later,
+                      SignUpFields.create(context),
                     ],
                   ),
                 ),
@@ -73,15 +75,29 @@ class SignUpForm extends StatelessWidget {
 }
 
 class SignUpFields extends StatefulWidget {
+  final EmailSignInChangeModel model;
+
+  SignUpFields({@required this.model});
+  static Widget create(BuildContext context) {
+    final auth = Provider.of<AuthBase>(context);
+    return ChangeNotifierProvider<EmailSignInChangeModel>(
+      create: (context) => EmailSignInChangeModel(auth: auth),
+      child: Consumer<EmailSignInChangeModel>(
+        builder: (context, model, _) => SignUpFields(model: model),
+      ),
+    );
+  }
+
   @override
   _SignUpFieldsState createState() => _SignUpFieldsState();
 }
 
 class _SignUpFieldsState extends State<SignUpFields> {
-  /* final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
+  EmailSignInChangeModel get model => widget.model;
 
   @override
   void dispose() {
@@ -91,9 +107,31 @@ class _SignUpFieldsState extends State<SignUpFields> {
     _passwordController.dispose();
     super.dispose();
   }
-  
-  // implemented later with the help of validators.
-  */
+
+  Future<void> _submit() async {
+    try {
+      model.formType = EmailSignInFormType.Register;
+      await model.submit();
+      PlatformAlertDialog(
+        title: "Email Verification",
+        cancelActionText: "Okay",
+        content:
+            "We've sent a link on your email. Once verified, tap on Login! to continue.",
+      ).show(context);
+    } catch (e) {
+      PlatFormExceptionAlertDialog(
+        title: 'Sign Up Failed',
+        exception: e,
+      ).show(context);
+    }
+  }
+
+  void _onEmailEditingComplete() {
+    final newFocus = model.emailValidator.isValid(model.email)
+        ? _passwordFocusNode
+        : _emailFocusNode;
+    FocusScope.of(context).requestFocus(newFocus);
+  }
 
   final myController = TextEditingController();
   Text passwordStrength(String password) {
@@ -126,15 +164,6 @@ class _SignUpFieldsState extends State<SignUpFields> {
     }
   }
 
-  _gotoHomePage() {
-    PlatformPageRoute.pageRoute(
-      widget: BottomNavigation(),
-      fullScreen: true,
-      fromRoot: true,
-      context: context,
-    );
-  }
-
   Column _buildEmail() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,6 +183,12 @@ class _SignUpFieldsState extends State<SignUpFields> {
               color: Colors.white,
               fontFamily: 'OpenSans',
             ),
+            focusNode: _emailFocusNode,
+            controller: _emailController,
+            textInputAction: TextInputAction.next,
+            onEditingComplete: () => _onEmailEditingComplete(),
+            onChanged: model.updateEmail,
+            autocorrect: false,
             decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
@@ -163,6 +198,9 @@ class _SignUpFieldsState extends State<SignUpFields> {
               ),
               hintText: 'Enter your email',
               hintStyle: kHintTextStyle,
+              errorText:
+                  model.showErrorText ? model.invalidEmailErrorText : null,
+              enabled: model.isLoading == false,
             ),
           ),
         )
@@ -186,7 +224,11 @@ class _SignUpFieldsState extends State<SignUpFields> {
           child: TextField(
             controller: myController,
             obscureText: true,
-            keyboardType: TextInputType.emailAddress,
+            focusNode: _passwordFocusNode,
+            autocorrect: false,
+            maxLines: 1,
+            onEditingComplete: _submit,
+            onChanged: model.updatePassword,
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -200,6 +242,10 @@ class _SignUpFieldsState extends State<SignUpFields> {
               ),
               hintText: 'Enter your password',
               hintStyle: kHintTextStyle,
+              errorText: model.showPasswordErrorText
+                  ? model.invalidPasswordErrorText
+                  : null,
+              enabled: model.isLoading == false,
             ),
           ),
         )
@@ -223,7 +269,7 @@ class _SignUpFieldsState extends State<SignUpFields> {
       ),
       width: double.infinity,
       child: RaisedButton(
-        onPressed: () => _gotoHomePage(),
+        onPressed: model.canSubmit ? _submit : null,
         padding: EdgeInsets.all(15.0),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
@@ -274,7 +320,12 @@ class _SignUpFieldsState extends State<SignUpFields> {
           child: SignUpOrIn(
             description: 'Already have an Account? ',
             highlighted: 'Login!',
-            action: () => Navigator.of(context).pop(false),
+            action: () {
+              model.toggleFormType();
+              _emailController.clear();
+              _passwordController.clear();
+              Navigator.of(context).pop(false);
+            },
           ),
         )
       ];
