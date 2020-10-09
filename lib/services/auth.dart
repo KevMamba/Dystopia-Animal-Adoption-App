@@ -65,13 +65,13 @@ class Auth implements AuthBase {
         );
         return _userFromFirebase(authResult.user);
       } else {
-        throw PlatformException(
+        throw FirebaseAuthException(
           code: 'ERROR_MISSING_GOOGLE_AUTH_TOKEN',
           message: 'Missing google auth token',
         );
       }
     } else {
-      throw PlatformException(
+      throw FirebaseAuthException(
         code: 'ERROR_ABORTED_BY_USER',
         message: 'Sign in aborted by user',
       );
@@ -91,7 +91,7 @@ class Auth implements AuthBase {
           (await _firebaseAuth.signInWithCredential(credential)).user;
       return _userFromFirebase(user);
     } else {
-      throw PlatformException(
+      throw FirebaseAuthException(
         code: 'ERROR_ABORTED_BY_USER',
         message: 'Sign in aborted by user',
       );

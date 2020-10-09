@@ -126,13 +126,13 @@ class _HomePage2State extends State<HomePage2> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: FlatButton.icon(
-                height: 30,
+                //height: 30,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
                 onPressed: () {},
                 icon: Icon(
-                  Icons.night_shelter,
+                  Icons.lock,
                   color: Colors.white,
                 ),
                 label: Text(
@@ -157,7 +157,7 @@ class _HomePage2State extends State<HomePage2> {
           bottomRight: Radius.circular(30),
         ),
       ),
-      leadingWidth: 0.0,
+      //leadingWidth: 0.0,
       leading: Opacity(
         opacity: 0.0,
       ),
