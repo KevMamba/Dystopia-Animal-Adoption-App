@@ -21,20 +21,30 @@ class ListScreenState extends State<ListScreen> {
       body: CustomScrollView(
         physics: ClampingScrollPhysics(),
         slivers: [
-          //buildFloatingSearchBar(),
-          _buildSubHeading(),
+          _buildAppBar(),
           _buildPetResults(),
-          //_buildPetCategory(),
         ],
       ),
     );
   }
 
-  SliverToBoxAdapter _buildSubHeading() {
-    return SliverToBoxAdapter(
-      child: Container(
-        margin: EdgeInsets.all(10),
-        child: Text("Results"),
+  SliverAppBar _buildAppBar() {
+    return SliverAppBar(
+      pinned: true,
+      collapsedHeight: 150,
+      title: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Opacity(
+            opacity: 0,
+          ),
+          Text(
+            "Dogs",
+            style: TextStyle(
+              fontSize: 50,
+            ),
+          ),
+        ],
       ),
     );
   }

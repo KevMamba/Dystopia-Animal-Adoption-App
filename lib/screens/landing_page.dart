@@ -10,14 +10,12 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthBase>(context, listen: false);
-    print("Is it here?");
     return StreamBuilder<User>(
         stream: auth.onAuthStateChanged,
         builder: (context, snapshot) {
-          print("In builder?");
           if (snapshot.connectionState == ConnectionState.active) {
             User user = snapshot.data;
-            print("object in landing page");
+
             if (user == null) {
               return SignInPage.create(context);
             } else {

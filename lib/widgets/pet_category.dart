@@ -30,7 +30,6 @@ class PetCategory extends StatelessWidget {
         child: Material(
           child: InkWell(
             onTap: () {
-              print("Is it here?");
               PlatformPageRoute.pageRoute(
                   fullScreen: false,
                   widget: ListScreen(),

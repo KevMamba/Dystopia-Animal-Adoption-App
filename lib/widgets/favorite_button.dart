@@ -17,10 +17,10 @@ class FavoriteButtonState extends State<FavoriteButton> {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(liked ? Icons.favorite : Icons.favorite_border,
-          color: liked ? Colors.redAccent : Colors.white),
-      onPressed: () => favPressed(),
+    return GestureDetector(
+      child: Icon(liked ? Icons.favorite : Icons.favorite_border,
+          color: liked ? Colors.redAccent : Colors.grey),
+      onTap: () => favPressed(),
     );
   }
 }

@@ -120,7 +120,9 @@ class _BottomNavigationState extends State<BottomNavigation>
         gapLocation: GapLocation.end,
         leftCornerRadius: 0,
         rightCornerRadius: 0,
-        onTap: (index) => setState(() => _bottomNavIndex = index),
+        onTap: (index) => {
+          if (this.mounted) {setState(() => _bottomNavIndex = index)}
+        },
       ),
     );
   }

@@ -92,7 +92,7 @@ class _HomePage2State extends State<HomePage2> {
     );
   }
 
-  SliverToBoxAdapter petList() {
+  SliverToBoxAdapter listForAdoption() {
     return SliverToBoxAdapter(
       child: Container(
         height: ScreenUtil().screenHeight / 3,
@@ -161,10 +161,6 @@ class _HomePage2State extends State<HomePage2> {
           bottomLeft: Radius.circular(40.w),
           bottomRight: Radius.circular(40.w),
         ),
-      ),
-      //leadingWidth: 0.0,
-      leading: Opacity(
-        opacity: 0.0,
       ),
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
@@ -245,7 +241,7 @@ class _HomePage2State extends State<HomePage2> {
                         vertical: 40.h,
                       ),
                     ),
-                    petList(),
+                    listForAdoption(),
                     // scroll helper
                     SliverToBoxAdapter(
                       child: Container(

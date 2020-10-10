@@ -3,6 +3,7 @@ import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dystopia_flutter_app/widgets/favorite_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PetResults extends StatelessWidget {
   final String petPic;
@@ -22,72 +23,89 @@ class PetResults extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Size size = MediaQuery.of(context).size;
-    return InkWell(
-        onTap: () {
-          PlatformPageRoute.pageRoute(
-            widget: PetResultScreen(),
-            context: context,
-            fromRoot: false,
+    ScreenUtil.init(
+      context,
+      designSize: Size(414, 896),
+      allowFontScaling: true,
+    );
+
+    return GestureDetector(
+      onTap: () {
+        PlatformPageRoute.pageRoute(
             fullScreen: false,
-          );
-        },
-        child: IgnorePointer(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(30.0),
-            child: Container(
-                margin: EdgeInsets.all(20.0),
-                height: 360,
-                child: Column(children: <Widget>[
-                  Container(child: Image.asset(petPic, fit: BoxFit.contain)),
-                  Container(
-                      padding: EdgeInsets.all(5.0),
-                      decoration: BoxDecoration(
-                          color: Color(0xFF8a8c5d),
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20.0),
-                            bottomRight: Radius.circular(20.0),
-                          )),
-                      child: Padding(
-                          padding: EdgeInsets.all(5.0),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      Text(
-                                        "$petName",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 24,
-                                        ),
-                                      ),
-                                      Text(
-                                        "$petBreed",
-                                        style: TextStyle(
-                                          color: Colors.white70,
-                                          fontSize: 18,
-                                        ),
-                                      )
-                                    ]),
-                                Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      FavoriteButton(),
-                                      Text("$petAge\n",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                          ))
-                                    ])
-                              ])))
-                ])),
-            //
+            widget: PetResultScreen(),
+            fromRoot: true,
+            context: context);
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(39.w),
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 39.w, vertical: 26.w),
+          height: ScreenUtil().screenHeight / 2.25,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(39.w),
+            color: Colors.white70,
           ),
-        ));
+          child: Stack(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 10.w),
+                height: ScreenUtil().screenHeight / 3.25,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      12.w,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        offset: Offset(0.0, 2.0),
+                        blurRadius: 8.0,
+                      )
+                    ],
+                    color: Colors.white,
+                    image: DecorationImage(
+                      image: AssetImage(
+                        petPic,
+                      ),
+                      fit: BoxFit.cover,
+                    )),
+              ),
+              Positioned(
+                bottom: 15,
+                left: 15,
+                child: Container(
+                  width: 290.w,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "$petName",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            FavoriteButton(),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 2,
+                        ),
+                        Text(
+                          "$petBreed",
+                        ),
+                      ]),
+                ),
+              ),
+            ],
+          ),
+        ),
+        //
+      ),
+    );
   }
 }
