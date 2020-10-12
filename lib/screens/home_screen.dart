@@ -48,6 +48,24 @@ class _HomePage2State extends State<HomePage2> {
     );
   }
 
+  SliverToBoxAdapter _label() {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: EdgeInsets.only(left: 20.0, bottom: 10),
+        child: Container(
+          child: Text(
+            "Popular Categories",
+            style: TextStyle(
+              fontSize: 30.h,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   SliverToBoxAdapter petCategories() {
     List<PetCategory> _tiles = [
       PetCategory(
@@ -166,7 +184,7 @@ class _HomePage2State extends State<HomePage2> {
       flexibleSpace: FlexibleSpaceBar(
         background: Swiper(
           autoplay: true,
-          autoplayDelay: 3000,
+          autoplayDelay: 300000,
           duration: 1000,
           curve: Curves.easeInOut,
           autoplayDisableOnInteraction: true,
@@ -206,6 +224,7 @@ class _HomePage2State extends State<HomePage2> {
     return Scaffold(
       backgroundColor: Colors.white, //Color(0xFFedf3eb),
       resizeToAvoidBottomInset: true,
+
       body: Stack(
         children: [
           Column(
@@ -232,9 +251,10 @@ class _HomePage2State extends State<HomePage2> {
                   slivers: [
                     SliverPadding(
                       padding: EdgeInsets.symmetric(
-                        vertical: 45.h,
+                        vertical: 10.h,
                       ),
                     ),
+                    _label(),
                     petCategories(),
                     SliverPadding(
                       padding: EdgeInsets.symmetric(
@@ -242,10 +262,9 @@ class _HomePage2State extends State<HomePage2> {
                       ),
                     ),
                     listForAdoption(),
-                    // scroll helper
                     SliverToBoxAdapter(
                       child: Container(
-                        height: 290.h,
+                        height: 210.h,
                         color: Colors.transparent,
                       ),
                     )

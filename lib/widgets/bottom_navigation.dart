@@ -21,11 +21,12 @@ class _BottomNavigationState extends State<BottomNavigation>
   AnimationController _animationController;
   Animation<double> animation;
   CurvedAnimation curve;
-
+  bool disposed = false;
   @override
   void dispose() {
-    super.dispose();
+    disposed = true;
     _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -51,10 +52,12 @@ class _BottomNavigationState extends State<BottomNavigation>
       end: 1,
     ).animate(curve);
 
-    Future.delayed(
-      Duration(seconds: 1),
-      () => _animationController.forward(),
-    );
+    Future.delayed(Duration(seconds: 1), () {
+      if (disposed) {
+        return;
+      }
+      _animationController.forward();
+    });
   }
 
   List iconList = <IconData>[

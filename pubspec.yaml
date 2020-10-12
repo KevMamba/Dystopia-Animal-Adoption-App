@@ -31,12 +31,14 @@ dependencies:
   flutter_facebook_auth: ^0.3.2
   flutter_screenutil: ^3.1.1
   flutter_staggered_animations: ^0.1.2
-  flutter_staggered_grid_view: ^0.3.2
   flutter_swiper: ^1.1.6
   google_fonts: ^1.1.0
   google_sign_in: ^4.5.4
+  groovin_widgets: ^1.6.0
   line_awesome_flutter: ^1.0.1
   linked_scroll_controller: ^0.1.2
+
+  material_floating_search_bar: ^0.2.0
   password_strength: ^0.1.2
   provider: ^4.3.2+2
 

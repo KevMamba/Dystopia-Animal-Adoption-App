@@ -33,7 +33,7 @@ class PetCategory extends StatelessWidget {
               PlatformPageRoute.pageRoute(
                   fullScreen: false,
                   widget: ListScreen(),
-                  fromRoot: false,
+                  fromRoot: true,
                   context: context);
             },
             child: IgnorePointer(

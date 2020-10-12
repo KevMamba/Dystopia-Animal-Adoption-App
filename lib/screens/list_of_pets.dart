@@ -2,6 +2,8 @@ import 'package:dystopia_flutter_app/widgets/pet_list_card.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+
 class ListScreen extends StatefulWidget {
   // creating a stateful widget
   @override
@@ -15,42 +17,65 @@ final kLabelStyle = TextStyle(
 );
 
 class ListScreenState extends State<ListScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        physics: ClampingScrollPhysics(),
-        slivers: [
-          _buildAppBar(),
-          _buildPetResults(),
-        ],
-      ),
-    );
-  }
+  var value;
+  bool isExpanded = false;
 
-  SliverAppBar _buildAppBar() {
-    return SliverAppBar(
-      pinned: true,
-      collapsedHeight: 150,
-      title: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Opacity(
-            opacity: 0,
+  Widget buildFloatingSearchBar() {
+    final controller = FloatingSearchBarController();
+
+    return FloatingSearchBar(
+      controller: controller,
+      borderRadius: BorderRadius.circular(20),
+      margins: EdgeInsets.symmetric(horizontal: 30, vertical: 40),
+      elevation: 10,
+      clearQueryOnClose: true,
+      hint: 'Enter Location',
+      iconColor: Colors.grey[400],
+      scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
+      transitionDuration: const Duration(milliseconds: 800),
+      transitionCurve: Curves.easeInOutCubic,
+      physics: const BouncingScrollPhysics(),
+      axisAlignment: 0.0,
+      openAxisAlignment: 0.0,
+      maxWidth: 600,
+      actions: [
+        FloatingSearchBarAction(
+          showIfOpened: true,
+          child: CircularButton(
+            icon: const Icon(Icons.tune, color: Colors.grey),
+            onPressed: () {},
           ),
-          Text(
-            "Dogs",
-            style: TextStyle(
-              fontSize: 50,
+        ),
+        FloatingSearchBarAction.searchToClear(
+          showIfClosed: false,
+        ),
+      ],
+      //progress: model.isLoading,
+      debounceDelay: const Duration(milliseconds: 500),
+      //onQueryChanged: model.onQueryChanged,
+      transition: CircularFloatingSearchBarTransition(),
+      builder: (context, transition) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Material(
+            color: Colors.white,
+            elevation: 4.0,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: Colors.accents.map((color) {
+                return Container(height: 112, color: color);
+              }).toList(),
             ),
           ),
-        ],
-      ),
+        );
+      },
+      //body: buildBody(),
     );
   }
 
-  SliverList _buildPetResults() {
-    List<PetResults> listElements = [
+  @override
+  Widget build(BuildContext context) {
+    List<PetResults> _listElements = [
       PetResults(
           petPic: 'assets/images/dog-bg.jpg',
           petName: "Marley",
@@ -60,15 +85,53 @@ class ListScreenState extends State<ListScreen> {
           petPic: 'assets/images/dog-bg.jpg',
           petName: "Polo",
           petBreed: "Beagle",
-          petAge: "3 months")
+          petAge: "3 months"),
+      PetResults(
+          petPic: 'assets/images/dog-bg.jpg',
+          petName: "Marley",
+          petBreed: "Golden Retriever",
+          petAge: "12 months"),
     ];
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          return listElements[index];
-        },
-        childCount: 2,
+    return Scaffold(
+      backgroundColor: Color(0xFFb9815d),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Column(
+            children: <Widget>[
+              Flexible(
+                flex: 1,
+                child: Column(
+                  children: [
+                    Opacity(
+                      opacity: 0.0,
+                    ),
+                  ],
+                ),
+              ),
+              Flexible(
+                flex: 4,
+                child: Material(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                  color: Colors.white,
+                  elevation: 10,
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      return _listElements[index];
+                    },
+                    itemCount: 3,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          buildFloatingSearchBar(),
+        ],
       ),
+      resizeToAvoidBottomInset: false,
     );
   }
 }
