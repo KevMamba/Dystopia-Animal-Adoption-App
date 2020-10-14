@@ -148,13 +148,13 @@ class _HomePage2State extends State<HomePage2> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: FlatButton.icon(
-                height: 32.h,
+                //height: 32.h,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
                 onPressed: () {},
                 icon: Icon(
-                  Icons.lock,
+                  Icons.home,
                   color: Colors.white,
                 ),
                 label: Text(

@@ -135,11 +135,11 @@ final kLightTheme = ThemeData(
   ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(),
   secondaryHeaderColor: Colors.black,
-  textSelectionTheme: TextSelectionThemeData(
-    selectionColor: Color(0xffB5BFD3),
-    cursorColor: Color(0xff936F3E),
-    selectionHandleColor: Color(0xff936F3E),
-  ),
+  // textSelectionTheme: TextSelectionThemeData(
+  //   selectionColor: Color(0xffB5BFD3),
+  //   cursorColor: Color(0xff936F3E),
+  //   selectionHandleColor: Color(0xff936F3E),
+  // ),
   backgroundColor: Colors.white,
   dialogBackgroundColor: Colors.white,
   indicatorColor: Color(0xff457BE0),

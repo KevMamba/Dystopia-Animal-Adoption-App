@@ -58,7 +58,7 @@ class PetResultScreenState extends State<PetResultScreen> {
                 message: "Chat",
                 child: IconButton(
                     icon: Icon(
-                      Icons.chat_bubble_outline_rounded,
+                      Icons.chat_bubble,
                       color: Colors.white,
                     ),
                     color: Colors.black,
