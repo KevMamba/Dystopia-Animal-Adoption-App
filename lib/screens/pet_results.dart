@@ -54,13 +54,16 @@ class PetResultScreenState extends State<PetResultScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              IconButton(
-                  icon: Icon(
-                    Icons.chat_bubble_outline_rounded,
-                    color: Colors.white,
-                  ),
-                  color: Colors.black,
-                  onPressed: () => {}),
+              Tooltip(
+                message: "Chat",
+                child: IconButton(
+                    icon: Icon(
+                      Icons.chat_bubble_outline_rounded,
+                      color: Colors.white,
+                    ),
+                    color: Colors.black,
+                    onPressed: () => {}),
+              ),
             ],
           )
         ],
@@ -128,6 +131,15 @@ class PetResultScreenState extends State<PetResultScreen> {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(
+                horizontal: 20.0,
+                vertical: 15,
+              ),
+              child: ownerBox(),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
                 vertical: 10.0,
                 horizontal: 20,
               ),
@@ -159,15 +171,6 @@ class PetResultScreenState extends State<PetResultScreen> {
                   ],
                 ),
               ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20.0,
-                vertical: 15,
-              ),
-              child: ownerBox(),
             ),
           ),
           SliverToBoxAdapter(

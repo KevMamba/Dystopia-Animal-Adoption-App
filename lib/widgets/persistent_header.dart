@@ -52,22 +52,6 @@ class PersistentHeader extends SliverPersistentHeaderDelegate {
         ),
       ),
       Positioned(
-        top: 10,
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: 20.0,
-            top: 30.0,
-          ),
-          child: GestureDetector(
-            child: Icon(
-              Icons.arrow_back_ios_outlined,
-              size: 20,
-            ),
-            onTap: () => Navigator.of(context).pop(),
-          ),
-        ),
-      ),
-      Positioned(
         bottom: 20,
         left: 20,
         child: Column(
@@ -165,7 +149,7 @@ class PersistentHeader extends SliverPersistentHeaderDelegate {
                       icon: Icon(
                         Icons.arrow_back_ios,
                         color: this.makeStickyHeaderTextColor(
-                            shrinkOffset, false), // Return icon color
+                            shrinkOffset, true), // Return icon color
                       ),
                       onPressed: () => Navigator.pop(context),
                     ),
@@ -181,6 +165,10 @@ class PersistentHeader extends SliverPersistentHeaderDelegate {
                             shrinkOffset, false), // Title color
                       ),
                     ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 12.0),
+                    child: FavoriteButton(),
                   ),
                 ],
               ),
@@ -204,7 +192,7 @@ class PersistentHeader extends SliverPersistentHeaderDelegate {
 
   Color makeStickyHeaderTextColor(shrinkOffset, isIcon) {
     if (shrinkOffset <= 50) {
-      return isIcon ? Colors.white : Colors.transparent;
+      return isIcon ? Colors.grey : Colors.transparent;
     } else {
       final int alpha = (shrinkOffset / (this.maxExtent - this.minExtent) * 255)
           .clamp(0, 255)

@@ -21,7 +21,7 @@ class FavoriteButtonState extends State<FavoriteButton> {
       child: Icon(
         liked ? Icons.favorite : Icons.favorite_border,
         color: liked ? Colors.redAccent : Colors.grey,
-        size: 20,
+        size: 30,
       ),
       onTap: () => favPressed(),
     );

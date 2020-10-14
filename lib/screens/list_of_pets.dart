@@ -41,9 +41,17 @@ class ListScreenState extends State<ListScreen> {
       actions: [
         FloatingSearchBarAction(
           showIfOpened: true,
-          child: CircularButton(
-            icon: const Icon(Icons.tune, color: Colors.grey),
-            onPressed: () {},
+          child: Tooltip(
+            message: "Filters",
+            child: IconButton(
+              splashRadius: 20,
+              icon: Icon(
+                Icons.tune,
+                color: Colors.grey[400],
+                semanticLabel: "Filters",
+              ),
+              onPressed: () {},
+            ),
           ),
         ),
         FloatingSearchBarAction.searchToClear(
@@ -81,7 +89,7 @@ class ListScreenState extends State<ListScreen> {
           petName: "Marley",
           petBreed: "Golden Retriever",
           petAge: "12 months"),
-      /*   PetResults(
+      /* PetResults(
           petPic: 'assets/images/dog-bg.jpg',
           petName: "Polo",
           petBreed: "Beagle",
