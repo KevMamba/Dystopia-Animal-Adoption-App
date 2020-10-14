@@ -79,7 +79,7 @@ final kButtonTextStyle = TextStyle(
   fontWeight: FontWeight.w400,
   color: kDarkPrimaryColor,
 );
-
+/*
 final kDarkTheme = ThemeData(
   brightness: Brightness.dark,
   fontFamily: 'SFProText',
@@ -95,21 +95,75 @@ final kDarkTheme = ThemeData(
         bodyColor: kLightSecondaryColor,
         displayColor: kLightSecondaryColor,
       ),
-);
+);*/
 
 final kLightTheme = ThemeData(
   brightness: Brightness.light,
-  fontFamily: 'SFProText',
-  primaryColor: kLightPrimaryColor,
-  canvasColor: kLightPrimaryColor,
-  backgroundColor: kLightSecondaryColor,
-  accentColor: kAccentColor,
-  iconTheme: ThemeData.light().iconTheme.copyWith(
-        color: kDarkSecondaryColor,
+  visualDensity: VisualDensity(vertical: 0.5, horizontal: 0.5),
+  accentColorBrightness: Brightness.light,
+  primaryColorBrightness: Brightness.light,
+  applyElevationOverlayColor: true,
+  // added for GroovinExpansionTile widget
+  accentColor: Colors.white,
+  colorScheme: ColorScheme(
+    onPrimary: Colors.black,
+    onSecondary: Colors.white,
+    background: Colors.white,
+    onBackground: Colors.black,
+    surface: Color(0xaaF5E0C3),
+    onSurface: Colors.black,
+    brightness: Brightness.light,
+    onError: Colors.white,
+    primary: Colors.white,
+    secondary: Color(0xFFb9815d),
+    secondaryVariant: Color(0xFFb9815d),
+    primaryVariant: Colors.brown[100],
+    error: Colors.red,
+  ),
+  canvasColor: Color(0xffE09E45),
+  scaffoldBackgroundColor: Colors.white,
+  cardColor: Color(0xaaF5E0C3),
+  dividerColor: Colors.brown[300],
+  focusColor: Color(0xFFF5E0C3),
+  hoverColor: Color(0xffDEC29B),
+  splashColor: Colors.brown[400],
+  selectedRowColor: Colors.grey,
+  unselectedWidgetColor: Colors.grey.shade400,
+  disabledColor: Colors.grey.shade600,
+  buttonTheme: ButtonThemeData(
+    buttonColor: Color(0xffcba186),
+  ),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(),
+  secondaryHeaderColor: Colors.black,
+  textSelectionTheme: TextSelectionThemeData(
+    selectionColor: Color(0xffB5BFD3),
+    cursorColor: Color(0xff936F3E),
+    selectionHandleColor: Color(0xff936F3E),
+  ),
+  backgroundColor: Colors.white,
+  dialogBackgroundColor: Colors.white,
+  indicatorColor: Color(0xff457BE0),
+  hintColor: Colors.grey,
+  errorColor: Colors.red,
+  textTheme: TextTheme(
+      //text themes that contrast with card and canvas
       ),
-  textTheme: ThemeData.light().textTheme.apply(
-        fontFamily: 'SFProText',
-        bodyColor: kDarkSecondaryColor,
-        displayColor: kDarkSecondaryColor,
+  primaryTextTheme: TextTheme(
+      //text theme that contrast with primary color
+      ),
+  accentTextTheme: TextTheme(
+      //text theme that contrast with accent Color
+      ),
+  inputDecorationTheme: InputDecorationTheme(
+      // default values for InputDecorator, TextField, and TextFormField
+      ),
+  iconTheme: IconThemeData(
+      //icon themes that contrast with card and canvas
+      ),
+  primaryIconTheme: IconThemeData(
+      //icon themes that contrast primary color
+      ),
+  accentIconTheme: IconThemeData(
+      //icon themes that contrast accent color
       ),
 );

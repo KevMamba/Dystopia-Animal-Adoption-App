@@ -44,21 +44,23 @@ class PetCategory extends StatelessWidget {
                     flex: 2,
                     child: Container(
                       decoration: BoxDecoration(
-                          color: Color(0xFFb9815d),
                           image: DecorationImage(
-                            image: AssetImage(image),
-                            fit: BoxFit.cover,
-                          )),
+                        image: AssetImage(image),
+                        fit: BoxFit.cover,
+                      )),
                     ),
                   ),
                   Expanded(
                     flex: 1,
-                    child: Center(
-                      child: Text(
-                        name,
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.nunito(
-                            textStyle: TextStyle(fontSize: 20.w)),
+                    child: Material(
+                      color: Colors.white,
+                      child: Center(
+                        child: Text(
+                          name,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.nunito(
+                              textStyle: TextStyle(fontSize: 20.w)),
+                        ),
                       ),
                     ),
                   )

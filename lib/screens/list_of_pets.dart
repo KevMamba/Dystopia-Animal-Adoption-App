@@ -81,7 +81,7 @@ class ListScreenState extends State<ListScreen> {
           petName: "Marley",
           petBreed: "Golden Retriever",
           petAge: "12 months"),
-      PetResults(
+      /*   PetResults(
           petPic: 'assets/images/dog-bg.jpg',
           petName: "Polo",
           petBreed: "Beagle",
@@ -90,7 +90,7 @@ class ListScreenState extends State<ListScreen> {
           petPic: 'assets/images/dog-bg.jpg',
           petName: "Marley",
           petBreed: "Golden Retriever",
-          petAge: "12 months"),
+          petAge: "12 months"),*/
     ];
     return Scaffold(
       backgroundColor: Color(0xFFb9815d),
@@ -122,7 +122,7 @@ class ListScreenState extends State<ListScreen> {
                     itemBuilder: (context, index) {
                       return _listElements[index];
                     },
-                    itemCount: 3,
+                    itemCount: _listElements.length,
                   ),
                 ),
               ),

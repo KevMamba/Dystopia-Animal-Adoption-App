@@ -145,7 +145,6 @@ class _HomePage2State extends State<HomePage2> {
             ),
             Container(
               decoration: BoxDecoration(
-                color: Color(0xFF875433),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: FlatButton.icon(

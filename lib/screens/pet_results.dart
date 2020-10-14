@@ -1,166 +1,182 @@
-import 'package:dystopia_flutter_app/widgets/filter_button.dart';
+import 'package:dystopia_flutter_app/widgets/helper_buttons.dart';
+import 'package:dystopia_flutter_app/widgets/persistent_header.dart';
 import 'package:flutter/material.dart';
-
-import 'package:dystopia_flutter_app/widgets//favorite_button.dart';
+import 'package:groovin_widgets/groovin_widgets.dart';
 
 class PetResultScreen extends StatefulWidget {
+  final String petPic;
+
+  const PetResultScreen({Key key, this.petPic}) : super(key: key);
   @override
   State createState() => new PetResultScreenState();
 }
 
 class PetResultScreenState extends State<PetResultScreen> {
-  Padding ownerBox() {
-    return Padding(
-        padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Row(children: <Widget>[
-              CircleAvatar(
-                backgroundImage: AssetImage('assets/images/user.png'),
-                radius: 22.0,
-              ),
-              SizedBox(width: 10.0),
-              RichText(
-                text: TextSpan(children: <TextSpan>[
-                  TextSpan(
-                    text: "Aleena Dox \n",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18.0,
-                    ),
-                  ),
-                  TextSpan(
-                    text: "Owner",
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ]),
-              )
-            ]),
-            Row(children: <Widget>[
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  Widget ownerBox() {
+    return Material(
+      elevation: 4,
+      type: MaterialType.canvas,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      child: GroovinExpansionTile(
+        initiallyExpanded: false,
+        defaultTrailingIconColor: Theme.of(context).disabledColor,
+        inkwellRadius: BorderRadius.circular(15),
+        leading: CircleAvatar(
+          backgroundImage: AssetImage('assets/images/user.png'),
+          radius: 22.0,
+        ),
+        title: Text(
+          "Name",
+        ),
+        subtitle: Text(
+          "Owner",
+        ),
+        boxDecoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(
+            15,
+          ),
+        ),
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 10,
+            ),
+            child: Text(
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et odio pellentesque diam volutpat commodo sed egestas. Ac turpis egestas maecenas pharetra convallis posuere morbi leo urna.",
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
               IconButton(
-                  icon: Icon(Icons.chat_bubble_outline_rounded),
+                  icon: Icon(
+                    Icons.chat_bubble_outline_rounded,
+                    color: Colors.white,
+                  ),
                   color: Colors.black,
                   onPressed: () => {}),
-              IconButton(
-                  icon: Icon(Icons.phone),
-                  color: Colors.black,
-                  onPressed: () => {}),
-            ])
-          ],
-        ));
+            ],
+          )
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    final myHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-        backgroundColor: Color(0xffbabfb8),
-        resizeToAvoidBottomInset: true,
-        body: SingleChildScrollView(
-            //alignment: Alignment.center,
-            child: Stack(
-          children: <Widget>[
-            Column(children: <Widget>[
-              Container(
-                  height: myHeight * 0.4,
-                  child: Hero(
-                      tag: "results", //change later
-                      child: Image(
-                        image: AssetImage('assets/images/dog-bg.jpg'),
-                        fit: BoxFit.cover,
-                      ))),
-              //SizedBox(height: 30.0),
-              Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.zero,
-                        topRight: Radius.zero,
-                        bottomLeft: Radius.circular(20.0),
-                        bottomRight: Radius.circular(20.0)),
-                    color: Color(0xff8a8f88),
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: CustomScrollView(
+        slivers: [
+          SliverPersistentHeader(
+            pinned: true,
+            floating: true,
+            delegate: PersistentHeader(context: context, petPic: widget.petPic),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.only(
+              top: 30,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 15.0,
+                left: 15.0,
+              ),
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child: Text(
+                        "Filters",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      height: 100.0,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        controller: new ScrollController(),
+                        padding: EdgeInsets.all(5),
                         children: <Widget>[
-                          Text("Polo",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 24.0,
-                                  fontWeight: FontWeight.bold)),
-                          Text("3 months",
-                              style: TextStyle(
-                                fontSize: 14.0,
-                                color: Colors.black,
-                              ))
+                          filterCategory("Female"),
+                          filterCategory("Golden\nRetriever"),
+                          filterCategory("3 months"),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text("Golden Retriever",
-                              style: TextStyle(
-                                fontSize: 14.0,
-                                color: Colors.black,
-                              )),
-                          Row(children: <Widget>[
-                            Icon(Icons.location_on),
-                            Text("Bangalore",
-                                style: TextStyle(
-                                  fontSize: 14.0,
-                                  color: Colors.black,
-                                ))
-                          ])
-                        ],
-                      )
-                    ],
-                  )),
-              Container(
-                  height: 100.0,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.all(10),
-                    children: <Widget>[
-                      filterCategory("Female"),
-                      filterCategory("Pug"),
-                      filterCategory("3 months"),
-                    ],
-                  )),
-              ownerBox(),
-              Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
-                  child: Text(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et odio pellentesque diam volutpat commodo sed egestas. Ac turpis egestas maecenas pharetra convallis posuere morbi leo urna.",
-                    style: TextStyle(
-                      fontSize: 15.0,
-                      height: 1.5,
                     ),
-                    //overflow: TextOverflow.ellipsis,
-                  ))
-            ]),
-            Container(
-                child: Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Icon(
-                            Icons.arrow_back_ios,
-                            size: 24.0,
-                            color: Colors.white,
-                          ),
-                          FavoriteButton(),
-                        ]))),
-          ],
-        )));
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 10.0,
+                horizontal: 20,
+              ),
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "About",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: Text(
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et odio pellentesque diam volutpat commodo sed egestas. Ac turpis egestas maecenas pharetra convallis posuere morbi leo urna.",
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          height: 1.5,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20.0,
+                vertical: 15,
+              ),
+              child: ownerBox(),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              height: MediaQuery.of(context).size.height / 10,
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
