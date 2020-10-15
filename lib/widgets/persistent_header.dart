@@ -13,7 +13,6 @@ class PersistentHeader extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    // print("$shrinkOffset");
     return Stack(fit: StackFit.expand, children: [
       Hero(
         tag: petPic,

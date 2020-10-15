@@ -133,7 +133,8 @@ final kLightTheme = ThemeData(
   buttonTheme: ButtonThemeData(
     buttonColor: Color(0xffcba186),
   ),
-  floatingActionButtonTheme: FloatingActionButtonThemeData(),
+
+  ///floatingActionButtonTheme: FloatingActionButtonThemeData(),
   secondaryHeaderColor: Colors.black,
   // textSelectionTheme: TextSelectionThemeData(
   //   selectionColor: Color(0xffB5BFD3),
@@ -145,25 +146,4 @@ final kLightTheme = ThemeData(
   indicatorColor: Color(0xff457BE0),
   hintColor: Colors.grey,
   errorColor: Colors.red,
-  textTheme: TextTheme(
-      //text themes that contrast with card and canvas
-      ),
-  primaryTextTheme: TextTheme(
-      //text theme that contrast with primary color
-      ),
-  accentTextTheme: TextTheme(
-      //text theme that contrast with accent Color
-      ),
-  inputDecorationTheme: InputDecorationTheme(
-      // default values for InputDecorator, TextField, and TextFormField
-      ),
-  iconTheme: IconThemeData(
-      //icon themes that contrast with card and canvas
-      ),
-  primaryIconTheme: IconThemeData(
-      //icon themes that contrast primary color
-      ),
-  accentIconTheme: IconThemeData(
-      //icon themes that contrast accent color
-      ),
 );

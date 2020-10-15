@@ -10,7 +10,7 @@ class HomePage2 extends StatefulWidget {
 }
 
 class _HomePage2State extends State<HomePage2> {
-  Padding buildSearchBox() {
+  Widget buildSearchBox() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 55.h),
       child: Container(
@@ -27,6 +27,7 @@ class _HomePage2State extends State<HomePage2> {
           ),
           child: RaisedButton(
             onPressed: () {},
+            color: Theme.of(context).cardColor,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -48,28 +49,21 @@ class _HomePage2State extends State<HomePage2> {
     );
   }
 
-  SliverToBoxAdapter _label() {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: EdgeInsets.only(left: 20.0, bottom: 10),
-        child: Container(
-          child: Text(
-            "Popular Categories",
-            style: TextStyle(
-              fontSize: 30.h,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
+  Widget petCategories() {
+    Widget _label = Container(
+      child: Text(
+        "    Popular \n",
+        style: TextStyle(
+          fontSize: 30.h,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
         ),
       ),
     );
-  }
 
-  SliverToBoxAdapter petCategories() {
     List<PetCategory> _tiles = [
       PetCategory(
-        image: 'assets/images/dogs_icon.png',
+        image: 'assets/images/cat.png',
         name: "Dogs",
         context: context,
       ),
@@ -79,136 +73,101 @@ class _HomePage2State extends State<HomePage2> {
         context: context,
       ),
       PetCategory(
-        image: 'assets/images/Other_icon.png',
+        image: 'assets/images/cat.png',
         name: "Others",
         context: context,
       ),
-    ];
-    return SliverToBoxAdapter(
-      child: Container(
-        color: Colors.white, //Color(0xFFedf3eb),
-        padding: EdgeInsets.symmetric(
-          vertical: 12.w,
-          horizontal: 17.w,
-        ),
-        height: ScreenUtil().screenHeight / 4,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: 3,
-          itemBuilder: (context, index) {
-            return Container(
-              width: MediaQuery.of(context).size.width / 3.25,
-              padding: EdgeInsets.symmetric(
-                horizontal: 8.w,
-              ),
-              child: _tiles[index],
-            );
-          },
-        ),
+      PetCategory(
+        image: 'assets/images/cat.png',
+        name: "Dogs",
+        context: context,
       ),
-    );
+    ];
+    return SizedBox(
+        width: ScreenUtil().screenWidth,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              color: Colors.white,
+              padding: EdgeInsets.only(
+                bottom: 20,
+                left: 27.w,
+              ),
+              child: GridView.builder(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: _tiles.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 5,
+                  crossAxisSpacing: 15,
+                ),
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 3.w,
+                    ),
+                    child: _tiles[index],
+                  );
+                },
+              ),
+            ),
+            _label,
+          ],
+        ));
   }
 
-  SliverToBoxAdapter listForAdoption() {
-    return SliverToBoxAdapter(
-      child: Container(
-        height: ScreenUtil().screenHeight / 3,
-        margin: EdgeInsets.symmetric(
-          horizontal: 25.w,
-          vertical: 6.h,
-        ),
-        padding: EdgeInsets.symmetric(
-          vertical: 25.h,
-          horizontal: 25.w,
-        ),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            Color(0xFFbbc7b9),
-            Color(0xFFe3e5e2),
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-          borderRadius: BorderRadius.circular(40.w),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Flexible(
-              child: Text(
-                "Can\'t look after your pet due to unforeseen reasons? List your pet today and let us help you find their next owner.",
-                style: TextStyle(
-                  fontSize: 25.h,
-                ),
+  Widget listForAdoption() {
+    return Container(
+      //height: ScreenUtil().screenHeight / 6,
+      margin: EdgeInsets.symmetric(
+        horizontal: 25.w,
+        vertical: 20.h,
+      ),
+      padding: EdgeInsets.symmetric(
+        vertical: 30.h,
+        horizontal: 25.w,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(40.w),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Flexible(
+            child: Text(
+              "Can\'t look after your pet due to unforeseen reasons? List your pet today and let us help you find their next owner.",
+              style: TextStyle(
+                fontSize: 25.h,
               ),
             ),
-            SizedBox(
-              height: 12.h,
+          ),
+          //      SizedBox(
+          //        height: 12.h,
+          //      ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
             ),
-            Container(
-              decoration: BoxDecoration(
+            child: FlatButton.icon(
+              //height: 32.h,
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: FlatButton.icon(
-                //height: 32.h,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                onPressed: () {},
-                icon: Icon(
-                  Icons.home,
-                  color: Colors.white,
-                ),
-                label: Text(
-                  "Start now",
-                  style: TextStyle(fontSize: 22.h, color: Colors.white),
-                ),
+              onPressed: () {},
+              icon: Icon(
+                Icons.home,
+                color: Colors.white,
               ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  SliverAppBar carouselAppBar() {
-    return SliverAppBar(
-      expandedHeight: (ScreenUtil().screenHeight + 40) / 2.5,
-      backgroundColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(40.w),
-          bottomRight: Radius.circular(40.w),
-        ),
-      ),
-      pinned: true,
-      flexibleSpace: FlexibleSpaceBar(
-        background: Swiper(
-          autoplay: true,
-          autoplayDelay: 300000,
-          duration: 1000,
-          curve: Curves.easeInOut,
-          autoplayDisableOnInteraction: true,
-          layout: SwiperLayout.STACK,
-          controller: SwiperController(),
-          itemWidth: ScreenUtil().screenWidth,
-          itemCount: 3,
-          pagination: new SwiperPagination(),
-          control: new SwiperControl(
-            size: 0.0,
-          ),
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return ClipRRect(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(40.w),
-                  bottomRight: Radius.circular(40.w)),
-              child: Image(
-                image: AssetImage('assets/images/Home_image.png'),
-                filterQuality: FilterQuality.high,
-                fit: BoxFit.cover,
+              label: Text(
+                "Start now",
+                style: TextStyle(fontSize: 22.h, color: Colors.white),
               ),
-            );
-          },
-        ),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -223,20 +182,42 @@ class _HomePage2State extends State<HomePage2> {
     return Scaffold(
       backgroundColor: Colors.white, //Color(0xFFedf3eb),
       resizeToAvoidBottomInset: true,
-
       body: Stack(
         children: [
           Column(
             children: [
               Expanded(
-                flex: 2,
-                child: CustomScrollView(
-                  physics: NeverScrollableScrollPhysics(),
-                  slivers: <Widget>[
-                    carouselAppBar(),
-                  ],
-                ),
-              ),
+                  flex: 2,
+                  child: Container(
+                    height: ScreenUtil().screenHeight / 2,
+                    child: Swiper(
+                        autoplay: true,
+                        autoplayDelay: 30000,
+                        duration: 1000,
+                        curve: Curves.easeInOut,
+                        autoplayDisableOnInteraction: true,
+                        layout: SwiperLayout.STACK,
+                        controller: SwiperController(),
+                        itemWidth: ScreenUtil().screenWidth,
+                        itemCount: 3,
+                        pagination: new SwiperPagination(),
+                        control: new SwiperControl(
+                          size: 0.0,
+                        ),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return ClipRRect(
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(40.w),
+                                bottomRight: Radius.circular(40.w)),
+                            child: Image(
+                              image: AssetImage('assets/images/Home_image.png'),
+                              filterQuality: FilterQuality.high,
+                              fit: BoxFit.cover,
+                            ),
+                          );
+                        }),
+                  )),
               Padding(
                 padding: EdgeInsets.only(
                   top: 25.h,
@@ -244,36 +225,30 @@ class _HomePage2State extends State<HomePage2> {
                 child: Divider(),
               ),
               Expanded(
-                flex: 2,
-                child: CustomScrollView(
-                  physics: BouncingScrollPhysics(),
-                  slivers: [
-                    SliverPadding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 10.h,
+                  flex: 2,
+                  child: SafeArea(
+                    minimum: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                    child: PageView.custom(
+                      scrollDirection: Axis.vertical,
+                      controller: new PageController(
+                        viewportFraction: 1,
+                      ),
+                      childrenDelegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          if (index == 0) {
+                            return petCategories();
+                          } else {
+                            return listForAdoption();
+                          }
+                        },
+                        childCount: 2,
                       ),
                     ),
-                    _label(),
-                    petCategories(),
-                    SliverPadding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 40.h,
-                      ),
-                    ),
-                    listForAdoption(),
-                    SliverToBoxAdapter(
-                      child: Container(
-                        height: 210.h,
-                        color: Colors.transparent,
-                      ),
-                    )
-                  ],
-                ),
-              ),
+                  )),
             ],
           ),
           Positioned(
-            top: (ScreenUtil().screenHeight + 30) / 2.5,
+            top: (ScreenUtil().screenHeight + 40) / 2.5,
             width: ScreenUtil().screenWidth,
             child: Align(
               child: buildSearchBox(),

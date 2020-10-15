@@ -39,7 +39,8 @@ class FixedDockedFabLocation extends FloatingActionButtonLocation {
   Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
     final double fabX = (scaffoldGeometry.scaffoldSize.width -
             scaffoldGeometry.floatingActionButtonSize.width) /
-        1.05;
+        2.0;
+    //1.05;
     return Offset(fabX, getDockedY(scaffoldGeometry));
   }
 }
