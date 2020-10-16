@@ -1,6 +1,8 @@
+import 'package:dystopia_flutter_app/screens/filter_screen.dart';
 import 'package:dystopia_flutter_app/widgets/pet_list_card.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
@@ -50,7 +52,13 @@ class ListScreenState extends State<ListScreen> {
                 color: Colors.grey[400],
                 semanticLabel: "Filters",
               ),
-              onPressed: () {},
+              onPressed: () {
+                PlatformPageRoute.pageRoute(
+                    fullScreen: false,
+                    widget: FilterScreen(),
+                    fromRoot: true,
+                    context: context);
+              },
             ),
           ),
         ),
