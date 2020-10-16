@@ -63,23 +63,23 @@ class _HomePage2State extends State<HomePage2> {
 
     List<PetCategory> _tiles = [
       PetCategory(
-        image: 'assets/images/cat.png',
+        emoji: '🐶',
         name: "Dogs",
         context: context,
       ),
       PetCategory(
-        image: 'assets/images/cat.png',
+        emoji: '🐦',
+        name: "Birds",
+        context: context,
+      ),
+      PetCategory(
+        emoji: '🐈',
         name: "Cats",
         context: context,
       ),
       PetCategory(
-        image: 'assets/images/cat.png',
+        emoji: '🐹',
         name: "Others",
-        context: context,
-      ),
-      PetCategory(
-        image: 'assets/images/cat.png',
-        name: "Dogs",
         context: context,
       ),
     ];
@@ -108,6 +108,18 @@ class _HomePage2State extends State<HomePage2> {
                   return Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: 3.w,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF5F5F7),
+                      borderRadius: BorderRadius.circular(40),
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(3, 3),
+                          blurRadius: 10,
+                          color: Colors.black.withOpacity(0.16),
+                          spreadRadius: -2,
+                        )
+                      ],
                     ),
                     child: _tiles[index],
                   );
@@ -234,7 +246,7 @@ class _HomePage2State extends State<HomePage2> {
                         viewportFraction: 1,
                       ),
                       childrenDelegate: SliverChildBuilderDelegate(
-                        (context, index) {
+                            (context, index) {
                           if (index == 0) {
                             return petCategories();
                           } else {
