@@ -1,4 +1,6 @@
+import 'package:dystopia_flutter_app/screens/search_page.dart';
 import 'package:dystopia_flutter_app/widgets/pet_category.dart';
+import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +28,14 @@ class _HomePage2State extends State<HomePage2> {
             Radius.circular(35.w),
           ),
           child: RaisedButton(
-            onPressed: () {},
+            onPressed: () {
+              PlatformPageRoute.pageRoute(
+                fullScreen: false,
+                widget: SearchPage(),
+                fromRoot: true,
+                context: context,
+              );
+            },
             color: Theme.of(context).cardColor,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,51 +98,40 @@ class _HomePage2State extends State<HomePage2> {
     return SizedBox(
       width: ScreenUtil().screenWidth,
       child: Container(
-        child: Center(
-          child: Row(
-            children: [
-              _label,
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    color: Colors.white,
-                    child: GridView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: _tiles.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 5,
-                        crossAxisSpacing: 15,
-                      ),
-                      itemBuilder: (context, index) {
-                        return Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 3.w,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Color(0xFFF5F5F7),
-                            borderRadius: BorderRadius.circular(40),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(3, 3),
-                                blurRadius: 10,
-                                color: Colors.black.withOpacity(0.16),
-                                spreadRadius: -2,
-                              )
-                            ],
-                          ),
-                          child: _tiles[index],
-                        );
-                      },
-                    ),
-                  ),
-                ],
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _label,
+            GridView.builder(
+              padding: EdgeInsets.all(5),
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: _tiles.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
               ),
-            ],
-          ),
+              itemBuilder: (context, index) {
+                return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(3, 3),
+                          blurRadius: 2,
+                          color: Colors.black.withOpacity(0.16),
+                          spreadRadius: -3,
+                        )
+                      ],
+                    ),
+                    child: _tiles[index]);
+              },
+            ),
+          ],
         ),
       ),
     );
@@ -141,20 +139,17 @@ class _HomePage2State extends State<HomePage2> {
 
   Widget listForAdoption() {
     return Container(
-      //height: ScreenUtil().screenHeight / 6,
       margin: EdgeInsets.symmetric(
         horizontal: 25.w,
         vertical: 20.h,
       ),
       padding: EdgeInsets.symmetric(
-        vertical: 30.h,
         horizontal: 25.w,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(40.w),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Flexible(
             child: Text(
@@ -164,29 +159,24 @@ class _HomePage2State extends State<HomePage2> {
               ),
             ),
           ),
-          //      SizedBox(
-          //        height: 12.h,
-          //      ),
-          Container(
-            decoration: BoxDecoration(
+          SizedBox(
+            height: 20.h,
+          ),
+          FlatButton.icon(
+            color: Theme.of(context).colorScheme.primaryVariant,
+            shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
-            child: FlatButton.icon(
-              //height: 32.h,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              onPressed: () {},
-              icon: Icon(
-                Icons.home,
-                color: Colors.black,
-              ),
-              label: Text(
-                "Start now",
-                style: TextStyle(fontSize: 22.h, color: Colors.black),
-              ),
+            onPressed: () {},
+            icon: Icon(
+              Icons.home,
+              color: Colors.black,
             ),
-          )
+            label: Text(
+              "Start now",
+              style: TextStyle(fontSize: 22.h, color: Colors.black),
+            ),
+          ),
         ],
       ),
     );
@@ -240,31 +230,31 @@ class _HomePage2State extends State<HomePage2> {
                   )),
               Padding(
                 padding: EdgeInsets.only(
-                  top: 25.h,
+                  top: 30.h,
                 ),
                 child: Divider(),
               ),
               Expanded(
-                  flex: 2,
-                  child: SafeArea(
-                    minimum: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                    child: PageView.custom(
-                      scrollDirection: Axis.vertical,
-                      controller: new PageController(
-                        viewportFraction: 1,
-                      ),
-                      childrenDelegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          if (index == 0) {
-                            return petCategories();
-                          } else {
-                            return listForAdoption();
-                          }
-                        },
-                        childCount: 2,
-                      ),
+                flex: 2,
+                child: SafeArea(
+                  child: PageView.custom(
+                    scrollDirection: Axis.horizontal,
+                    controller: new PageController(
+                      viewportFraction: 1,
                     ),
-                  )),
+                    childrenDelegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        if (index == 0) {
+                          return petCategories();
+                        } else {
+                          return listForAdoption();
+                        }
+                      },
+                      childCount: 2,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
           Positioned(

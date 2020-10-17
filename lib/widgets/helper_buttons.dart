@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteButton extends StatefulWidget {
@@ -29,23 +28,20 @@ class FavoriteButtonState extends State<FavoriteButton> {
   }
 }
 
-class filterCategory extends StatefulWidget{
-  filterCategory(this.filter,this.toggle);
+class FilterCategory extends StatefulWidget {
+  FilterCategory(this.filter, this.toggle);
   final String filter;
   final bool toggle;
 
   @override
-  filterCategoryState createState() => new filterCategoryState();
+  FilterCategoryState createState() => new FilterCategoryState();
 }
 
-class filterCategoryState extends State<filterCategory>
-{
+class FilterCategoryState extends State<FilterCategory> {
   bool hasBeenPressed = false;
 
-  filterPressed(){
-
-    if(widget.toggle)
-    {
+  filterPressed() {
+    if (widget.toggle) {
       setState(() {
         hasBeenPressed = !hasBeenPressed;
       });
@@ -53,16 +49,14 @@ class filterCategoryState extends State<filterCategory>
   }
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return GestureDetector(
-      child:
-      Container(
+      child: Container(
         margin: EdgeInsets.all(8.0),
         width: 90.0,
         child: Material(
           type: MaterialType.card,
-          color: hasBeenPressed? Color(0xff875433) : Color(0xffaaF5E0C3),
+          color: hasBeenPressed ? Color(0xff875433) : Color(0xffaaF5E0C3),
           borderRadius: BorderRadius.circular(20),
           child: Center(
             child: Text(
@@ -71,7 +65,7 @@ class filterCategoryState extends State<filterCategory>
               style: TextStyle(
                 fontSize: 14.0,
                 fontWeight: FontWeight.bold,
-                color: hasBeenPressed? Colors.white : Colors.black,
+                color: hasBeenPressed ? Colors.white : Colors.black,
               ),
             ),
           ),

@@ -1,5 +1,8 @@
+import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+
+import 'filter_screen.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -39,7 +42,13 @@ class _SearchPageState extends State<SearchPage> {
                 color: Colors.grey[400],
                 semanticLabel: "Filters",
               ),
-              onPressed: () {},
+              onPressed: () {
+                PlatformPageRoute.pageRoute(
+                    fullScreen: true,
+                    widget: FilterScreen(),
+                    fromRoot: true,
+                    context: context);
+              },
             ),
           ),
         ),
@@ -76,9 +85,27 @@ class _SearchPageState extends State<SearchPage> {
       body: Stack(
         children: [
           Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [Text("")],
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "1. Enter your location",
+                  ),
+                  Text(
+                    "2. Filter your search",
+                  ),
+                  Text(
+                    "3. Browse through a list of pets that we find based on your needs.",
+                  ),
+                  Text(
+                      "4. Tap on ♥️ and you can find those pets under the Saved section."),
+                  Text("5. Make a wise decision and talk to it's owner."),
+                ],
+              ),
             ),
           ),
           buildFloatingSearchBar(),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dystopia_flutter_app/widgets/helper_buttons.dart';
 
-final myTitle= TextStyle(
+final myTitle = TextStyle(
   color: Colors.white70,
   fontSize: 18.0,
   fontFamily: 'OpenSans',
@@ -15,37 +15,33 @@ final mySubTitle = TextStyle(
   fontFamily: 'OpenSans',
 );
 
-
 class FilterScreen extends StatefulWidget {
   @override
   State createState() => new FilterScreenState();
 }
 
 class FilterScreenState extends State<FilterScreen> {
-
-  Text _buildFilterHeading(String heading)
-  {
+  Text _buildFilterHeading(String heading) {
     return Text(
       heading,
       style: myTitle,
       textAlign: TextAlign.left,
     );
-
   }
 
-  Container _buildFilterBoxes(List<String> filters, BuildContext context)
-  {
+  Container _buildFilterBoxes(List<String> filters, BuildContext context) {
     return Container(
       height: 120.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         controller: new ScrollController(),
         padding: EdgeInsets.all(5),
-        itemBuilder: (context,index){
-          return filterCategory(filters[index], true);
+        itemBuilder: (context, index) {
+          return FilterCategory(filters[index], true);
         },
         itemCount: filters.length,
-      ),);
+      ),
+    );
   }
 
   RangeValues _currentRangeValues = const RangeValues(40, 80);
@@ -61,29 +57,20 @@ class FilterScreenState extends State<FilterScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: Icon(Icons.close),
-          color: Colors.white,
-        ),
         title: Text('Filters',
-            style: TextStyle(
-                fontSize: 18.0,
-                color: Colors.white)),
+            style: TextStyle(fontSize: 18.0, color: Colors.white)),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
           child: Padding(
-              padding: EdgeInsets.only(left: 20.w, top:20.h),
-              child:
-              Column(
+              padding: EdgeInsets.only(left: 20.w, top: 20.h),
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   _buildFilterHeading("Breed"),
-                  _buildFilterBoxes(["Golden Retriever", "Pug", "Beagle"], context),
+                  _buildFilterBoxes(
+                      ["Golden Retriever", "Pug", "Beagle"], context),
                   SizedBox(height: 20.h),
                   _buildFilterHeading("Age"),
                   RangeSlider(
@@ -106,36 +93,27 @@ class FilterScreenState extends State<FilterScreen> {
                   _buildFilterBoxes(["Male", "Female"], context),
                   SizedBox(height: 20.h),
                   _buildFilterHeading("Gets along with"),
-                  _buildFilterBoxes(["Dogs", "Cats", "Birds"], context ),
+                  _buildFilterBoxes(["Dogs", "Cats", "Birds"], context),
                   SizedBox(height: 20.h),
                   _buildFilterHeading("Nature"),
                   _buildFilterBoxes(["Playful", "Shy", "Naughty"], context),
                   SizedBox(height: 70.h),
-
                 ],
-              )
-          )
-
-      ),
+              ))),
       bottomSheet: GestureDetector(
-          onTap: (){
+          onTap: () {
             Navigator.of(context).pop();
           },
           child: Container(
               height: 80.h,
               color: Colors.white,
               child: Center(
-                  child: Text(
-                      "APPLY",
+                  child: Text("APPLY",
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
-                      )
-                  )
-              )
-          )
-      ),
+                      ))))),
     );
   }
 }

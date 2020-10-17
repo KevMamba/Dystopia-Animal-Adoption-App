@@ -54,7 +54,7 @@ class ListScreenState extends State<ListScreen> {
               ),
               onPressed: () {
                 PlatformPageRoute.pageRoute(
-                    fullScreen: false,
+                    fullScreen: true,
                     widget: FilterScreen(),
                     fromRoot: true,
                     context: context);

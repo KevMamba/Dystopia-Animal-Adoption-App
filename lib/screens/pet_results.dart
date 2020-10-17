@@ -117,9 +117,9 @@ class PetResultScreenState extends State<PetResultScreen> {
                       controller: new ScrollController(),
                       padding: EdgeInsets.all(5),
                       children: <Widget>[
-                        filterCategory("Female", false),
-                        filterCategory("Golden\nRetriever", false),
-                        filterCategory("3 months", false),
+                        FilterCategory("Female", false),
+                        FilterCategory("Golden\nRetriever", false),
+                        FilterCategory("3 months", false),
                       ],
                     ),
                   ),
