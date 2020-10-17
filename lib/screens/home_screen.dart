@@ -50,15 +50,18 @@ class _HomePage2State extends State<HomePage2> {
   }
 
   Widget petCategories() {
-    Widget _label = Container(
-      child: Text(
-        "    Popular \n",
-        style: TextStyle(
-          fontSize: 30.h,
-          fontWeight: FontWeight.bold,
-          color: Colors.black,
+    Widget _label = Row(
+      children: [
+        Text(
+          " Popular \n   Pets",
+          style: TextStyle(
+            fontSize: 30.h,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
         ),
-      ),
+        SizedBox(height: 100),
+      ],
     );
 
     List<PetCategory> _tiles = [
@@ -84,51 +87,56 @@ class _HomePage2State extends State<HomePage2> {
       ),
     ];
     return SizedBox(
-        width: ScreenUtil().screenWidth,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              color: Colors.white,
-              padding: EdgeInsets.only(
-                bottom: 20,
-                left: 27.w,
-              ),
-              child: GridView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: _tiles.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 5,
-                  crossAxisSpacing: 15,
-                ),
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 3.w,
+      width: ScreenUtil().screenWidth,
+      child: Container(
+        child: Center(
+          child: Row(
+            children: [
+              _label,
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    color: Colors.white,
+                    child: GridView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: _tiles.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 5,
+                        crossAxisSpacing: 15,
+                      ),
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 3.w,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Color(0xFFF5F5F7),
+                            borderRadius: BorderRadius.circular(40),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(3, 3),
+                                blurRadius: 10,
+                                color: Colors.black.withOpacity(0.16),
+                                spreadRadius: -2,
+                              )
+                            ],
+                          ),
+                          child: _tiles[index],
+                        );
+                      },
                     ),
-                    decoration: BoxDecoration(
-                      color: Color(0xFFF5F5F7),
-                      borderRadius: BorderRadius.circular(40),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(3, 3),
-                          blurRadius: 10,
-                          color: Colors.black.withOpacity(0.16),
-                          spreadRadius: -2,
-                        )
-                      ],
-                    ),
-                    child: _tiles[index],
-                  );
-                },
+                  ),
+                ],
               ),
-            ),
-            _label,
-          ],
-        ));
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget listForAdoption() {
@@ -171,11 +179,11 @@ class _HomePage2State extends State<HomePage2> {
               onPressed: () {},
               icon: Icon(
                 Icons.home,
-                color: Colors.white,
+                color: Colors.black,
               ),
               label: Text(
                 "Start now",
-                style: TextStyle(fontSize: 22.h, color: Colors.white),
+                style: TextStyle(fontSize: 22.h, color: Colors.black),
               ),
             ),
           )
@@ -246,7 +254,7 @@ class _HomePage2State extends State<HomePage2> {
                         viewportFraction: 1,
                       ),
                       childrenDelegate: SliverChildBuilderDelegate(
-                            (context, index) {
+                        (context, index) {
                           if (index == 0) {
                             return petCategories();
                           } else {

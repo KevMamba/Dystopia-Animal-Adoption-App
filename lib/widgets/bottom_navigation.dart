@@ -67,27 +67,30 @@ class _BottomNavigationState extends State<BottomNavigation>
           onPositionChanged: (index) => setState(() => _bottomNavIndex = index),
           items: [
             BottomNavigationBarItem(
-              label: "Home",
+              // label: "Home",
               icon: Icon(Icons.home),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
-              label: "Favorite",
+              // label: "Favorite",
             ),
             BottomNavigationBarItem(
-                icon: ImageIcon(
-                  AssetImage(
-                    'assets/images/pet_logo.png',
-                  ),
-                  size: 70,
+              icon: ImageIcon(
+                AssetImage(
+                  'assets/images/pet_logo.png',
                 ),
-                label: "About Us"),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.chat),
-              label: "Chat",
+                size: 70,
+              ),
+              // label: "About Us",
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.account_box), label: 'Account'),
+              icon: Icon(Icons.chat_bubble),
+              // label: "Chat",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_box),
+              // label: 'Account',
+            ),
           ],
         ));
   }
