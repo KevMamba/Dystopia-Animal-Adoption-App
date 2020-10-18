@@ -60,16 +60,16 @@ class _HomePage2State extends State<HomePage2> {
 
   Widget petCategories() {
     Widget _label = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          " Popular \n   Pets",
+          "Popular Pets",
           style: TextStyle(
             fontSize: 30.h,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
         ),
-        SizedBox(height: 100),
       ],
     );
 
@@ -98,24 +98,26 @@ class _HomePage2State extends State<HomePage2> {
     return SizedBox(
       width: ScreenUtil().screenWidth,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _label,
-            GridView.builder(
-              padding: EdgeInsets.all(5),
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: _tiles.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-              ),
-              itemBuilder: (context, index) {
-                return Container(
+            Expanded(
+              child: GridView.builder(
+                padding: EdgeInsets.all(5),
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: _tiles.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 75,
+                  crossAxisSpacing: 50,
+                ),
+                itemBuilder: (context, index) {
+                  return Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(30),
@@ -128,8 +130,10 @@ class _HomePage2State extends State<HomePage2> {
                         )
                       ],
                     ),
-                    child: _tiles[index]);
-              },
+                    child: _tiles[index],
+                  );
+                },
+              ),
             ),
           ],
         ),
@@ -202,7 +206,7 @@ class _HomePage2State extends State<HomePage2> {
                     height: ScreenUtil().screenHeight / 2,
                     child: Swiper(
                         autoplay: true,
-                        autoplayDelay: 30000,
+                        autoplayDelay: 6000,
                         duration: 1000,
                         curve: Curves.easeInOut,
                         autoplayDisableOnInteraction: true,

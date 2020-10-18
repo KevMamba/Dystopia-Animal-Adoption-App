@@ -96,6 +96,7 @@ class PlatformAlertDialog extends PlatFormWidget {
   @override
   Widget buildMaterialWidgets(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Color(0xffb9815d),
       title: Text(title),
       content: Text(content),
       actions: _buildActions(context),
