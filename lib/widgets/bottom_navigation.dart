@@ -1,4 +1,5 @@
 import 'package:dystopia_flutter_app/screens/account.dart';
+import 'package:dystopia_flutter_app/screens/dystopia_details.dart';
 import 'package:dystopia_flutter_app/screens/saved_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,7 +41,7 @@ class _BottomNavigationState extends State<BottomNavigation>
   final List _screens = [
     HomePage2(),
     SavedPage(),
-    Scaffold(),
+    DystopiaDetails(),
     Scaffold(),
     ProfileScreen(),
   ];
