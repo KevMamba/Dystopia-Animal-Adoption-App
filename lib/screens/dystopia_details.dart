@@ -40,9 +40,7 @@ class DystopiaDetailsState extends State<DystopiaDetails> {
           ),
         ),
         Padding(
-            padding: EdgeInsets.only(
-              left: 20.0, top: 20.0, right: 20.0
-            ),
+            padding: EdgeInsets.only(left: 20.0, top: 20.0, right: 20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,67 +58,81 @@ class DystopiaDetailsState extends State<DystopiaDetails> {
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Orci eu lobortis elementum nibh tellus molestie nunc non."),
               ],
             )),
+        SizedBox(
+          height: 20,
+        ),
         Center(
           child: RaisedButton(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.w),
             ),
-            onPressed: (){},
+            onPressed: () {},
             color: Color(0xFFb9815d),
-            child: Text("Volunteer at Dystopia")
-          )
+            child: Text(
+              "Volunteer at Dystopia",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
         ),
         Center(
-          child: Padding(
-            padding: EdgeInsets.all(20.w),
+            child: Padding(
+                padding: EdgeInsets.all(20.w),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.w),
+                  ),
+                ))),
+        Padding(
+            padding: EdgeInsets.all(10.w),
             child: Container(
               decoration: BoxDecoration(
+                color: Color(0xffb9815d),
                 borderRadius: BorderRadius.circular(20.w),
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(3, 3),
+                    blurRadius: 2,
+                    color: Colors.black.withOpacity(0.16),
+                    spreadRadius: -3,
+                  )
+                ],
               ),
-            )
-        )),
-        Padding(
-          padding: EdgeInsets.all(10.w),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Color(0xffb9815d),
-              borderRadius: BorderRadius.circular(20.w),
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(3, 3),
-                  blurRadius: 2,
-                  color: Colors.black.withOpacity(0.16),
-                  spreadRadius: -3,
-                )
-              ],
-            ),
-            child: Column(
-              children: <Widget>[
-                 Row(
-                  children: <Widget>[
-                    Container(
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Container(
                         padding: EdgeInsets.only(left: 10.w),
-                        width: ScreenUtil().screenWidth*0.45,
-                        child: Text(
-                            "In this unprecedented time, we need your help more than ever! Please consider donating to help us care for our animals.")),
-                    Image(image: AssetImage(
-                        "assets/images/donate-dogs.png"
-                    ),
-                        fit: BoxFit.contain)
-                  ],
-                ),
-                RaisedButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.w),
+                        width: ScreenUtil().screenWidth * 0.45,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: Text(
+                            "In these unprecedented times, we need your help more than ever! Please consider donating to help us care for our animals.",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17.5,
+                            ),
+                          ),
                         ),
-                        onPressed: (){},
-                        color: Colors.white,
-                        child: Text("Donate")
-                    ),
-              ],
-            ),
-          )
-        ),
+                      ),
+                      Image(
+                        image: AssetImage("assets/images/donate-dogs.png"),
+                        fit: BoxFit.contain,
+                      )
+                    ],
+                  ),
+                  RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.w),
+                      ),
+                      onPressed: () {},
+                      color: Colors.white,
+                      child: Text("Donate")),
+                ],
+              ),
+            )),
         SizedBox(height: 100.h),
       ],
     )));
