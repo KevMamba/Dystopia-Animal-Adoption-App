@@ -38,6 +38,7 @@ dependencies:
   line_awesome_flutter: ^1.0.1
   linked_scroll_controller: ^0.1.2
   material_floating_search_bar: ^0.2.2
+  modal_bottom_sheet: ^0.2.2
   password_strength: ^0.1.2
   provider: ^4.3.2+2
 

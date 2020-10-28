@@ -101,7 +101,6 @@ class _HomePage2State extends State<HomePage2> {
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _label,
             Expanded(
@@ -113,8 +112,8 @@ class _HomePage2State extends State<HomePage2> {
                 itemCount: _tiles.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 75,
-                  crossAxisSpacing: 50,
+                  mainAxisSpacing: 50.w,
+                  crossAxisSpacing: 15.h,
                 ),
                 itemBuilder: (context, index) {
                   return Container(
@@ -194,7 +193,6 @@ class _HomePage2State extends State<HomePage2> {
       allowFontScaling: true,
     );
     return Scaffold(
-      backgroundColor: Colors.white, //Color(0xFFedf3eb),
       resizeToAvoidBottomInset: true,
       body: Stack(
         children: [

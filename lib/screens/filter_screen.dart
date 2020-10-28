@@ -3,13 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dystopia_flutter_app/widgets/helper_buttons.dart';
 
 final myTitle = TextStyle(
-  color: Colors.white70,
+  color: Colors.black,
   fontSize: 18.0,
   fontFamily: 'OpenSans',
 );
 
 final mySubTitle = TextStyle(
-  color: Colors.white,
+  color: Colors.grey,
   fontWeight: FontWeight.bold,
   fontSize: 16.0,
   fontFamily: 'OpenSans',
@@ -29,18 +29,18 @@ class FilterScreenState extends State<FilterScreen> {
     );
   }
 
-  Container _buildFilterBoxes(List<String> filters, BuildContext context) {
-    return Container(
-      height: 120.h,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        controller: new ScrollController(),
-        padding: EdgeInsets.all(5),
-        itemBuilder: (context, index) {
-          return FilterCategory(filters[index], true);
-        },
-        itemCount: filters.length,
-      ),
+  Widget _buildFilterBoxes(List<String> filters, BuildContext context) {
+    return GridView.builder(
+      shrinkWrap: true,
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+      scrollDirection: Axis.vertical,
+      physics: NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.all(5),
+      itemBuilder: (context, index) {
+        return FilterCategory(filters[index], true);
+      },
+      itemCount: filters.length,
     );
   }
 
@@ -53,17 +53,30 @@ class FilterScreenState extends State<FilterScreen> {
       allowFontScaling: true,
     );
     return Scaffold(
-      backgroundColor: Color(0xFFb9815d),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        title: Text('Filters',
-            style: TextStyle(fontSize: 18.0, color: Colors.white)),
-        centerTitle: true,
+        backgroundColor: Theme.of(context).bottomAppBarColor,
+        leadingWidth: 0,
+        leading: Opacity(
+          opacity: 0,
+        ),
+        centerTitle: false,
+        title: Text(
+          "Filters",
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: Icon(Icons.close_rounded),
+          )
+        ],
       ),
       body: SingleChildScrollView(
           child: Padding(
-              padding: EdgeInsets.only(left: 20.w, top: 20.h),
+              padding: EdgeInsets.only(left: 20.w, top: 30.h),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,6 +91,8 @@ class FilterScreenState extends State<FilterScreen> {
                     min: 0,
                     max: 100,
                     divisions: 5,
+                    activeColor: Theme.of(context).colorScheme.secondaryVariant,
+                    inactiveColor: Theme.of(context).colorScheme.primaryVariant,
                     labels: RangeLabels(
                       _currentRangeValues.start.round().toString(),
                       _currentRangeValues.end.round().toString(),
@@ -100,20 +115,39 @@ class FilterScreenState extends State<FilterScreen> {
                   SizedBox(height: 70.h),
                 ],
               ))),
-      bottomSheet: GestureDetector(
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-          child: Container(
-              height: 80.h,
-              color: Colors.white,
-              child: Center(
-                  child: Text("APPLY",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ))))),
+      bottomSheet: Container(
+          padding: EdgeInsets.symmetric(horizontal: 30.w),
+          height: 80.h,
+          color: Theme.of(context).colorScheme.surface,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                child: Text(
+                  "Reset",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
+                onTap: () {
+                  setState(() {
+                    _currentRangeValues = RangeValues(0, 0);
+                  });
+                },
+              ),
+              GestureDetector(
+                child: Text(
+                  "Apply",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          )),
     );
   }
 }

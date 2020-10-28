@@ -1,0 +1,49 @@
+import 'package:flutter/material.dart';
+
+import 'floating_search_bar.dart';
+
+class CustomScaffold extends StatelessWidget {
+  final Widget body;
+
+  const CustomScaffold({Key key, @required this.body}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFFb9815d),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Column(
+            children: <Widget>[
+              Flexible(
+                flex: 1,
+                child: Column(
+                  children: [
+                    Opacity(
+                      opacity: 0.0,
+                    ),
+                  ],
+                ),
+              ),
+              Flexible(
+                flex: 4,
+                child: Material(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                  color: Colors.white,
+                  elevation: 10,
+                  child: body,
+                ),
+              ),
+            ],
+          ),
+          SearchBar(),
+        ],
+      ),
+      resizeToAvoidBottomInset: false,
+    );
+  }
+}
