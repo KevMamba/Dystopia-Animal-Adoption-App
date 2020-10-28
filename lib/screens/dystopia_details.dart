@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DystopiaDetails extends StatefulWidget {
-  // creating a stateful widget
   @override
-  State createState() => new DystopiaDetailsState(); // creating the state
+  State createState() => new DystopiaDetailsState();
 }
 
 class DystopiaDetailsState extends State<DystopiaDetails> {
