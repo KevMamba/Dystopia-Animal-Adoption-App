@@ -1,10 +1,12 @@
 import 'package:dystopia_flutter_app/screens/account.dart';
+import 'package:dystopia_flutter_app/screens/chat/main_page.dart';
 import 'package:dystopia_flutter_app/screens/dystopia_details.dart';
 import 'package:dystopia_flutter_app/screens/saved_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
+
 import '../screens/home_screen.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -15,11 +17,6 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation>
     with SingleTickerProviderStateMixin {
   var _bottomNavIndex;
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   void initState() {
@@ -33,16 +30,12 @@ class _BottomNavigationState extends State<BottomNavigation>
     borderRadius: BorderRadius.only(
         topLeft: Radius.circular(30), topRight: Radius.circular(30)),
   );
-  ShapeBorder customBottomBarShape1 = BeveledRectangleBorder(
-    borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-  );
 
   final List _screens = [
     HomePage2(),
     SavedPage(),
     DystopiaDetails(),
-    Scaffold(),
+    ChatHome(),
     ProfileScreen(),
   ];
   @override
@@ -56,43 +49,51 @@ class _BottomNavigationState extends State<BottomNavigation>
         extendBody: true,
         resizeToAvoidBottomInset: true,
         body: _screens[_bottomNavIndex],
-        bottomNavigationBar: SnakeNavigationBar(
+        bottomNavigationBar: SnakeNavigationBar.color(
+          behaviour: SnakeBarBehaviour.floating,
+          shadowColor: Colors.brown[100],
           elevation: 10,
           snakeShape: SnakeShape.rectangle,
-          style: SnakeBarStyle.floating,
-          snakeColor: Theme.of(context).colorScheme.secondaryVariant,
+          snakeViewColor: Theme.of(context).colorScheme.secondary,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          unselectedItemColor: Theme.of(context).colorScheme.secondaryVariant,
+          selectedItemColor: Theme.of(context).colorScheme.primaryVariant,
           showUnselectedLabels: false,
-          showSelectedLabels: false,
+          showSelectedLabels: true,
           shape: customBottomBarShape,
           currentIndex: _bottomNavIndex,
-          onPositionChanged: (index) => setState(() => _bottomNavIndex = index),
+          onTap: (index) => setState(() => _bottomNavIndex = index),
           items: [
             BottomNavigationBarItem(
-              // label: "Home",
-              icon: Icon(Icons.home),
+              label: "Home",
+              icon: Icon(Icons.home_outlined),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              // label: "Favorite",
+              icon: Icon(Icons.favorite_outlined),
+              label: "Favorite",
             ),
             BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage(
-                  'assets/images/pet_logo.png',
-                ),
-                size: 70,
-              ),
-              // label: "About Us",
+              icon: Icon(Icons.info_outline),
+              label: "About",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble),
-              // label: "Chat",
+              icon: Icon(Icons.chat_bubble_outlined),
+              label: "Chat",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.account_box),
-              // label: 'Account',
+              icon: Icon(Icons.account_box_outlined),
+              label: 'Account',
             ),
           ],
         ));
   }
 }
+
+// TODO: Resize paw icon.
+/**
+ * 
+ * ImageIcon(
+                AssetImage(
+                  'assets/images/pet_logo.png',
+                ),
+ */

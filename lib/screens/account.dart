@@ -45,7 +45,7 @@ class ProfileScreen extends StatelessWidget {
             child: Stack(
               children: <Widget>[
                 CircleAvatar(
-                  radius: kSpacingUnit.w * 5,
+                  radius: kSpacingUnit.w * 50,
                   backgroundImage: AssetImage('assets/images/user.png'),
                 ),
                 Align(

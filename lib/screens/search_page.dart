@@ -10,6 +10,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      searchBar: true,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.only(left: 20.0),

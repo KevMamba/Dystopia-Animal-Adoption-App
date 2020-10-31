@@ -25,6 +25,7 @@ class ListScreenState extends State<ListScreen> {
           petAge: "12 months"),
     ];
     return CustomScaffold(
+      searchBar: true,
       body: ListView.builder(
         itemBuilder: (context, index) {
           return _listElements[index];

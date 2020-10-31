@@ -239,20 +239,22 @@ class _HomePage2State extends State<HomePage2> {
               Expanded(
                 flex: 2,
                 child: SafeArea(
-                  child: PageView.custom(
-                    scrollDirection: Axis.horizontal,
-                    controller: new PageController(
-                      viewportFraction: 1,
-                    ),
-                    childrenDelegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        if (index == 0) {
-                          return petCategories();
-                        } else {
-                          return listForAdoption();
-                        }
-                      },
-                      childCount: 2,
+                  child: Scrollbar(
+                    child: PageView.custom(
+                      scrollDirection: Axis.vertical,
+                      controller: new PageController(
+                        viewportFraction: 1,
+                      ),
+                      childrenDelegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          if (index == 0) {
+                            return petCategories();
+                          } else {
+                            return listForAdoption();
+                          }
+                        },
+                        childCount: 2,
+                      ),
                     ),
                   ),
                 ),

@@ -4,8 +4,11 @@ import 'floating_search_bar.dart';
 
 class CustomScaffold extends StatelessWidget {
   final Widget body;
-
-  const CustomScaffold({Key key, @required this.body}) : super(key: key);
+  final Widget header;
+  final bool searchBar;
+  const CustomScaffold(
+      {Key key, @required this.body, this.searchBar, this.header})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +43,17 @@ class CustomScaffold extends StatelessWidget {
               ),
             ],
           ),
-          SearchBar(),
+          _buildHeader(),
         ],
       ),
       resizeToAvoidBottomInset: false,
     );
+  }
+
+  Widget _buildHeader() {
+    if (searchBar) {
+      return SearchBar();
+    }
+    return header;
   }
 }
