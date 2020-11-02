@@ -216,7 +216,9 @@ class _SignUpFieldsState extends State<SignUpFields> {
           'Password',
           style: kLabelStyle,
         ),
-        SizedBox(height: 10),
+        SizedBox(
+          height: 10,
+        ),
         Container(
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,

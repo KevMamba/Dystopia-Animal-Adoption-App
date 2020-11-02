@@ -1,6 +1,7 @@
 import 'package:dystopia_flutter_app/screens/search_page.dart';
 import 'package:dystopia_flutter_app/widgets/pet_category.dart';
 import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
+import 'package:flutter/gestures.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -98,40 +99,41 @@ class _HomePage2State extends State<HomePage2> {
     return SizedBox(
       width: ScreenUtil().screenWidth,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             _label,
             Expanded(
-              child: GridView.builder(
-                padding: EdgeInsets.all(5),
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: _tiles.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 50.w,
-                  crossAxisSpacing: 15.h,
+              child: SafeArea(
+                child: GridView.builder(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: _tiles.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 50.w,
+                    crossAxisSpacing: 15.h,
+                  ),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(30),
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(3, 3),
+                            blurRadius: 2,
+                            color: Colors.black.withOpacity(0.16),
+                            spreadRadius: -3,
+                          )
+                        ],
+                      ),
+                      child: _tiles[index],
+                    );
+                  },
                 ),
-                itemBuilder: (context, index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(30),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(3, 3),
-                          blurRadius: 2,
-                          color: Colors.black.withOpacity(0.16),
-                          spreadRadius: -3,
-                        )
-                      ],
-                    ),
-                    child: _tiles[index],
-                  );
-                },
               ),
             ),
           ],
@@ -142,45 +144,40 @@ class _HomePage2State extends State<HomePage2> {
 
   Widget listForAdoption() {
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 25.w,
-        vertical: 20.h,
-      ),
       padding: EdgeInsets.symmetric(
         horizontal: 25.w,
+        vertical: 25.h,
+      ),
+      margin: EdgeInsets.symmetric(
+        horizontal: 10,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(40.w),
+        color: Theme.of(context).cardColor,
       ),
-      child: Column(
-        children: [
-          Flexible(
-            child: Text(
-              "Can\'t look after your pet due to unforeseen reasons? List your pet today and let us help you find their next owner.",
+      child: RichText(
+        text: TextSpan(
+          text:
+              "Can\'t look after your pet due to unforeseen reasons? \nList your pet today and let us help you find their next owner.",
+          style: TextStyle(
+            fontSize: 25.h,
+            color: Colors.black,
+          ),
+          children: <TextSpan>[
+            TextSpan(
+              text: "\n\n \t\t\t\t\t\t\t\t\t\t Start now!",
               style: TextStyle(
-                fontSize: 25.h,
+                color: Theme.of(context).colorScheme.secondaryVariant,
+                letterSpacing: 2,
               ),
+              // TODO: Application form
+
+              // recognizer: TapGestureRecognizer()..onTap = () {
+              //   return
+              // }
             ),
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-          FlatButton.icon(
-            color: Theme.of(context).colorScheme.primaryVariant,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            onPressed: () {},
-            icon: Icon(
-              Icons.home,
-              color: Colors.black,
-            ),
-            label: Text(
-              "Start now",
-              style: TextStyle(fontSize: 22.h, color: Colors.black),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -192,84 +189,82 @@ class _HomePage2State extends State<HomePage2> {
       designSize: Size(414, 896),
       allowFontScaling: true,
     );
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              Expanded(
-                  flex: 2,
-                  child: Container(
-                    height: ScreenUtil().screenHeight / 2,
-                    child: Swiper(
-                        autoplay: true,
-                        autoplayDelay: 6000,
-                        duration: 1000,
-                        curve: Curves.easeInOut,
-                        autoplayDisableOnInteraction: true,
-                        layout: SwiperLayout.STACK,
-                        controller: SwiperController(),
-                        itemWidth: ScreenUtil().screenWidth,
-                        itemCount: 3,
-                        pagination: new SwiperPagination(),
-                        control: new SwiperControl(
-                          size: 0.0,
-                        ),
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return ClipRRect(
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(40.w),
-                                bottomRight: Radius.circular(40.w)),
-                            child: Image(
-                              image: AssetImage('assets/images/Home_image.png'),
-                              filterQuality: FilterQuality.high,
-                              fit: BoxFit.cover,
-                            ),
-                          );
-                        }),
-                  )),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: 30.h,
-                ),
-                child: Divider(),
-              ),
-              Expanded(
+    return Stack(
+      children: [
+        Column(
+          children: [
+            Expanded(
                 flex: 2,
-                child: SafeArea(
-                  child: Scrollbar(
-                    child: PageView.custom(
-                      scrollDirection: Axis.vertical,
-                      controller: new PageController(
-                        viewportFraction: 1,
+                child: Container(
+                  height: ScreenUtil().screenHeight / 2,
+                  child: Swiper(
+                      autoplay: true,
+                      autoplayDelay: 6000,
+                      duration: 1000,
+                      curve: Curves.easeInOut,
+                      autoplayDisableOnInteraction: true,
+                      layout: SwiperLayout.STACK,
+                      controller: SwiperController(),
+                      itemWidth: ScreenUtil().screenWidth,
+                      itemCount: 3,
+                      pagination: new SwiperPagination(),
+                      control: new SwiperControl(
+                        size: 0.0,
                       ),
-                      childrenDelegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          if (index == 0) {
-                            return petCategories();
-                          } else {
-                            return listForAdoption();
-                          }
-                        },
-                        childCount: 2,
-                      ),
-                    ),
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(40.w),
+                              bottomRight: Radius.circular(40.w)),
+                          child: Image(
+                            image: AssetImage('assets/images/Home_image.png'),
+                            filterQuality: FilterQuality.high,
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      }),
+                )),
+            Padding(
+              padding: EdgeInsets.only(
+                top: 30.h,
+              ),
+              child: Divider(),
+            ),
+            Expanded(
+              flex: 2,
+              child: Scrollbar(
+                child: PageView.custom(
+                  scrollDirection: Axis.vertical,
+                  childrenDelegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      if (index == 0) {
+                        return petCategories();
+                      } else {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 25,
+                            vertical: 10,
+                          ),
+                          child: SafeArea(
+                            child: listForAdoption(),
+                          ),
+                        );
+                      }
+                    },
+                    childCount: 2,
                   ),
                 ),
               ),
-            ],
-          ),
-          Positioned(
-            top: (ScreenUtil().screenHeight + 40) / 2.5,
-            width: ScreenUtil().screenWidth,
-            child: Align(
-              child: buildSearchBox(),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
+        Positioned(
+          top: (ScreenUtil().screenHeight + 40) / 2.5,
+          width: ScreenUtil().screenWidth,
+          child: buildSearchBox(),
+        ),
+      ],
     );
   }
 }

@@ -89,7 +89,7 @@ class _BottomNavigationState extends State<BottomNavigation>
   }
 }
 
-// TODO: Resize paw icon.
+// TODO: Resize the paw icon
 /**
  * 
  * ImageIcon(
