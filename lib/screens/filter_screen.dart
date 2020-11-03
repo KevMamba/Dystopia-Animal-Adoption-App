@@ -59,8 +59,7 @@ class FilterScreenState extends State<FilterScreen> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: GestureDetector(
-            onTap: () => Navigator.of(context).pop(),
-            child: Icon(Icons.close_rounded)),
+            onTap: () => Navigator.of(context).pop(), child: Icon(Icons.close)),
         title: Text(
           "Filters",
           style: TextStyle(

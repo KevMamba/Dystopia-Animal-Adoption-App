@@ -66,10 +66,10 @@ class _BottomNavigationState extends State<BottomNavigation>
           items: [
             BottomNavigationBarItem(
               label: "Home",
-              icon: Icon(Icons.home_outlined),
+              icon: Icon(Icons.home),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_outlined),
+              icon: Icon(Icons.favorite),
               label: "Favorite",
             ),
             BottomNavigationBarItem(
@@ -77,11 +77,11 @@ class _BottomNavigationState extends State<BottomNavigation>
               label: "About",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble_outlined),
+              icon: Icon(Icons.chat_bubble),
               label: "Chat",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.account_box_outlined),
+              icon: Icon(Icons.account_box),
               label: 'Account',
             ),
           ],
