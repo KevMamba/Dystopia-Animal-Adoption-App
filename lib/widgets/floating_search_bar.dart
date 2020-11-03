@@ -19,7 +19,7 @@ class _FloatingSearchBarState extends State<SearchBar> {
       margins: EdgeInsets.symmetric(horizontal: 30, vertical: 40),
       elevation: 10,
       showAfter: Duration(milliseconds: 1000),
-      showDrawerHamburger: true,
+      //   showDrawerHamburger: true,
       clearQueryOnClose: true,
       hint: 'Enter Location',
       iconColor: Colors.grey[400],
