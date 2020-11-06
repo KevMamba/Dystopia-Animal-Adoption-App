@@ -109,22 +109,13 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return CustomScaffold(
-      body: _body(),
-      searchBar: false,
-      header: _header(),
-    );
-  }
-
   Widget _header() {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 30),
+          padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(),
@@ -134,14 +125,29 @@ class _ChatScreenState extends State<ChatScreen> {
                   color: Theme.of(context).colorScheme.primary,
                 ),
               ),
-              Text(
-                widget.user.displayName,
-                style: TextStyle(
-                  fontSize: 28.0,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primaryVariant,
+              SizedBox(width: 60),
+              Hero(
+                tag: widget.user.photoUrl,
+                child: CircleAvatar(
+                  radius: 35.0,
+                  backgroundImage: AssetImage(widget.user.photoUrl),
                 ),
               ),
+              SizedBox(width: 10),
+              Hero(
+                tag: widget.user.displayName,
+                child: Text(
+                  widget.user.displayName,
+                  style: TextStyle(
+                    fontSize: 28.0,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primaryVariant,
+                  ),
+                ),
+              ),
+              Opacity(
+                opacity: 1,
+              )
             ],
           ),
         ),
@@ -184,6 +190,15 @@ class _ChatScreenState extends State<ChatScreen> {
           _buildMessageComposer(),
         ],
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomScaffold(
+      body: _body(),
+      searchBar: false,
+      header: _header(),
     );
   }
 }

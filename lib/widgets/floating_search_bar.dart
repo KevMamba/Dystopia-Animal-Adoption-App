@@ -19,7 +19,7 @@ class _FloatingSearchBarState extends State<SearchBar> {
       margins: EdgeInsets.symmetric(horizontal: 30, vertical: 40),
       elevation: 10,
       showAfter: Duration(milliseconds: 1000),
-      //   showDrawerHamburger: true,
+
       clearQueryOnClose: true,
       hint: 'Enter Location',
       iconColor: Colors.grey[400],
@@ -33,6 +33,7 @@ class _FloatingSearchBarState extends State<SearchBar> {
       actions: [
         FloatingSearchBarAction(
           showIfOpened: true,
+          showIfClosed: false,
           child: Tooltip(
             message: "Filters",
             child: IconButton(
@@ -65,7 +66,7 @@ class _FloatingSearchBarState extends State<SearchBar> {
       //progress: model.isLoading,
       debounceDelay: const Duration(milliseconds: 500),
       //onQueryChanged: model.onQueryChanged,
-      transition: SlideFadeFloatingSearchBarTransition(),
+      transition: ExpandingFloatingSearchBarTransition(),
       builder: (context, transition) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(8),
