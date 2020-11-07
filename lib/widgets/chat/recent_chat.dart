@@ -1,5 +1,6 @@
 import 'package:dystopia_flutter_app/data/chat/message.dart';
 import 'package:dystopia_flutter_app/screens/chat/chat.dart';
+import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 
@@ -7,9 +8,6 @@ class RecentChats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(
-        top: 1,
-      ),
       child: Scrollbar(
         child: ListView.builder(
           controller: new ScrollController(),
@@ -17,13 +15,13 @@ class RecentChats extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             final Message chat = chats[index];
             return GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => ChatScreen(
-                    user: chat.sender,
-                  ),
+              onTap: () => PlatformPageRoute.pageRoute(
+                fullScreen: false,
+                widget: ChatScreen(
+                  user: chat.sender,
                 ),
+                fromRoot: false,
+                context: context,
               ),
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -39,20 +37,26 @@ class RecentChats extends StatelessWidget {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        CircleAvatar(
-                          radius: 35.0,
-                          backgroundImage: AssetImage(chat.sender.photoUrl),
+                        Hero(
+                          tag: chat.sender.photoUrl,
+                          child: CircleAvatar(
+                            radius: 35.0,
+                            backgroundImage: AssetImage(chat.sender.photoUrl),
+                          ),
                         ),
                         SizedBox(width: 10.0),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
-                              chat.sender.displayName,
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.bold,
+                            Hero(
+                              tag: chat.sender.displayName,
+                              child: Text(
+                                chat.sender.displayName,
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             SizedBox(height: 5.0),

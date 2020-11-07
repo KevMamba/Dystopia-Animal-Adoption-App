@@ -13,7 +13,7 @@ class CustomScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFb9815d),
+      backgroundColor: Theme.of(context).canvasColor,
       body: Stack(
         fit: StackFit.expand,
         children: [
