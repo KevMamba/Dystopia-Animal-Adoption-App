@@ -1,22 +1,41 @@
+import 'package:dystopia_flutter_app/widgets/pet_list_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:dystopia_flutter_app/data/saved_page_model.dart';
 
 class FavoriteButton extends StatefulWidget {
+
+  FavoriteButton({@required this.model, this.item});
+  final SavedModel model;
+  final PetResults item;
+
   @override
   FavoriteButtonState createState() => new FavoriteButtonState();
 }
 
 class FavoriteButtonState extends State<FavoriteButton> {
   bool liked = false;
+  SavedModel get model => widget.model;
+  PetResults get item => widget.item;
 
   favPressed() {
     setState(() {
-      liked = !liked;
+      if(liked)
+        {
+          liked = false;
+          model.add(item);
+        }
+      else
+        {
+          liked = true;
+          model.remove(item);
+        }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
       child: Icon(
         liked ? Icons.favorite : Icons.favorite_border,

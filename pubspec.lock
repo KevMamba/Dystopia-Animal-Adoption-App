@@ -288,7 +288,11 @@ packages:
       name: meta
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
+    version: "1.3.0-nullsafety.3"
+=======
     version: "1.3.0-nullsafety.4"
+>>>>>>> 92e07c93592f910014439ddf0a25606e74c54285
   modal_bottom_sheet:
     dependency: "direct main"
     description:
@@ -412,7 +416,11 @@ packages:
       name: stack_trace
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
+    version: "1.10.0-nullsafety.1"
+=======
     version: "1.10.0-nullsafety.4"
+>>>>>>> 92e07c93592f910014439ddf0a25606e74c54285
   stream_channel:
     dependency: transitive
     description:

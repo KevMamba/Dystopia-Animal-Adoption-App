@@ -1,3 +1,4 @@
+import 'package:dystopia_flutter_app/data/saved_page_model.dart';
 import 'package:dystopia_flutter_app/screens/pet_results.dart';
 import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,6 +12,7 @@ class PetResults extends StatelessWidget {
   final String petBreed;
   final String petAge;
   final VoidCallback onTap;
+  final SavedModel model;
 
   const PetResults({
     Key key,
@@ -19,7 +21,9 @@ class PetResults extends StatelessWidget {
     this.petBreed,
     this.petAge,
     this.onTap,
+    this.model,
   }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +101,7 @@ class PetResults extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              FavoriteButton(),
+                              FavoriteButton(model: model, item: this),
                             ],
                           ),
                           SizedBox(

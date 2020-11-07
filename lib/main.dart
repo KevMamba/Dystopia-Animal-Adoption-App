@@ -1,5 +1,6 @@
 import 'package:animated_splash/animated_splash.dart';
 import 'package:dystopia_flutter_app/screens/landing_page.dart';
+import 'package:dystopia_flutter_app/screens/saved_page.dart';
 import 'package:dystopia_flutter_app/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -18,8 +19,10 @@ Future<void> main() async {
 class DystopiaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Provider<AuthBase>(
-      create: (_) => Auth(),
+    return MultiProvider(
+      providers:[
+        Provider<AuthBase>(create: (_) => Auth()),
+        ],
       child: MaterialApp(
         theme: kLightTheme,
         debugShowCheckedModeBanner: false,
@@ -34,5 +37,6 @@ class DystopiaApp extends StatelessWidget {
         // will be handy later.
       ),
     );
+
   }
 }
