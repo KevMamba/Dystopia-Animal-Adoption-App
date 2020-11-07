@@ -30,7 +30,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
               Text(
                   "4. Tap on ♥️ and you can find those pets under the Saved section."),
-              Text("5. Make a wise decision and talk to it's owner."),
+              Text("5. Make a wise decision and talk to its owner."),
             ],
           ),
         ),
