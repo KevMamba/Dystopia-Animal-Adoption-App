@@ -4,13 +4,11 @@ import 'package:dystopia_flutter_app/screens/chat/main_page.dart';
 import 'package:dystopia_flutter_app/screens/dystopia_details.dart';
 import 'package:dystopia_flutter_app/screens/saved_page.dart';
 import 'package:dystopia_flutter_app/services/auth.dart';
-import 'package:dystopia_flutter_app/services/database_chat.dart';
 import 'package:dystopia_flutter_app/services/sharedPreferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
-import 'package:provider/provider.dart';
 
 import '../screens/home_screen.dart';
 

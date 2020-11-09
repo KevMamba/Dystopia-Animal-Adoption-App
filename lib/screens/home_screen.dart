@@ -184,7 +184,7 @@ class _HomePage2State extends State<HomePage2> {
               onPressed: () {
                 PlatformPageRoute.pageRoute(
                   fullScreen: false,
-                  widget: GUFA_1(),
+                  widget: GUFA(),
                   fromRoot: true,
                   context: context,
                 );
