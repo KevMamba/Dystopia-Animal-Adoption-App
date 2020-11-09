@@ -30,21 +30,18 @@ class _BottomNavigationState extends State<BottomNavigation>
     _bottomNavIndex = 0;
     getUserInfo();
     final systemTheme = SystemUiOverlayStyle.light;
-
     SystemChrome.setSystemUIOverlayStyle(systemTheme);
   }
 
   Future<void> getUserInfo() async {
     final val = await Future.wait([
       SaveData.getUserImage(),
-      SaveData.getUserName(),
+      // SaveData.getUserName(),
       SaveData.getUserEmail()
     ]);
-
     Constants.image = val[0];
-    // the following line assigns null to loggedUser.
-    //  Constants.loggedUser = val[1];
-    Constants.loggedEmail = val[2];
+    //Constants.loggedUser = val[1];
+    Constants.loggedEmail = val[1];
   }
 
   ShapeBorder customBottomBarShape = RoundedRectangleBorder(
