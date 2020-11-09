@@ -132,7 +132,7 @@ class GUFAState extends State<GUFA> {
                   onPressed: () {
                     PlatformPageRoute.pageRoute(
                       fullScreen: false,
-                      widget: GUFA_2(),
+                      widget: GUFA2(),
                       fromRoot: true,
                       context: context,
                     );

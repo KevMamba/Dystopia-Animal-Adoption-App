@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
+
 import 'package:dystopia_flutter_app/theme.dart';
 
-class GUFA_2 extends StatefulWidget {
+class GUFA2 extends StatefulWidget {
   @override
-  _GUFA_2State createState() => _GUFA_2State();
+  _GUFA2State createState() => _GUFA2State();
 }
 
 enum Pets { Dogs, Cats, Birds, Others }
@@ -14,7 +14,7 @@ Pets _character;
 enum Gender { Male, Female }
 Gender _gender;
 
-class _GUFA_2State extends State<GUFA_2> {
+class _GUFA2State extends State<GUFA2> {
   String name;
   bool checkedValue = false;
   bool isHomeTrained = false;

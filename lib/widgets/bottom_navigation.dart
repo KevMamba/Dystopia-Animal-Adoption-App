@@ -79,7 +79,7 @@ class _BottomNavigationState extends State<BottomNavigation>
               icon: Icon(
                 Icons.favorite,
               ),
-              label: "Favourite",
+              label: "Favorites",
             ),
             BottomNavigationBarItem(
               icon: ImageIcon(
