@@ -21,6 +21,7 @@ final User currentUser = User(
   uid: '0',
   displayName: 'Current User',
   photoUrl: 'assets/images/greg.jpg',
+  emailId: 'asfa',
 );
 
 // USERS
@@ -28,36 +29,43 @@ final User greg = User(
   uid: '1',
   displayName: 'Greg',
   photoUrl: 'assets/images/greg.jpg',
+  emailId: 'asfa',
 );
 final User james = User(
   uid: '2',
   displayName: 'James',
   photoUrl: 'assets/images/james.jpg',
+  emailId: 'asfa',
 );
 final User john = User(
   uid: '3',
   displayName: 'John',
   photoUrl: 'assets/images/john.jpg',
+  emailId: 'asfa',
 );
 final User olivia = User(
   uid: '4',
   displayName: 'Olivia',
   photoUrl: 'assets/images/olivia.jpg',
+  emailId: 'asfa',
 );
 final User sam = User(
   uid: '5',
   displayName: 'Sam',
   photoUrl: 'assets/images/sam.jpg',
+  emailId: 'asfa',
 );
 final User sophia = User(
   uid: '6',
   displayName: 'Sophia',
   photoUrl: 'assets/images/sophia.jpg',
+  emailId: 'asfa',
 );
 final User steven = User(
   uid: '7',
   displayName: 'Steven',
   photoUrl: 'assets/images/steven.jpg',
+  emailId: 'asfa',
 );
 
 // FAVORITE CONTACTS
