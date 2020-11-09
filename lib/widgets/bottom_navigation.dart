@@ -70,11 +70,16 @@ class _BottomNavigationState extends State<BottomNavigation>
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
-              label: "Favorite",
+              label: "Favourites",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.info_outline),
-              label: "About",
+              icon: ImageIcon(
+                AssetImage(
+                  'assets/images/pet_logo.png',
+                ),
+                size: 100,
+              ),
+              // label: "About",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.chat_bubble),
