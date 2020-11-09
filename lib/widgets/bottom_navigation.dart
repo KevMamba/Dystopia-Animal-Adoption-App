@@ -1,7 +1,10 @@
+import 'package:dystopia_flutter_app/data/constants.dart';
 import 'package:dystopia_flutter_app/screens/account.dart';
 import 'package:dystopia_flutter_app/screens/chat/main_page.dart';
 import 'package:dystopia_flutter_app/screens/dystopia_details.dart';
 import 'package:dystopia_flutter_app/screens/saved_page.dart';
+import 'package:dystopia_flutter_app/services/auth.dart';
+import 'package:dystopia_flutter_app/services/sharedPreferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +13,9 @@ import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import '../screens/home_screen.dart';
 
 class BottomNavigation extends StatefulWidget {
+  final User user;
+
+  const BottomNavigation({Key key, this.user}) : super(key: key);
   @override
   _BottomNavigationState createState() => _BottomNavigationState();
 }
@@ -22,8 +28,20 @@ class _BottomNavigationState extends State<BottomNavigation>
   void initState() {
     super.initState();
     _bottomNavIndex = 0;
+    getUserInfo();
     final systemTheme = SystemUiOverlayStyle.light;
     SystemChrome.setSystemUIOverlayStyle(systemTheme);
+  }
+
+  Future<void> getUserInfo() async {
+    final val = await Future.wait([
+      SaveData.getUserImage(),
+      // SaveData.getUserName(),
+      SaveData.getUserEmail()
+    ]);
+    Constants.image = val[0];
+    //Constants.loggedUser = val[1];
+    Constants.loggedEmail = val[1];
   }
 
   ShapeBorder customBottomBarShape = RoundedRectangleBorder(
@@ -45,6 +63,7 @@ class _BottomNavigationState extends State<BottomNavigation>
       designSize: Size(414, 896),
       allowFontScaling: true,
     );
+
     return Scaffold(
         extendBody: true,
         resizeToAvoidBottomInset: true,

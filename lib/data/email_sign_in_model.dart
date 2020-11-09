@@ -1,4 +1,7 @@
 import 'package:dystopia_flutter_app/services/auth.dart';
+
+import 'package:dystopia_flutter_app/services/firestore_service.dart';
+import 'package:dystopia_flutter_app/services/sharedPreferences.dart';
 import 'package:dystopia_flutter_app/services/validators.dart';
 import 'package:flutter/foundation.dart';
 
@@ -75,11 +78,16 @@ class EmailSignInChangeModel with FieldValidators, ChangeNotifier {
     try {
       // introduce artificial delays to check if the sign-in form is disabled when an auth request is in progress
       // await Future.delayed(Duration(seconds: 3));
+      User user;
       if (this.formType == EmailSignInFormType.SignIn) {
-        await auth.signInWithEmailAndPassword(this.email, this.password);
+        user = await auth.signInWithEmailAndPassword(this.email, this.password);
       } else {
-        await auth.createUserWithEmailIdAndPassword(this.email, this.password);
+        user = await auth.createUserWithEmailIdAndPassword(
+            this.email, this.password);
       }
+      SaveData.setSharedPreferences(user);
+      final instance = FirestoreService.instance;
+      await instance.addUser(username: user.displayName, photo: user.photoUrl);
     } catch (e) {
       updateWith(isLoading: false);
       rethrow;

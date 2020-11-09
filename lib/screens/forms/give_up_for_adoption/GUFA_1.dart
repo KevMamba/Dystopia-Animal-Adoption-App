@@ -4,12 +4,12 @@ import 'package:flutter_screenutil/screenutil.dart';
 import 'package:dystopia_flutter_app/theme.dart';
 import 'GUFA_2.dart';
 
-class GUFA_1 extends StatefulWidget {
+class GUFA extends StatefulWidget {
   @override
-  _GUFA_1State createState() => _GUFA_1State();
+  GUFAState createState() => GUFAState();
 }
 
-class _GUFA_1State extends State<GUFA_1> {
+class GUFAState extends State<GUFA> {
   String name;
   Widget buildTextFields(String text, String hint) {
     return Column(

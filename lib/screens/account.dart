@@ -1,3 +1,4 @@
+import 'package:dystopia_flutter_app/data/constants.dart';
 import 'package:dystopia_flutter_app/services/auth.dart';
 import 'package:dystopia_flutter_app/widgets/account_list_item.dart';
 import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
@@ -46,7 +47,7 @@ class ProfileScreen extends StatelessWidget {
               children: <Widget>[
                 CircleAvatar(
                   radius: kSpacingUnit.w * 50,
-                  backgroundImage: AssetImage('assets/images/user.png'),
+                  backgroundImage: NetworkImage(Constants.image),
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
@@ -73,12 +74,12 @@ class ProfileScreen extends StatelessWidget {
           ),
           SizedBox(height: kSpacingUnit.w * 2),
           Text(
-            'XYZ',
+            Constants.loggedUser,
             style: kTitleTextStyle,
           ),
           SizedBox(height: kSpacingUnit.w * 0.5),
           Text(
-            'XYZ@gmail.com',
+            Constants.loggedEmail,
             style: kCaptionTextStyle,
           ),
         ],

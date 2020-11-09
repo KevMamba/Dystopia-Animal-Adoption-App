@@ -8,10 +8,13 @@ class User {
   final String uid;
   final String photoUrl;
   final String displayName;
-  User(
-      {@required this.uid,
-      @required this.photoUrl,
-      @required this.displayName});
+  final String emailId;
+  User({
+    @required this.uid,
+    @required this.photoUrl,
+    @required this.displayName,
+    @required this.emailId,
+  });
 }
 
 abstract class AuthBase {
@@ -36,7 +39,11 @@ class Auth implements AuthBase {
   // type helper
   User _userFromFirebase(auth.User user) => (user != null)
       ? User(
-          uid: user.uid, displayName: user.displayName, photoUrl: user.photoURL)
+          uid: user.uid,
+          displayName: user.displayName,
+          photoUrl: user.photoURL,
+          emailId: user.email,
+        )
       : null;
 
   // custom stream of users
