@@ -1,10 +1,9 @@
-import 'package:dystopia_flutter_app/data/constants.dart';
 import 'package:dystopia_flutter_app/screens/account.dart';
 import 'package:dystopia_flutter_app/screens/chat/main_page.dart';
 import 'package:dystopia_flutter_app/screens/dystopia_details.dart';
 import 'package:dystopia_flutter_app/screens/saved_page.dart';
 import 'package:dystopia_flutter_app/services/auth.dart';
-import 'package:dystopia_flutter_app/services/sharedPreferences.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,20 +27,9 @@ class _BottomNavigationState extends State<BottomNavigation>
   void initState() {
     super.initState();
     _bottomNavIndex = 0;
-    getUserInfo();
+
     final systemTheme = SystemUiOverlayStyle.light;
     SystemChrome.setSystemUIOverlayStyle(systemTheme);
-  }
-
-  Future<void> getUserInfo() async {
-    final val = await Future.wait([
-      SaveData.getUserImage(),
-      // SaveData.getUserName(),
-      SaveData.getUserEmail()
-    ]);
-    Constants.image = val[0];
-    //Constants.loggedUser = val[1];
-    Constants.loggedEmail = val[1];
   }
 
   ShapeBorder customBottomBarShape = RoundedRectangleBorder(
@@ -88,8 +76,10 @@ class _BottomNavigationState extends State<BottomNavigation>
               icon: Icon(Icons.home),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              label: "Favourites",
+              icon: Icon(
+                Icons.favorite,
+              ),
+              label: "Favourite",
             ),
             BottomNavigationBarItem(
               icon: ImageIcon(

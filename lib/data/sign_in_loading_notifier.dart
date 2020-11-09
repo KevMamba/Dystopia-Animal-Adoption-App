@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dystopia_flutter_app/services/auth.dart';
 import 'package:dystopia_flutter_app/services/firestore_service.dart';
-import 'package:dystopia_flutter_app/services/sharedPreferences.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -13,14 +13,13 @@ class SignInLoadingNotifier {
   final instance = FirestoreService.instance;
   Future<User> signInWithGoogle() async {
     User user = await _signIn(auth.signInWithGoogle);
-    SaveData.setSharedPreferences(user);
     await instance.addUser(username: user.displayName, photo: user.photoUrl);
     return user;
   }
 
   Future<User> signInWithFacebook() async {
     User user = await _signIn(auth.siginWithFacebook);
-    SaveData.setSharedPreferences(user);
+
     await instance.addUser(username: user.displayName, photo: user.photoUrl);
     return user;
   }
