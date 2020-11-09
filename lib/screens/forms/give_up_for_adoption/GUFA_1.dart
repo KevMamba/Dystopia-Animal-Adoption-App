@@ -1,6 +1,8 @@
+import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:dystopia_flutter_app/theme.dart';
+import 'GUFA_2.dart';
 
 class GUFA_1 extends StatefulWidget {
   @override
@@ -127,7 +129,14 @@ class _GUFA_1State extends State<GUFA_1> {
                   height: 25,
                 ),
                 FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    PlatformPageRoute.pageRoute(
+                      fullScreen: false,
+                      widget: GUFA_2(),
+                      fromRoot: true,
+                      context: context,
+                    );
+                  },
                   backgroundColor: Color(0xffE09E45),
                   child: Icon(Icons.navigate_next),
                 ),
