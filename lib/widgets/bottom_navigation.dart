@@ -88,7 +88,6 @@ class _BottomNavigationState extends State<BottomNavigation>
                 ),
                 size: 100,
               ),
-              // label: "About",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.chat_bubble),

@@ -8,16 +8,23 @@ class FirestoreService {
 
   Future<void> addUser({
     @required String username,
+    @required String email,
     @required String photo,
   }) async {
     final reference =
         FirebaseFirestore.instance.collection(APIPath.userCollection());
-    if (reference.where('name', isEqualTo: username).get() != null) {
-      return null;
-    } else {
-      Map<String, String> data = {'name': username, 'photo': photo};
-      await reference.add(data);
-    }
+    reference.where("email", isEqualTo: email).snapshots().listen((data) async {
+      if (data.docs.length == 0) {
+        Map<String, String> data = {
+          'name': username,
+          'email': email,
+          'photo': photo
+        };
+        await reference.add(data);
+      } else {
+        return;
+      }
+    });
   }
 
   Future<QuerySnapshot> usersByName({

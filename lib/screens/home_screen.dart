@@ -1,4 +1,4 @@
-import 'package:dystopia_flutter_app/screens/search_page.dart';
+import 'package:dystopia_flutter_app/screens/pet_search/search_page.dart';
 import 'package:dystopia_flutter_app/widgets/pet_category.dart';
 import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:dystopia_flutter_app/screens/forms/give_up_for_adoption/GUFA_1.dart';

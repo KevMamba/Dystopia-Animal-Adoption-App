@@ -87,7 +87,11 @@ class EmailSignInChangeModel with FieldValidators, ChangeNotifier {
       }
 
       final instance = FirestoreService.instance;
-      await instance.addUser(username: user.displayName, photo: user.photoUrl);
+      await instance.addUser(
+        username: user.displayName,
+        email: user.emailId,
+        photo: user.photoUrl,
+      );
     } catch (e) {
       updateWith(isLoading: false);
       rethrow;

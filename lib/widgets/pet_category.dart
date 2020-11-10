@@ -1,4 +1,4 @@
-import 'package:dystopia_flutter_app/screens/list_of_pets.dart';
+import 'package:dystopia_flutter_app/screens/pet_search/list_of_pets.dart';
 import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:flutter/material.dart';
 

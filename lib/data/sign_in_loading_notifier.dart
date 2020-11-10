@@ -13,14 +13,22 @@ class SignInLoadingNotifier {
   final instance = FirestoreService.instance;
   Future<User> signInWithGoogle() async {
     User user = await _signIn(auth.signInWithGoogle);
-    await instance.addUser(username: user.displayName, photo: user.photoUrl);
+    print('isItHERE?');
+    await instance.addUser(
+      username: user.displayName,
+      email: user.emailId,
+      photo: user.photoUrl,
+    );
     return user;
   }
 
   Future<User> signInWithFacebook() async {
     User user = await _signIn(auth.siginWithFacebook);
-
-    await instance.addUser(username: user.displayName, photo: user.photoUrl);
+    await instance.addUser(
+      username: user.displayName,
+      email: user.emailId,
+      photo: user.photoUrl,
+    );
     return user;
   }
 

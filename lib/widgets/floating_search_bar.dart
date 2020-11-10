@@ -1,4 +1,4 @@
-import 'package:dystopia_flutter_app/screens/filter_screen.dart';
+import 'package:dystopia_flutter_app/screens/pet_search/filter_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
