@@ -1,7 +1,11 @@
+import 'package:dystopia_flutter_app/data/chat/room_id.dart';
+import 'package:dystopia_flutter_app/services/auth.dart';
+import 'package:dystopia_flutter_app/services/database_chat.dart';
 import 'package:dystopia_flutter_app/widgets/helper_buttons.dart';
 import 'package:dystopia_flutter_app/widgets/persistent_header.dart';
 import 'package:flutter/material.dart';
 import 'package:groovin_widgets/groovin_widgets.dart';
+import 'package:provider/provider.dart';
 
 class PetResultScreen extends StatefulWidget {
   final String petPic;
@@ -12,12 +16,15 @@ class PetResultScreen extends StatefulWidget {
 }
 
 class PetResultScreenState extends State<PetResultScreen> {
+  List<String> users;
   @override
   void initState() {
     super.initState();
   }
 
   Widget ownerBox() {
+    final user = Provider.of<User>(context, listen: false);
+    final database = Provider.of<FirestoreDatabase>(context, listen: false);
     return Material(
       elevation: 4,
       type: MaterialType.canvas,
@@ -32,7 +39,7 @@ class PetResultScreenState extends State<PetResultScreen> {
           radius: 22.0,
         ),
         title: Text(
-          "Name",
+          "Username",
         ),
         subtitle: Text(
           "Owner",
@@ -62,7 +69,19 @@ class PetResultScreenState extends State<PetResultScreen> {
                       color: Colors.white,
                     ),
                     color: Colors.black,
-                    onPressed: () => {}),
+                    onPressed: () async {
+                      users = [user.displayName, 'Username'];
+
+                      String chatRoomId = ChatRoomDetails.getChatRoomId(
+                          user.displayName, 'Username');
+
+                      Map<String, dynamic> chatRoom = {
+                        "chatRoomId": chatRoomId,
+                        "users": users,
+                      };
+
+                      await database.getChatRoom(chatRoomId, chatRoom);
+                    }),
               ),
             ],
           )

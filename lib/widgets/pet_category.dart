@@ -25,7 +25,7 @@ class PetCategory extends StatelessWidget {
             PlatformPageRoute.pageRoute(
               fullScreen: false,
               widget: ListScreen(),
-              fromRoot: true,
+              fromRoot: false,
               context: context,
             );
           },

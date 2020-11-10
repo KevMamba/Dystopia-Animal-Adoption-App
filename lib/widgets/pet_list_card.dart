@@ -36,7 +36,7 @@ class PetResults extends StatelessWidget {
             widget: PetResultScreen(
               petPic: petPic,
             ),
-            fromRoot: true,
+            fromRoot: false,
             context: context);
       },
       child: ClipRRect(

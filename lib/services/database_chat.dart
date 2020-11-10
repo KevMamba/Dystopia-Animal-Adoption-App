@@ -8,7 +8,7 @@ import 'firestore_service.dart';
 abstract class Database {
   Future<QuerySnapshot> getUserByName(String name);
 
-  Future getChatRoom(String chatroomID);
+  Future getChatRoom(String chatroomID, Map<String, dynamic> data);
 }
 
 class FirestoreDatabase implements Database {
@@ -24,8 +24,8 @@ class FirestoreDatabase implements Database {
   }
 
   @override
-  Future getChatRoom(String chatroomID) async {
+  Future getChatRoom(String chatroomID, Map<String, dynamic> data) async {
     return await _service.getChatRoom(
-        path: APIPath.chatCollection(), chatRoomID: chatroomID, data: null);
+        path: APIPath.chatCollection(), chatRoomID: chatroomID, data: data);
   }
 }

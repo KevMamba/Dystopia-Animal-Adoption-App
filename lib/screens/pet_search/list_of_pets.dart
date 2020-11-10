@@ -1,7 +1,10 @@
+import 'package:dystopia_flutter_app/services/auth.dart';
+import 'package:dystopia_flutter_app/services/database_chat.dart';
 import 'package:dystopia_flutter_app/widgets/custom_scaffold.dart';
 import 'package:dystopia_flutter_app/widgets/pet_list_card.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ListScreen extends StatefulWidget {
   @override
@@ -19,10 +22,11 @@ class ListScreenState extends State<ListScreen> {
   Widget build(BuildContext context) {
     List<PetResults> _listElements = [
       PetResults(
-          petPic: 'assets/images/dog-bg.jpg',
-          petName: "Marley",
-          petBreed: "Golden Retriever",
-          petAge: "12 months"),
+        petPic: 'assets/images/dog-bg.jpg',
+        petName: "Marley",
+        petBreed: "Golden Retriever",
+        petAge: "12 months",
+      ),
     ];
     return CustomScaffold(
       searchBar: true,
