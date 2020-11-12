@@ -33,6 +33,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context, listen: false);
     ScreenUtil.init(context,
         designSize: Size(414, 896), allowFontScaling: true);
     var profileInfo = Expanded(
@@ -46,7 +47,7 @@ class ProfileScreen extends StatelessWidget {
               children: <Widget>[
                 CircleAvatar(
                   radius: kSpacingUnit.w * 50,
-                  backgroundImage: AssetImage('assets/images/user.png'),
+                  backgroundImage: NetworkImage(user.photoUrl),
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
@@ -73,12 +74,12 @@ class ProfileScreen extends StatelessWidget {
           ),
           SizedBox(height: kSpacingUnit.w * 2),
           Text(
-            'XYZ',
+            user.displayName,
             style: kTitleTextStyle,
           ),
           SizedBox(height: kSpacingUnit.w * 0.5),
           Text(
-            'XYZ@gmail.com',
+            user.emailId,
             style: kCaptionTextStyle,
           ),
         ],

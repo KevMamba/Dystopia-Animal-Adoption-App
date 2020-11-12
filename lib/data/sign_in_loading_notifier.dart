@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:dystopia_flutter_app/services/auth.dart';
+import 'package:dystopia_flutter_app/services/firestore_service.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -8,12 +10,29 @@ class SignInLoadingNotifier {
   final Auth auth;
   final ValueNotifier<bool> isLoading;
   SignInLoadingNotifier({@required this.auth, @required this.isLoading});
+  final instance = FirestoreService.instance;
+  Future<User> signInWithGoogle() async {
+    User user = await _signIn(auth.signInWithGoogle);
+    print('isItHERE?');
+    await instance.addUser(
+      username: user.displayName,
+      email: user.emailId,
+      photo: user.photoUrl,
+    );
+    return user;
+  }
 
-  Future<User> signInWithGoogle() async => _signIn(auth.signInWithGoogle);
+  Future<User> signInWithFacebook() async {
+    User user = await _signIn(auth.siginWithFacebook);
+    await instance.addUser(
+      username: user.displayName,
+      email: user.emailId,
+      photo: user.photoUrl,
+    );
+    return user;
+  }
 
-  Future<User> signInWithFacebook() async => _signIn(auth.siginWithFacebook);
-
-  Future<User> signInAnonymously() async => _signIn(
+  Future<User> signInAnonymously() async => await _signIn(
         auth.signInAnonymously,
       );
 

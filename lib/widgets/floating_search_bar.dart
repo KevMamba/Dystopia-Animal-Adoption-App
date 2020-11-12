@@ -1,7 +1,7 @@
-import 'package:dystopia_flutter_app/screens/filter_screen.dart';
+import 'package:dystopia_flutter_app/screens/pet_search/filter_screen.dart';
+import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class SearchBar extends StatefulWidget {
   @override
@@ -44,17 +44,23 @@ class _FloatingSearchBarState extends State<SearchBar> {
                 semanticLabel: "Filters",
               ),
               onPressed: () {
-                showBarModalBottomSheet(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
-                    ),
-                    context: context,
-                    builder: (context, scrollController) {
-                      return FilterScreen();
-                    });
+                // showBarModalBottomSheet(
+                //     shape: RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.only(
+                //         topLeft: Radius.circular(30),
+                //         topRight: Radius.circular(30),
+                //       ),
+                //     ),
+                //     context: context,
+                //     builder: (context, scrollController) {
+                //       return
+                //     });
+
+                PlatformPageRoute(
+                    fullScreen: true,
+                    widget: FilterScreen(),
+                    fromRoot: false,
+                    context: context);
               },
             ),
           ),

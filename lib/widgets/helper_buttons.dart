@@ -5,8 +5,7 @@ import 'package:dystopia_flutter_app/data/saved_page_model.dart';
 
 class FavoriteButton extends StatefulWidget {
 
-  FavoriteButton({@required this.model, this.item});
-  final SavedModel model;
+  FavoriteButton({@required this.item});
   final PetResults item;
 
   @override
@@ -14,22 +13,21 @@ class FavoriteButton extends StatefulWidget {
 }
 
 class FavoriteButtonState extends State<FavoriteButton> {
-  bool liked = false;
-  SavedModel get model => widget.model;
+
   PetResults get item => widget.item;
 
   favPressed() {
     setState(() {
-      if(liked)
+      if(item.liked)
         {
-          liked = false;
-          model.add(item);
+          SavedModel.remove(item);
         }
       else
         {
-          liked = true;
-          model.remove(item);
+          SavedModel.add(item);
         }
+
+      item.liked = !item.liked;
     });
   }
 
@@ -38,8 +36,8 @@ class FavoriteButtonState extends State<FavoriteButton> {
 
     return GestureDetector(
       child: Icon(
-        liked ? Icons.favorite : Icons.favorite_border,
-        color: liked ? Colors.redAccent : Colors.grey,
+        item.liked ? Icons.favorite : Icons.favorite_border,
+        color: item.liked ? Colors.redAccent : Colors.grey,
         size: 30,
       ),
       onTap: () => favPressed(),

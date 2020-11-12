@@ -1,11 +1,15 @@
-import 'package:dystopia_flutter_app/screens/search_page.dart';
+import 'package:dystopia_flutter_app/screens/pet_search/search_page.dart';
+import 'package:dystopia_flutter_app/services/auth.dart';
+import 'package:dystopia_flutter_app/services/database_chat.dart';
 import 'package:dystopia_flutter_app/widgets/pet_category.dart';
 import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
+import 'package:dystopia_flutter_app/screens/forms/give_up_for_adoption/GUFA_1.dart';
 import 'package:flutter/gestures.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:provider/provider.dart';
 
 class HomePage2 extends StatefulWidget {
   @override
@@ -60,6 +64,8 @@ class _HomePage2State extends State<HomePage2> {
   }
 
   Widget petCategories() {
+    final user = Provider.of<User>(context, listen: false);
+    final database = Provider.of<FirestoreDatabase>(context, listen: false);
     Widget _label = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -79,21 +85,29 @@ class _HomePage2State extends State<HomePage2> {
         emoji: '🐶',
         name: "Dogs",
         context: context,
+        user: user,
+        database: database,
       ),
       PetCategory(
         emoji: '🐦',
         name: "Birds",
         context: context,
+        user: user,
+        database: database,
       ),
       PetCategory(
         emoji: '🐈',
         name: "Cats",
         context: context,
+        user: user,
+        database: database,
       ),
       PetCategory(
         emoji: '🐹',
         name: "Others",
         context: context,
+        user: user,
+        database: database,
       ),
     ];
     return SizedBox(
@@ -155,31 +169,93 @@ class _HomePage2State extends State<HomePage2> {
         borderRadius: BorderRadius.circular(40.w),
         color: Theme.of(context).cardColor,
       ),
-      child: RichText(
-        text: TextSpan(
-          text:
-              "Can\'t look after your pet due to unforeseen reasons? \nList your pet today and let us help you find their next owner.",
-          style: TextStyle(
-            fontSize: 25.h,
-            color: Colors.black,
-          ),
-          children: <TextSpan>[
-            TextSpan(
-              text: "\n\n \t\t\t\t\t\t\t\t\t\t Start now!",
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.secondaryVariant,
-                letterSpacing: 2,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Flexible(
+            child: Center(
+              child: Text(
+                "Can\'t look after your pet due to unforeseen reasons? \nList your pet today and let us help you find their next owner.",
+                style: TextStyle(
+                  fontSize: 25.h,
+                ),
               ),
-              // TODO: Application form
-
-              // recognizer: TapGestureRecognizer()..onTap = () {
-              //   return
-              // }
             ),
-          ],
-        ),
+          ),
+          SizedBox(
+            height: 5.h,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Color(0xFF875433),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: FlatButton.icon(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              onPressed: () {
+                PlatformPageRoute.pageRoute(
+                  fullScreen: false,
+                  widget: GUFA(),
+                  fromRoot: true,
+                  context: context,
+                );
+              },
+              icon: Icon(
+                Icons.home,
+                color: Colors.white,
+              ),
+              label: Text(
+                "Start now!",
+                style: TextStyle(fontSize: 22.h, color: Colors.white),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 12.h,
+          ),
+        ],
       ),
     );
+    // return Container(
+    //   padding: EdgeInsets.symmetric(
+    //     horizontal: 25.w,
+    //     vertical: 25.h,
+    //   ),
+    //   margin: EdgeInsets.symmetric(
+    //     horizontal: 10,
+    //   ),
+    //   decoration: BoxDecoration(
+    //     borderRadius: BorderRadius.circular(40.w),
+    //     color: Theme.of(context).cardColor,
+    //   ),
+    //   child: RichText(
+    //     text: TextSpan(
+    //       text:
+    //           "Can\'t look after your pet due to unforeseen reasons? \nList your pet today and let us help you find their next owner.",
+    //       style: TextStyle(
+    //         fontSize: 25.h,
+    //         color: Colors.black,
+    //       ),
+    //       children: <TextSpan>[
+    //         TextSpan(
+    //           text: "\n\n \t\t\t\t\t\t\t\t\t\t Start now!",
+    //           style: TextStyle(
+    //             color: Theme.of(context).colorScheme.secondaryVariant,
+    //             letterSpacing: 2,
+    //           ),
+    //
+    //           // TODO: Application form
+    //
+    //           // recognizer: TapGestureRecognizer()..onTap = () {
+    //           //   return
+    //           // }
+    //         ),
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 
   @override
