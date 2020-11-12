@@ -68,9 +68,6 @@ final User steven = User(
   emailId: 'asfa',
 );
 
-// FAVORITE CONTACTS
-List<User> favorites = [sam, steven, olivia, john, greg];
-
 // EXAMPLE CHATS ON HOME SCREEN
 List<Message> chats = [
   Message(

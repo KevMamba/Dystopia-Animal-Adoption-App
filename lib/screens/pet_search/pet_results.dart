@@ -1,16 +1,19 @@
 import 'package:dystopia_flutter_app/data/chat/room_id.dart';
+import 'package:dystopia_flutter_app/screens/chat/chat.dart';
 import 'package:dystopia_flutter_app/services/auth.dart';
 import 'package:dystopia_flutter_app/services/database_chat.dart';
 import 'package:dystopia_flutter_app/widgets/helper_buttons.dart';
 import 'package:dystopia_flutter_app/widgets/persistent_header.dart';
+import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:groovin_widgets/groovin_widgets.dart';
-import 'package:provider/provider.dart';
 
 class PetResultScreen extends StatefulWidget {
   final String petPic;
-
-  const PetResultScreen({Key key, this.petPic}) : super(key: key);
+  final User user;
+  final FirestoreDatabase database;
+  const PetResultScreen({Key key, this.petPic, this.user, this.database})
+      : super(key: key);
   @override
   State createState() => new PetResultScreenState();
 }
@@ -23,8 +26,12 @@ class PetResultScreenState extends State<PetResultScreen> {
   }
 
   Widget ownerBox() {
-    final user = Provider.of<User>(context, listen: false);
-    final database = Provider.of<FirestoreDatabase>(context, listen: false);
+    User owner = new User(
+        uid: 'asas',
+        photoUrl: 'assets/images/sophia.jpg',
+        displayName: 'OWNER',
+        emailId: 'owner@gmail.com');
+
     return Material(
       elevation: 4,
       type: MaterialType.canvas,
@@ -35,11 +42,11 @@ class PetResultScreenState extends State<PetResultScreen> {
         defaultTrailingIconColor: Theme.of(context).disabledColor,
         inkwellRadius: BorderRadius.circular(15),
         leading: CircleAvatar(
-          backgroundImage: AssetImage('assets/images/user.png'),
+          backgroundImage: AssetImage(owner.photoUrl),
           radius: 22.0,
         ),
         title: Text(
-          "Username",
+          owner.displayName,
         ),
         subtitle: Text(
           "Owner",
@@ -70,17 +77,24 @@ class PetResultScreenState extends State<PetResultScreen> {
                     ),
                     color: Colors.black,
                     onPressed: () async {
-                      users = [user.displayName, 'Username'];
-
+                      users = [widget.user.displayName, owner.displayName];
                       String chatRoomId = ChatRoomDetails.getChatRoomId(
-                          user.displayName, 'Username');
-
+                        widget.user.emailId,
+                        owner.emailId,
+                      );
                       Map<String, dynamic> chatRoom = {
                         "chatRoomId": chatRoomId,
                         "users": users,
                       };
-
-                      await database.getChatRoom(chatRoomId, chatRoom);
+                      await widget.database.getChatRoom(chatRoomId, chatRoom);
+                      PlatformPageRoute.pageRoute(
+                          fullScreen: false,
+                          widget: ChatScreen(
+                            chatID: chatRoomId,
+                            user: owner,
+                          ),
+                          fromRoot: false,
+                          context: context);
                     }),
               ),
             ],

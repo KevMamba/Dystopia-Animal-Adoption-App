@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dystopia_flutter_app/services/firestore_api.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class FirestoreService {
   FirestoreService._();

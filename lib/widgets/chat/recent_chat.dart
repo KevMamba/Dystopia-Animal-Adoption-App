@@ -37,26 +37,20 @@ class RecentChats extends StatelessWidget {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Hero(
-                          tag: chat.sender.photoUrl,
-                          child: CircleAvatar(
-                            radius: 35.0,
-                            backgroundImage: AssetImage(chat.sender.photoUrl),
-                          ),
+                        CircleAvatar(
+                          radius: 35.0,
+                          backgroundImage: AssetImage(chat.sender.photoUrl),
                         ),
                         SizedBox(width: 10.0),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Hero(
-                              tag: chat.sender.displayName,
-                              child: Text(
-                                chat.sender.displayName,
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            Text(
+                              chat.sender.displayName,
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             SizedBox(height: 5.0),

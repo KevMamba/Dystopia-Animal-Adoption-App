@@ -1,4 +1,6 @@
 import 'package:dystopia_flutter_app/screens/pet_search/pet_results.dart';
+import 'package:dystopia_flutter_app/services/auth.dart';
+import 'package:dystopia_flutter_app/services/database_chat.dart';
 import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,8 @@ class PetResults extends StatelessWidget {
   final String petName;
   final String petBreed;
   final String petAge;
+  final User user;
+  final FirestoreDatabase database;
   final VoidCallback onTap;
 
   const PetResults({
@@ -18,6 +22,8 @@ class PetResults extends StatelessWidget {
     this.petName,
     this.petBreed,
     this.petAge,
+    this.user,
+    this.database,
     this.onTap,
   }) : super(key: key);
 
@@ -35,6 +41,8 @@ class PetResults extends StatelessWidget {
             fullScreen: false,
             widget: PetResultScreen(
               petPic: petPic,
+              user: user,
+              database: database,
             ),
             fromRoot: false,
             context: context);

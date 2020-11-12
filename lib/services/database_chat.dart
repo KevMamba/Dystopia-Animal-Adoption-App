@@ -9,6 +9,8 @@ abstract class Database {
   Future<QuerySnapshot> getUserByName(String name);
 
   Future getChatRoom(String chatroomID, Map<String, dynamic> data);
+
+  //Future getAllConversations(String name);
 }
 
 class FirestoreDatabase implements Database {

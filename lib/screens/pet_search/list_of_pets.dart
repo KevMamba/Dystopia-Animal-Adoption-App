@@ -4,9 +4,12 @@ import 'package:dystopia_flutter_app/widgets/custom_scaffold.dart';
 import 'package:dystopia_flutter_app/widgets/pet_list_card.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class ListScreen extends StatefulWidget {
+  final User user;
+  final FirestoreDatabase database;
+
+  const ListScreen({Key key, this.user, this.database}) : super(key: key);
   @override
   State createState() => new ListScreenState();
 }
@@ -26,6 +29,8 @@ class ListScreenState extends State<ListScreen> {
         petName: "Marley",
         petBreed: "Golden Retriever",
         petAge: "12 months",
+        user: widget.user,
+        database: widget.database,
       ),
     ];
     return CustomScaffold(
