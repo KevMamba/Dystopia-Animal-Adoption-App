@@ -1,5 +1,6 @@
 import 'package:dystopia_flutter_app/screens/sign_in.dart';
 import 'package:dystopia_flutter_app/services/auth.dart';
+import 'package:dystopia_flutter_app/services/database_chat.dart';
 import 'package:dystopia_flutter_app/widgets/bottom_navigation.dart';
 import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 
@@ -21,7 +22,10 @@ class LandingPage extends StatelessWidget {
             } else {
               return Provider<User>.value(
                 value: user,
-                child: BottomNavigation(),
+                child: Provider<FirestoreDatabase>(
+                  create: (_) => FirestoreDatabase(uid: user.uid),
+                  child: BottomNavigation(user: user),
+                ),
               );
             }
           } else {

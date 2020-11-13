@@ -1,10 +1,15 @@
+import 'package:dystopia_flutter_app/services/auth.dart';
+import 'package:dystopia_flutter_app/services/database_chat.dart';
 import 'package:dystopia_flutter_app/widgets/custom_scaffold.dart';
 import 'package:dystopia_flutter_app/widgets/pet_list_card.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:dystopia_flutter_app/widgets/helper_buttons.dart';
 
 class ListScreen extends StatefulWidget {
+  final User user;
+  final FirestoreDatabase database;
+
+  const ListScreen({Key key, this.user, this.database}) : super(key: key);
   @override
   State createState() => new ListScreenState();
 }
@@ -16,25 +21,26 @@ final kLabelStyle = TextStyle(
 );
 
 class ListScreenState extends State<ListScreen> {
+
+
   @override
   Widget build(BuildContext context) {
     List<PetResults> _listElements = [
       PetResults(
-          petPic: 'assets/images/dog-bg.jpg',
-          petName: "Marley",
-          petBreed: "Golden Retriever",
-          petAge: "12 months"),
+        petPic: 'assets/images/dog-bg.jpg',
+        petName: "Marley",
+        petBreed: "Golden Retriever",
+        petAge: "12 months",
+        user: widget.user,
+        database: widget.database,
+      ),
       PetResults(
         petPic: 'assets/images/pug.jpg',
         petName: "Polo",
         petBreed: "Pug",
-        petAge: "1 year",
-      ),
-      PetResults(
-        petPic: 'assets/images/lab.png',
-        petName: "Woof",
-        petBreed: "Labrador",
-        petAge: "2 years",
+        petAge: "12 months",
+        user: widget.user,
+        database: widget.database,
       )
     ];
     return CustomScaffold(
@@ -47,4 +53,5 @@ class ListScreenState extends State<ListScreen> {
       ),
     );
   }
+
 }

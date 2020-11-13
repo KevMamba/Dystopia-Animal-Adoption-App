@@ -6,8 +6,12 @@ import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
   final User user;
+  final String chatID;
 
-  ChatScreen({this.user});
+  ChatScreen({
+    this.user,
+    this.chatID,
+  });
 
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -113,7 +117,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20),
+          padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -126,23 +130,17 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
               ),
               SizedBox(width: 60),
-              Hero(
-                tag: widget.user.photoUrl,
-                child: CircleAvatar(
-                  radius: 35.0,
-                  backgroundImage: AssetImage(widget.user.photoUrl),
-                ),
+              CircleAvatar(
+                radius: 35.0,
+                backgroundImage: AssetImage(widget.user.photoUrl),
               ),
               SizedBox(width: 10),
-              Hero(
-                tag: widget.user.displayName,
-                child: Text(
-                  widget.user.displayName,
-                  style: TextStyle(
-                    fontSize: 28.0,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primaryVariant,
-                  ),
+              Text(
+                widget.user.displayName,
+                style: TextStyle(
+                  fontSize: 28.0,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primaryVariant,
                 ),
               ),
               Opacity(
@@ -196,7 +194,11 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      body: _body(),
+      body: Center(
+        child: Text(
+          "Let's get started",
+        ),
+      ),
       searchBar: false,
       header: _header(),
     );

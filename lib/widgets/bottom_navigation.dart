@@ -2,6 +2,8 @@ import 'package:dystopia_flutter_app/screens/account.dart';
 import 'package:dystopia_flutter_app/screens/chat/main_page.dart';
 import 'package:dystopia_flutter_app/screens/dystopia_details.dart';
 import 'package:dystopia_flutter_app/screens/saved_page.dart';
+import 'package:dystopia_flutter_app/services/auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +12,9 @@ import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import '../screens/home_screen.dart';
 
 class BottomNavigation extends StatefulWidget {
+  final User user;
+
+  const BottomNavigation({Key key, this.user}) : super(key: key);
   @override
   _BottomNavigationState createState() => _BottomNavigationState();
 }
@@ -22,6 +27,7 @@ class _BottomNavigationState extends State<BottomNavigation>
   void initState() {
     super.initState();
     _bottomNavIndex = 0;
+
     final systemTheme = SystemUiOverlayStyle.light;
     SystemChrome.setSystemUIOverlayStyle(systemTheme);
   }
@@ -45,6 +51,7 @@ class _BottomNavigationState extends State<BottomNavigation>
       designSize: Size(414, 896),
       allowFontScaling: true,
     );
+
     return Scaffold(
         extendBody: true,
         resizeToAvoidBottomInset: true,
@@ -69,12 +76,18 @@ class _BottomNavigationState extends State<BottomNavigation>
               icon: Icon(Icons.home),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              label: "Favorite",
+              icon: Icon(
+                Icons.favorite,
+              ),
+              label: "Favorites",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.info_outline),
-              label: "About",
+              icon: ImageIcon(
+                AssetImage(
+                  'assets/images/pet_logo.png',
+                ),
+                size: 100,
+              ),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.chat_bubble),
