@@ -28,7 +28,7 @@ class FirestoreService {
     });
   }
 
-  Future<QuerySnapshot> usersByName({
+  Future usersByName({
     @required String username,
     @required String path,
   }) async {
@@ -43,5 +43,31 @@ class FirestoreService {
   }) async {
     final reference = FirebaseFirestore.instance.collection(path);
     return await reference.doc(chatRoomID).set(data);
+  }
+
+  Future<void> sendMessage(
+      {@required String path,
+      @required String chatroomID,
+      @required Map<String, dynamic> messageMap}) async {
+    final reference = FirebaseFirestore.instance.collection(path);
+    await reference
+        .doc(chatroomID)
+        .collection(APIPath.conversations())
+        .add(messageMap);
+  }
+
+  Future getConversation(
+      {@required String path, @required String chatroomID}) async {
+    final reference = FirebaseFirestore.instance.collection(path);
+    return reference
+        .doc(chatroomID)
+        .collection(APIPath.conversations())
+        .orderBy('date')
+        .snapshots();
+  }
+
+  Future getUserChats(String username, String path) async {
+    final reference = FirebaseFirestore.instance.collection(path);
+    return reference.where('users', arrayContains: username).snapshots();
   }
 }

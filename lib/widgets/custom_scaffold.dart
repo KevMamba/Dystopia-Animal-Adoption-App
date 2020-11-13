@@ -46,7 +46,7 @@ class CustomScaffold extends StatelessWidget {
           _buildHeader(),
         ],
       ),
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
     );
   }
 

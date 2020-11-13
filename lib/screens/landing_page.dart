@@ -24,7 +24,7 @@ class LandingPage extends StatelessWidget {
                 value: user,
                 child: Provider<FirestoreDatabase>(
                   create: (_) => FirestoreDatabase(uid: user.uid),
-                  child: BottomNavigation(user: user),
+                  child: BottomNavigation(),
                 ),
               );
             }

@@ -1,6 +1,9 @@
+import 'package:dystopia_flutter_app/services/auth.dart';
+import 'package:dystopia_flutter_app/services/database_chat.dart';
 import 'package:dystopia_flutter_app/widgets/chat/recent_chat.dart';
 import 'package:dystopia_flutter_app/widgets/custom_scaffold.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ChatHome extends StatefulWidget {
   @override
@@ -18,6 +21,9 @@ class _ChatScreenState extends State<ChatHome>
 
   @override
   Widget build(BuildContext context) {
+    final User user = Provider.of<User>(context, listen: false);
+    final FirestoreDatabase database =
+        Provider.of<FirestoreDatabase>(context, listen: false);
     return CustomScaffold(
       header: Padding(
         padding: const EdgeInsets.only(top: 50.0),
@@ -59,7 +65,7 @@ class _ChatScreenState extends State<ChatHome>
       ),
       body: TabBarView(
         children: [
-          RecentChats(),
+          RecentChats(user: user, database: database),
           Center(
             child: Text(
               "You've no requests yet..",

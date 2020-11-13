@@ -36,6 +36,7 @@ dependencies:
   google_fonts: ^1.1.0
   google_sign_in: ^4.5.4
   groovin_widgets: ^1.6.0
+  intl: ^0.16.1
   line_awesome_flutter: ^1.0.1
   material_floating_search_bar: ^0.2.2
   modal_bottom_sheet: ^0.2.2

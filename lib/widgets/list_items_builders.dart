@@ -18,7 +18,10 @@ class ListItemsBuilder<T> extends StatelessWidget {
       if (items.isNotEmpty) {
         return OnlyOnePointerRecognizerWidget(child: _buildList(items));
       } else {
-        return EmptyContent();
+        return EmptyContent(
+          title: "C'mon",
+          message: "Let's get started!",
+        );
       }
     } else if (snapshot.hasError) {
       print(snapshot.error.toString());
@@ -27,10 +30,8 @@ class ListItemsBuilder<T> extends StatelessWidget {
         message: 'Cannot load desired items ',
       );
     }
-    return SliverFillRemaining(
-      child: Center(
-        child: PlatFormProgressIndicator(),
-      ),
+    return Center(
+      child: PlatFormProgressIndicator(),
     );
   }
 

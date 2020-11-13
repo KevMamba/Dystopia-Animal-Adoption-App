@@ -2,6 +2,7 @@ import 'package:dystopia_flutter_app/data/chat/room_id.dart';
 import 'package:dystopia_flutter_app/screens/chat/chat.dart';
 import 'package:dystopia_flutter_app/services/auth.dart';
 import 'package:dystopia_flutter_app/services/database_chat.dart';
+import 'package:dystopia_flutter_app/services/firestore_service.dart';
 import 'package:dystopia_flutter_app/widgets/helper_buttons.dart';
 import 'package:dystopia_flutter_app/widgets/persistent_header.dart';
 import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
@@ -25,13 +26,22 @@ class PetResultScreenState extends State<PetResultScreen> {
     super.initState();
   }
 
+  _addOwnerToDatabase(User owner) async {
+    final reference = FirestoreService.instance;
+    await reference.addUser(
+      username: owner.displayName,
+      email: owner.emailId,
+      photo: owner.photoUrl,
+    );
+  }
+
   Widget ownerBox() {
     User owner = new User(
         uid: 'asas',
         photoUrl: 'assets/images/sophia.jpg',
-        displayName: 'OWNER',
-        emailId: 'owner@gmail.com');
-
+        displayName: 'Sophia',
+        emailId: 'sophia@gmail.com');
+    _addOwnerToDatabase(owner);
     return Material(
       elevation: 4,
       type: MaterialType.canvas,
@@ -91,7 +101,9 @@ class PetResultScreenState extends State<PetResultScreen> {
                           fullScreen: false,
                           widget: ChatScreen(
                             chatID: chatRoomId,
-                            user: owner,
+                            owner: owner,
+                            sender: widget.user,
+                            database: widget.database,
                           ),
                           fromRoot: false,
                           context: context);

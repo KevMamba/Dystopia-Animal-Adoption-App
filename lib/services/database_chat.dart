@@ -22,12 +22,40 @@ class FirestoreDatabase implements Database {
   @override
   Future<QuerySnapshot> getUserByName(String name) async {
     return await _service.usersByName(
-        username: name, path: APIPath.userCollection());
+      username: name,
+      path: APIPath.userCollection(),
+    );
   }
 
   @override
-  Future getChatRoom(String chatroomID, Map<String, dynamic> data) async {
-    return await _service.getChatRoom(
-        path: APIPath.chatCollection(), chatRoomID: chatroomID, data: data);
+  Future<void> getChatRoom(String chatroomID, Map<String, dynamic> data) async {
+    return await _service
+        .getChatRoom(
+      path: APIPath.chatRoomCollection(),
+      chatRoomID: chatroomID,
+      data: data,
+    )
+        .catchError((e) {
+      print(e);
+    });
+  }
+
+  Future<void> sendMessage(String chatroomID, Map<String, dynamic> data) async {
+    return await _service.sendMessage(
+      chatroomID: chatroomID,
+      messageMap: data,
+      path: APIPath.chatRoomCollection(),
+    );
+  }
+
+  Future getChat(String chatroomID) async {
+    return await _service.getConversation(
+      path: APIPath.chatRoomCollection(),
+      chatroomID: chatroomID,
+    );
+  }
+
+  Future getUserChats(String username) async {
+    return await _service.getUserChats(username, APIPath.chatRoomCollection());
   }
 }

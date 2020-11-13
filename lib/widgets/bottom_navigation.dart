@@ -2,7 +2,6 @@ import 'package:dystopia_flutter_app/screens/account.dart';
 import 'package:dystopia_flutter_app/screens/chat/main_page.dart';
 import 'package:dystopia_flutter_app/screens/dystopia_details.dart';
 import 'package:dystopia_flutter_app/screens/saved_page.dart';
-import 'package:dystopia_flutter_app/services/auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,9 +11,6 @@ import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import '../screens/home_screen.dart';
 
 class BottomNavigation extends StatefulWidget {
-  final User user;
-
-  const BottomNavigation({Key key, this.user}) : super(key: key);
   @override
   _BottomNavigationState createState() => _BottomNavigationState();
 }

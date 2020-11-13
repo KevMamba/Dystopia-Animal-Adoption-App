@@ -1,16 +1,24 @@
-import 'package:dystopia_flutter_app/data/chat/message.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:dystopia_flutter_app/services/auth.dart';
+import 'package:dystopia_flutter_app/services/database_chat.dart';
 import 'package:dystopia_flutter_app/widgets/custom_scaffold.dart';
 import 'package:dystopia_flutter_app/widgets/helper_buttons.dart';
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ChatScreen extends StatefulWidget {
-  final User user;
+  final User owner;
+  final User sender;
+  final FirestoreDatabase database;
   final String chatID;
 
   ChatScreen({
-    this.user,
+    this.owner,
     this.chatID,
+    this.sender,
+    this.database,
   });
 
   @override
@@ -18,7 +26,45 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  _buildMessage(Message message, bool isMe) {
+  TextEditingController _messageController = new TextEditingController();
+  Stream<QuerySnapshot> conversation;
+  @override
+  void initState() {
+    widget.database.getChat(widget.chatID).then((value) {
+      setState(() {
+        conversation = value;
+      });
+    });
+    super.initState();
+  }
+
+  _buildConversation() {
+    return Expanded(
+      child: StreamBuilder(
+        stream: conversation,
+        builder: (context, snapshot) {
+          return snapshot.hasData
+              ? ListView.builder(
+                  itemCount: snapshot.data.documents.length,
+                  itemBuilder: (context, index) {
+                    return _messageTile(
+                      message: snapshot.data.documents[index].data()["message"],
+                      time: snapshot.data.documents[index].data()["date"],
+                      isMe: widget.sender.displayName ==
+                          snapshot.data.documents[index].data()["sentBy"],
+                    );
+                  })
+              : Center(
+                  child: Text("GET STARTED"),
+                );
+        },
+      ),
+    );
+  }
+
+  _messageTile({String message, bool isMe, int time}) {
+    var date = DateTime.fromMillisecondsSinceEpoch(time);
+    var formattedDate = DateFormat.yMMMEd().format(date);
     final Container msg = Container(
       margin: isMe
           ? EdgeInsets.only(
@@ -50,7 +96,7 @@ class _ChatScreenState extends State<ChatScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            message.time,
+            formattedDate.toString(),
             style: TextStyle(
               color: Colors.blueGrey,
               fontSize: 16.0,
@@ -59,7 +105,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
           SizedBox(height: 8.0),
           Text(
-            message.text,
+            message,
             style: TextStyle(
               color: Colors.blueGrey,
               fontSize: 16.0,
@@ -96,6 +142,7 @@ class _ChatScreenState extends State<ChatScreen> {
           Expanded(
             child: TextField(
               textCapitalization: TextCapitalization.sentences,
+              controller: _messageController,
               onChanged: (value) {},
               decoration: InputDecoration.collapsed(
                 hintText: 'Send a message...',
@@ -103,10 +150,27 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           IconButton(
-            icon: Icon(Icons.send),
+            icon: Icon(
+              Icons.send,
+            ),
             iconSize: 25.0,
             color: Theme.of(context).colorScheme.primary,
-            onPressed: () {},
+            onPressed: () async {
+              if (_messageController.text.isNotEmpty) {
+                Map<String, dynamic> messageMap = {
+                  "message": _messageController.text,
+                  "sentBy": widget.sender.displayName,
+                  "date": DateTime.now().millisecondsSinceEpoch,
+                };
+                await widget.database.sendMessage(
+                  widget.chatID,
+                  messageMap,
+                );
+                setState(() {
+                  _messageController.text = "";
+                });
+              }
+            },
           ),
         ],
       ),
@@ -132,11 +196,11 @@ class _ChatScreenState extends State<ChatScreen> {
               SizedBox(width: 60),
               CircleAvatar(
                 radius: 35.0,
-                backgroundImage: AssetImage(widget.user.photoUrl),
+                backgroundImage: AssetImage(widget.owner.photoUrl),
               ),
               SizedBox(width: 10),
               Text(
-                widget.user.displayName,
+                widget.owner.displayName,
                 style: TextStyle(
                   fontSize: 28.0,
                   fontWeight: FontWeight.bold,
@@ -158,33 +222,7 @@ class _ChatScreenState extends State<ChatScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Column(
         children: <Widget>[
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30.0),
-                  topRight: Radius.circular(30.0),
-                ),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30.0),
-                  topRight: Radius.circular(30.0),
-                ),
-                child: ListView.builder(
-                  reverse: true,
-                  padding: EdgeInsets.only(top: 15.0),
-                  itemCount: messages.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final Message message = messages[index];
-                    final bool isMe = message.sender.uid == currentUser.uid;
-                    return _buildMessage(message, isMe);
-                  },
-                ),
-              ),
-            ),
-          ),
+          _buildConversation(),
           _buildMessageComposer(),
         ],
       ),
@@ -194,11 +232,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      body: Center(
-        child: Text(
-          "Let's get started",
-        ),
-      ),
+      body: _body(),
       searchBar: false,
       header: _header(),
     );

@@ -121,7 +121,6 @@ class PetResults extends StatelessWidget {
             ),
           ),
         ),
-        //
       ),
     );
   }
