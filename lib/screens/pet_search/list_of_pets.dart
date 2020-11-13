@@ -33,6 +33,14 @@ class ListScreenState extends State<ListScreen> {
         petAge: "12 months",
         user: widget.user,
         database: widget.database,
+      ),
+      PetResults(
+        petPic: 'assets/images/pug.jpg',
+        petName: "Polo",
+        petBreed: "Pug",
+        petAge: "12 months",
+        user: widget.user,
+        database: widget.database,
       )
     ];
     return CustomScaffold(
@@ -45,4 +53,5 @@ class ListScreenState extends State<ListScreen> {
       ),
     );
   }
+
 }

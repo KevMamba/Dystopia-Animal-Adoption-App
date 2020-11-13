@@ -17,17 +17,23 @@ class SavedPageState extends State<SavedPage> {
     yield SavedModel.favorites;
   }
 
-  Container _buildText(){
-    return Container(
-      padding: EdgeInsets.only(top: 60.0, left: 30.0, bottom: 60.0),
-      child: Text("Favorites",
+  Column _buildText(){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+          Container(
+          padding: EdgeInsets.only(top: 60.0, bottom: 60.0),
+            child: Text("Favorites",
               style: TextStyle(
-                fontSize: 32.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              )
+              fontSize: 32.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+          )
           ),
-      );
+        )
+
+      ],
+    );
 }
   @override
   Widget build(BuildContext context){

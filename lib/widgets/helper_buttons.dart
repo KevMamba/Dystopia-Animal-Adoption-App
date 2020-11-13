@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dystopia_flutter_app/data/saved_page_model.dart';
 
+
 class FavoriteButton extends StatefulWidget {
 
   FavoriteButton({@required this.item});
@@ -20,14 +21,18 @@ class FavoriteButtonState extends State<FavoriteButton> {
     setState(() {
       if(item.liked)
         {
+          item.liked = false;
           SavedModel.remove(item);
+         /* print(" I am unliking");
+          print("Item.liked = ${item.liked}");*/
         }
       else
         {
+          item.liked = true;
           SavedModel.add(item);
+         /* print(" I am liking");
+          print("Item.liked = ${item.liked}");*/
         }
-
-      item.liked = !item.liked;
     });
   }
 

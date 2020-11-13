@@ -4,15 +4,17 @@ import 'package:dystopia_flutter_app/services/auth.dart';
 import 'package:dystopia_flutter_app/services/database_chat.dart';
 import 'package:dystopia_flutter_app/widgets/helper_buttons.dart';
 import 'package:dystopia_flutter_app/widgets/persistent_header.dart';
+import 'package:dystopia_flutter_app/widgets/pet_list_card.dart';
 import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:groovin_widgets/groovin_widgets.dart';
 
 class PetResultScreen extends StatefulWidget {
-  final String petPic;
+  //final String petPic;
+  final PetResults pet;
   final User user;
   final FirestoreDatabase database;
-  const PetResultScreen({Key key, this.petPic, this.user, this.database})
+  const PetResultScreen({Key key, this.pet, this.user, this.database})
       : super(key: key);
   @override
   State createState() => new PetResultScreenState();
@@ -113,7 +115,7 @@ class PetResultScreenState extends State<PetResultScreen> {
           SliverPersistentHeader(
             pinned: true,
             floating: true,
-            delegate: PersistentHeader(context: context, petPic: widget.petPic),
+            delegate: PersistentHeader(context: context, pet: widget.pet),
           ),
           SliverPadding(
             padding: EdgeInsets.only(

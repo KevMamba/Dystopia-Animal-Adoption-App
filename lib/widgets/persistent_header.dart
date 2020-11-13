@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:dystopia_flutter_app/widgets/pet_list_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -7,15 +8,15 @@ import 'helper_buttons.dart';
 
 class PersistentHeader extends SliverPersistentHeaderDelegate {
   final BuildContext context;
-  final String petPic;
+  final PetResults pet;
 
-  PersistentHeader({@required this.context, @required this.petPic});
+  PersistentHeader({@required this.context, @required this.pet});
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Stack(fit: StackFit.expand, children: [
       Hero(
-        tag: petPic,
+        tag: pet.petPic,
         child: Container(
           height: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
@@ -41,7 +42,7 @@ class PersistentHeader extends SliverPersistentHeaderDelegate {
               opacity: responsiveOpacity(shrinkOffset),
               child: Image(
                 image: AssetImage(
-                  petPic,
+                  pet.petPic,
                 ),
                 filterQuality: FilterQuality.high,
                 fit: BoxFit.cover,
@@ -167,7 +168,7 @@ class PersistentHeader extends SliverPersistentHeaderDelegate {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 12.0),
-                    child: FavoriteButton(),
+                    child: FavoriteButton(item: pet),
                   ),
                 ],
               ),

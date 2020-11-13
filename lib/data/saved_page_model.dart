@@ -8,15 +8,12 @@ class SavedModel {
   {
     if(!favorites.contains(item))
       favorites.add(item);
-    print("Adding to favorites");
-    for( int i = 0; i<favorites.length; i++)
-      print(favorites[i].petName);
+    print(favorites);
   }
 
   static void remove(PetResults item)
   {
-    if(favorites.contains(item))
-      favorites.remove(item);
-    //print(favorites);
+    favorites.remove(item);
+    print(favorites);
   }
 }
