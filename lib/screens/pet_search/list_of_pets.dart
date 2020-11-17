@@ -21,6 +21,8 @@ final kLabelStyle = TextStyle(
 );
 
 class ListScreenState extends State<ListScreen> {
+
+
   @override
   Widget build(BuildContext context) {
     List<PetResults> _listElements = [
@@ -32,6 +34,14 @@ class ListScreenState extends State<ListScreen> {
         user: widget.user,
         database: widget.database,
       ),
+      PetResults(
+        petPic: 'assets/images/pug.jpg',
+        petName: "Polo",
+        petBreed: "Pug",
+        petAge: "12 months",
+        user: widget.user,
+        database: widget.database,
+      )
     ];
     return CustomScaffold(
       searchBar: true,
@@ -43,4 +53,5 @@ class ListScreenState extends State<ListScreen> {
       ),
     );
   }
+
 }

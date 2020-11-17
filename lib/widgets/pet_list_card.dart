@@ -1,13 +1,16 @@
+
 import 'package:dystopia_flutter_app/screens/pet_search/pet_results.dart';
 import 'package:dystopia_flutter_app/services/auth.dart';
 import 'package:dystopia_flutter_app/services/database_chat.dart';
+
 import 'package:dystopia_flutter_app/widgets/platform_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dystopia_flutter_app/widgets/helper_buttons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class PetResults extends StatelessWidget {
+// ignore: must_be_immutable
+class PetResults extends StatefulWidget {
   final String petPic;
   final String petName;
   final String petBreed;
@@ -15,8 +18,9 @@ class PetResults extends StatelessWidget {
   final User user;
   final FirestoreDatabase database;
   final VoidCallback onTap;
+  bool liked;
 
-  const PetResults({
+  PetResults({
     Key key,
     this.petPic,
     this.petName,
@@ -25,7 +29,15 @@ class PetResults extends StatelessWidget {
     this.user,
     this.database,
     this.onTap,
+    this.liked = false,
+
   }) : super(key: key);
+
+  @override
+  State createState() => new PetResultState();
+}
+
+class PetResultState extends State<PetResults>{
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +52,9 @@ class PetResults extends StatelessWidget {
         PlatformPageRoute.pageRoute(
             fullScreen: false,
             widget: PetResultScreen(
-              petPic: petPic,
-              user: user,
-              database: database,
+              pet: widget,
+              user: widget.user,
+              database: widget.database,
             ),
             fromRoot: false,
             context: context);
@@ -62,7 +74,7 @@ class PetResults extends StatelessWidget {
             child: Stack(
               children: [
                 Hero(
-                  tag: petPic,
+                  tag: widget.petPic,
                   child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 10.w),
                     height: ScreenUtil().screenHeight / 3.25,
@@ -80,7 +92,7 @@ class PetResults extends StatelessWidget {
                         color: Colors.white,
                         image: DecorationImage(
                           image: AssetImage(
-                            petPic,
+                            widget.petPic,
                           ),
                           fit: BoxFit.cover,
                         )),
@@ -99,20 +111,20 @@ class PetResults extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "$petName",
+                                "${widget.petName}",
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              FavoriteButton(),
+                              FavoriteButton(item: widget),
                             ],
                           ),
                           SizedBox(
                             height: 2,
                           ),
                           Text(
-                            "$petBreed",
+                            "${widget.petBreed}",
                           ),
                         ]),
                   ),

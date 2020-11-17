@@ -126,7 +126,7 @@ class Auth implements AuthBase {
       await authResult.user.sendEmailVerification();
       return _userFromFirebase(authResult.user);
     } catch (e) {
-      print("An error occured while trying to send email verification");
+      print("An error occurred while trying to send email verification");
       print(e.message);
     }
   }
