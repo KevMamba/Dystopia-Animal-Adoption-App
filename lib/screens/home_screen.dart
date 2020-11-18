@@ -218,44 +218,6 @@ class _HomePage2State extends State<HomePage2> {
         ],
       ),
     );
-    // return Container(
-    //   padding: EdgeInsets.symmetric(
-    //     horizontal: 25.w,
-    //     vertical: 25.h,
-    //   ),
-    //   margin: EdgeInsets.symmetric(
-    //     horizontal: 10,
-    //   ),
-    //   decoration: BoxDecoration(
-    //     borderRadius: BorderRadius.circular(40.w),
-    //     color: Theme.of(context).cardColor,
-    //   ),
-    //   child: RichText(
-    //     text: TextSpan(
-    //       text:
-    //           "Can\'t look after your pet due to unforeseen reasons? \nList your pet today and let us help you find their next owner.",
-    //       style: TextStyle(
-    //         fontSize: 25.h,
-    //         color: Colors.black,
-    //       ),
-    //       children: <TextSpan>[
-    //         TextSpan(
-    //           text: "\n\n \t\t\t\t\t\t\t\t\t\t Start now!",
-    //           style: TextStyle(
-    //             color: Theme.of(context).colorScheme.secondaryVariant,
-    //             letterSpacing: 2,
-    //           ),
-    //
-    //           // TODO: Application form
-    //
-    //           // recognizer: TapGestureRecognizer()..onTap = () {
-    //           //   return
-    //           // }
-    //         ),
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 
   @override

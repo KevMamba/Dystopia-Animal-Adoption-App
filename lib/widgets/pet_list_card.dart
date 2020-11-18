@@ -1,4 +1,3 @@
-
 import 'package:dystopia_flutter_app/screens/pet_search/pet_results.dart';
 import 'package:dystopia_flutter_app/services/auth.dart';
 import 'package:dystopia_flutter_app/services/database_chat.dart';
@@ -29,16 +28,14 @@ class PetResults extends StatefulWidget {
     this.user,
     this.database,
     this.onTap,
-    this.liked = false,
-
+    this.liked: false,
   }) : super(key: key);
 
   @override
   State createState() => new PetResultState();
 }
 
-class PetResultState extends State<PetResults>{
-
+class PetResultState extends State<PetResults> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(
@@ -73,30 +70,27 @@ class PetResultState extends State<PetResults>{
             borderRadius: BorderRadius.circular(39.w),
             child: Stack(
               children: [
-                Hero(
-                  tag: widget.petPic,
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10.w),
-                    height: ScreenUtil().screenHeight / 3.25,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          12.w,
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10.w),
+                  height: ScreenUtil().screenHeight / 3.25,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        12.w,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          offset: Offset(0.0, 2.0),
+                          blurRadius: 8.0,
+                        )
+                      ],
+                      color: Colors.white,
+                      image: DecorationImage(
+                        image: AssetImage(
+                          widget.petPic,
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            offset: Offset(0.0, 2.0),
-                            blurRadius: 8.0,
-                          )
-                        ],
-                        color: Colors.white,
-                        image: DecorationImage(
-                          image: AssetImage(
-                            widget.petPic,
-                          ),
-                          fit: BoxFit.cover,
-                        )),
-                  ),
+                        fit: BoxFit.cover,
+                      )),
                 ),
                 Positioned(
                   bottom: 15,

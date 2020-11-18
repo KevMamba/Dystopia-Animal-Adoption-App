@@ -3,10 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dystopia_flutter_app/data/saved_page_model.dart';
 
-
 class FavoriteButton extends StatefulWidget {
-
-  FavoriteButton({@required this.item});
+  FavoriteButton({this.item});
   final PetResults item;
 
   @override
@@ -14,31 +12,26 @@ class FavoriteButton extends StatefulWidget {
 }
 
 class FavoriteButtonState extends State<FavoriteButton> {
-
   PetResults get item => widget.item;
 
   favPressed() {
     setState(() {
-      if(item.liked)
-        {
-          item.liked = false;
-          SavedModel.remove(item);
-         /* print(" I am unliking");
+      if (item.liked) {
+        item.liked = false;
+        SavedModel.remove(item);
+        /* print(" I am unliking");
           print("Item.liked = ${item.liked}");*/
-        }
-      else
-        {
-          item.liked = true;
-          SavedModel.add(item);
-         /* print(" I am liking");
+      } else {
+        item.liked = true;
+        SavedModel.add(item);
+        /* print(" I am liking");
           print("Item.liked = ${item.liked}");*/
-        }
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
       child: Icon(
         item.liked ? Icons.favorite : Icons.favorite_border,

@@ -1,19 +1,24 @@
 import 'package:dystopia_flutter_app/widgets/pet_list_card.dart';
-import 'package:flutter/cupertino.dart';
 
 class SavedModel {
   static List<PetResults> favorites = [];
-
-  static void add(PetResults item)
-  {
-    if(!favorites.contains(item))
+  static List<String> names = [];
+  static void add(PetResults item) {
+    if (check(names, item.petName) == false) {
       favorites.add(item);
-    print(favorites);
+      addDetails(item);
+    }
   }
 
-  static void remove(PetResults item)
-  {
+  static void remove(PetResults item) {
     favorites.remove(item);
-    print(favorites);
+  }
+
+  static addDetails(PetResults item) {
+    names.add(item.petName);
+  }
+
+  static bool check(List list, String petName) {
+    return list.contains(petName);
   }
 }

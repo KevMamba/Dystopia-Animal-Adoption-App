@@ -1,3 +1,4 @@
+import 'package:dystopia_flutter_app/data/saved_page_model.dart';
 import 'package:dystopia_flutter_app/services/auth.dart';
 import 'package:dystopia_flutter_app/services/database_chat.dart';
 import 'package:dystopia_flutter_app/widgets/custom_scaffold.dart';
@@ -21,8 +22,6 @@ final kLabelStyle = TextStyle(
 );
 
 class ListScreenState extends State<ListScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     List<PetResults> _listElements = [
@@ -33,6 +32,7 @@ class ListScreenState extends State<ListScreen> {
         petAge: "12 months",
         user: widget.user,
         database: widget.database,
+        liked: SavedModel.check(SavedModel.names, "Marley"),
       ),
       PetResults(
         petPic: 'assets/images/pug.jpg',
@@ -41,6 +41,7 @@ class ListScreenState extends State<ListScreen> {
         petAge: "12 months",
         user: widget.user,
         database: widget.database,
+        liked: SavedModel.check(SavedModel.names, "Polo"),
       )
     ];
     return CustomScaffold(
@@ -53,5 +54,4 @@ class ListScreenState extends State<ListScreen> {
       ),
     );
   }
-
 }
